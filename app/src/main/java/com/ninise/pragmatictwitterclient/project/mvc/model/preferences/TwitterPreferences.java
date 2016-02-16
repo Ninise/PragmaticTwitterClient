@@ -11,13 +11,14 @@ public class TwitterPreferences {
     private SharedPreferences mPreferences;
     private Context mContex;
 
-    private TwitterPreferences() {
+    private TwitterPreferences(Context context) {
+        this.mContex = context;
         mPreferences = mContex.getSharedPreferences(Constants.TWITTER_PREFERENCES, Context.MODE_PRIVATE);
     }
 
-    public static TwitterPreferences getInstance() {
+    public static TwitterPreferences getInstance(Context context) {
         if (mInstance == null) {
-            mInstance = new TwitterPreferences();
+            mInstance = new TwitterPreferences(context);
         }
 
         return mInstance;
