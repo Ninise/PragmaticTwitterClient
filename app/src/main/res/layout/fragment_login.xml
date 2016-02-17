@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/loginMainToolbar"/>
+        android:layout_below="@id/loginMainToolbar"
+        android:src="@drawable/ic_ptc"/>
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/loginWelcomeTextView"

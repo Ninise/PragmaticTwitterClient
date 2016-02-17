@@ -4,34 +4,15 @@
               android:layout_height="match_parent">
 
         <include
-            android:id="@+id/loginToolbar"
+            android:id="@+id/loginMainToolbar"
             layout="@layout/tool_bar"
             />
 
-        <ImageView
-            android:id="@+id/loginImageView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/loginToolbar"/>
-
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/loginTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_below="@id/loginImageView"
-            android:text="@string/login_hi_textview"/>
-
-        <com.twitter.sdk.android.core.identity.TwitterLoginButton
-            android:id="@+id/twitter_login_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/loginTextView"
-            android:layout_centerHorizontal="true"
-            android:enabled="true"/>
+       <FrameLayout
+           android:id="@+id/loginContrainer"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:layout_below="@id/loginMainToolbar"/>
 
 
 </RelativeLayout>
