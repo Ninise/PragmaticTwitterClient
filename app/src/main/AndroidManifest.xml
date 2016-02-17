@@ -7,6 +7,11 @@
     <!-- Network State Permissions -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <uses-sdk
+        android:minSdkVersion="15"
+        android:targetSdkVersion="17"
+        android:maxSdkVersion="21"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
