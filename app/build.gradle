@@ -16,7 +16,7 @@ android {
     defaultConfig {
         applicationId "com.ninise.pragmatictwitterclient"
         minSdkVersion 15
-        targetSdkVersion 23
+        targetSdkVersion 17
         versionCode 1
         versionName "1.0"
     }
@@ -34,9 +34,14 @@ repositories {
 }
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile('com.twitter.sdk.android:twitter:1.12.1@aar') {
         transitive = true;
     }
+
+    // test libs
+    testCompile 'junit:junit:4.12'
+    testCompile "org.robolectric:robolectric:3.0"
+    testCompile "org.assertj:assertj-core:1.7.0"
+
 }
