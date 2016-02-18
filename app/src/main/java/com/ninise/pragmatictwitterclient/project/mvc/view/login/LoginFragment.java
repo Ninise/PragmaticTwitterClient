@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.ninise.pragmatictwitterclient.R;
 
+
 public class LoginFragment extends Fragment {
 
     private AppCompatButton signInButton;
@@ -18,6 +19,12 @@ public class LoginFragment extends Fragment {
 
     public static LoginFragment getInstance() {
         return new LoginFragment();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
     }
 
     @Nullable
@@ -32,7 +39,6 @@ public class LoginFragment extends Fragment {
 
             }
         });
-
 
         return v;
     }
