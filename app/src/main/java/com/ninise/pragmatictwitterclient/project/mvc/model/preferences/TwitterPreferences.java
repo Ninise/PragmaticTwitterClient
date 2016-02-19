@@ -35,4 +35,44 @@ public class TwitterPreferences {
                 mPreferences.getString(Constants.TWITTER_NICKNAME, "User") : "User";
     }
 
+    public void setOAuthVerifier(String verifier) {
+        SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putString(Constants.TWITTER_OAUTH_VERIFIER, verifier);
+        editor.apply();
+    }
+
+    public String getOAuthVerifier() {
+        return mPreferences.contains(Constants.TWITTER_OAUTH_VERIFIER) ?
+                mPreferences.getString(Constants.TWITTER_OAUTH_VERIFIER, "") : "";
+    }
+
+    public void setOAuthAccessTokenAndSecret(String token, String secret) {
+        SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putString(Constants.ACCESS_TOKEN, token);
+        editor.putString(Constants.ACCESS_TOKEN_SECRET, secret);
+        editor.apply();
+    }
+
+    public String getOAuthAccessToken() {
+        return mPreferences.contains(Constants.ACCESS_TOKEN) ?
+                mPreferences.getString(Constants.ACCESS_TOKEN, "") : "";
+    }
+
+    public String getOAuthAccessTokenSecret() {
+        return mPreferences.contains(Constants.ACCESS_TOKEN_SECRET) ?
+                mPreferences.getString(Constants.ACCESS_TOKEN_SECRET, "") : "";
+    }
+
+    public void setUserImageUrl(String url) {
+        SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putString(Constants.IMAGE_URL, url);
+        editor.apply();
+    }
+
+    public String getUserImageUrl() {
+        return mPreferences.contains(Constants.IMAGE_URL) ?
+                mPreferences.getString(Constants.IMAGE_URL, "") : "";
+    }
+
+
 }
