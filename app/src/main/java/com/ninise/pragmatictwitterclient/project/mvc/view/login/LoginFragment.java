@@ -1,17 +1,27 @@
 package com.ninise.pragmatictwitterclient.project.mvc.view.login;
 
+import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.content.IntentFilter;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatButton;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.ninise.pragmatictwitterclient.R;
+import com.ninise.pragmatictwitterclient.project.mvc.control.auth.OAuthWorker;
 
 
 public class LoginFragment extends Fragment {
+
+    private static final String TAG = LoginFragment.class.getSimpleName();
 
     private AppCompatButton signInButton;
 
@@ -24,7 +34,6 @@ public class LoginFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Nullable
@@ -36,7 +45,7 @@ public class LoginFragment extends Fragment {
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                OAuthWorker.getInstance(getActivity()).auth().execute();
             }
         });
 

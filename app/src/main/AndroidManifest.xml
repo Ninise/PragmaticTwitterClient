@@ -26,9 +26,15 @@
             </intent-filter>
         </activity>
 
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="141694e171b92af2c7be64961fa2e9f8f12564dd" />
+        <activity android:name=".project.mvc.view.login.WebActivity"/>
+
+        <receiver android:name=".project.mvc.control.auth.broadcastreceivers.OAuthReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.ninise.pratic.auth_finished"/>
+            </intent-filter>
+        </receiver>
 
     </application>
 
