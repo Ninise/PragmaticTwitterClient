@@ -20,6 +20,7 @@ public class Constants {
     /** AUTH DATA */
     public static final String AUTH_URL = "auth_url";
     public static final String AUTH_VERIFIER = "oauth_verifier";
+    public static final String CALLBACK_URL = "oauth://t4jsample";
 
 
 }

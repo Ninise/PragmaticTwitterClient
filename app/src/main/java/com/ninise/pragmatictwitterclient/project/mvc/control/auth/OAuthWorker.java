@@ -3,7 +3,9 @@ package com.ninise.pragmatictwitterclient.project.mvc.control.auth;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.ninise.pragmatictwitterclient.project.mvc.model.preferences.TwitterPreferences;
 import com.ninise.pragmatictwitterclient.project.utils.Constants;
@@ -16,6 +18,8 @@ import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
 
 public class OAuthWorker {
+
+    public static final String TAG = OAuthWorker.class.getSimpleName();
 
     private static OAuthWorker mInstance = null;
 
@@ -52,8 +56,11 @@ public class OAuthWorker {
         protected String doInBackground(String... args) {
 
             try {
-                requestToken = twitter.getOAuthRequestToken();
+                requestToken = twitter.getOAuthRequestToken(Constants.CALLBACK_URL);
                 oauth_url = requestToken.getAuthorizationURL();
+
+                mContext.startActivity(new Intent(Intent.ACTION_VIEW, Uri
+                        .parse(requestToken.getAuthenticationURL())));
             } catch (TwitterException e) {
                 e.printStackTrace();
             }
@@ -64,9 +71,11 @@ public class OAuthWorker {
         @Override
         protected void onPostExecute(final String oauth_url) {
             if (oauth_url != null) {
-                Intent broadcast = new Intent(Constants.AUTH_RECEIVER);
-                broadcast.putExtra(Constants.AUTH_URL, oauth_url);
-                mContext.sendBroadcast(broadcast);
+
+//                Intent broadcast = new Intent(Constants.AUTH_RECEIVER);
+//                broadcast.putExtra(Constants.AUTH_URL, oauth_url);
+//                mContext.sendBroadcast(broadcast);
+
             }
         }
     }
@@ -90,6 +99,7 @@ public class OAuthWorker {
                 TwitterPreferences.getInstance(mContext).setUserNickname(user.getName());
                 TwitterPreferences.getInstance(mContext).setUserImageUrl(user.getOriginalProfileImageURL());
 
+                Log.d(TAG, user.getName());
             } catch (TwitterException e) {
                 e.printStackTrace();
             }

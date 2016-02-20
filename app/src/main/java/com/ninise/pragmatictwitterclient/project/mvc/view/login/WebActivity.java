@@ -6,10 +6,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Window;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
@@ -38,6 +36,7 @@ public class WebActivity extends AppCompatActivity {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
+                Log.d(TAG, "onPageStarted");
             }
 
             @Override
@@ -48,7 +47,7 @@ public class WebActivity extends AppCompatActivity {
                     Uri uri = Uri.parse(url);
                     TwitterPreferences.getInstance(getApplicationContext()).setOAuthVerifier(uri.getQueryParameter(Constants.AUTH_VERIFIER));
 
-
+                    Log.d(TAG, "onPageFinished");
                     OAuthWorker.getInstance(getApplicationContext()).getAccess();
 
                 } else if (url.contains("denied")) {
@@ -56,5 +55,6 @@ public class WebActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 }

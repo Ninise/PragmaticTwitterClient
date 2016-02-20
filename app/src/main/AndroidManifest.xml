@@ -26,7 +26,16 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".project.mvc.view.login.WebActivity"/>
+        <activity android:name=".project.mvc.view.login.WebActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:host="t4jsample"
+                    android:scheme="oauth" />
+            </intent-filter>
+        </activity>
 
         <receiver android:name=".project.mvc.control.auth.broadcastreceivers.OAuthReceiver"
             android:enabled="true"
