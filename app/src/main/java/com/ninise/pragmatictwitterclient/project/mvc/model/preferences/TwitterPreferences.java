@@ -74,5 +74,15 @@ public class TwitterPreferences {
                 mPreferences.getString(Constants.IMAGE_URL, "") : "";
     }
 
+    public void setLoginOn(boolean status) {
+        SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putBoolean(Constants.IS_LOGIN_ON, status);
+        editor.apply();
+    }
+
+    public boolean getLoginOn() {
+        return mPreferences.contains(Constants.IS_LOGIN_ON) && mPreferences.getBoolean(Constants.IS_LOGIN_ON, false);
+    }
+
 
 }

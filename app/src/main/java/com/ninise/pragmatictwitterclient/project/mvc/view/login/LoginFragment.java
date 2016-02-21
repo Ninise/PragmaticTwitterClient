@@ -28,6 +28,8 @@ public class LoginFragment extends Fragment {
     private AppCompatButton signInButton;
     private AppCompatTextView welcomeTextView;
 
+    private boolean flag = false;
+
     public LoginFragment() {}
 
     public static LoginFragment getInstance() {
@@ -37,6 +39,11 @@ public class LoginFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (flag) {
+           OAuthWorker.getInstance(getActivity()).getAccess().execute();
+            flag = false;
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -54,6 +61,7 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 OAuthWorker.getInstance(getActivity()).auth().execute();
+                flag = true;
             }
         });
 

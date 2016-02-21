@@ -13,6 +13,7 @@ public class Constants {
     public static final String ACCESS_TOKEN = "access_token";
     public static final String ACCESS_TOKEN_SECRET = "access_toke_secret";
     public static final String IMAGE_URL = "image_url";
+    public static final String IS_LOGIN_ON = "is_login_on";
 
     /** Broadcast */
     public static final String AUTH_RECEIVER = "com.ninise.pratic.auth_finished";
@@ -21,6 +22,5 @@ public class Constants {
     public static final String AUTH_URL = "auth_url";
     public static final String AUTH_VERIFIER = "oauth_verifier";
     public static final String CALLBACK_URL = "oauth://t4jsample";
-
 
 }

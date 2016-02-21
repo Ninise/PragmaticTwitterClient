@@ -75,7 +75,7 @@ public class OAuthWorker {
 //                Intent broadcast = new Intent(Constants.AUTH_RECEIVER);
 //                broadcast.putExtra(Constants.AUTH_URL, oauth_url);
 //                mContext.sendBroadcast(broadcast);
-
+                TwitterPreferences.getInstance(mContext).setLoginOn(true);
             }
         }
     }
