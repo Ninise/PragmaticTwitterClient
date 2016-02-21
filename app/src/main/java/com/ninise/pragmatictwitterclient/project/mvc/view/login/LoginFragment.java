@@ -2,6 +2,7 @@ package com.ninise.pragmatictwitterclient.project.mvc.view.login;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -15,10 +16,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.ninise.pragmatictwitterclient.R;
 import com.ninise.pragmatictwitterclient.project.mvc.control.auth.OAuthWorker;
 import com.ninise.pragmatictwitterclient.project.mvc.model.preferences.TwitterPreferences;
+import com.ninise.pragmatictwitterclient.project.utils.Constants;
+
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+import twitter4j.User;
+import twitter4j.auth.AccessToken;
+import twitter4j.auth.RequestToken;
+import twitter4j.conf.Configuration;
+import twitter4j.conf.ConfigurationBuilder;
 
 
 public class LoginFragment extends Fragment {
@@ -28,7 +40,9 @@ public class LoginFragment extends Fragment {
     private AppCompatButton signInButton;
     private AppCompatTextView welcomeTextView;
 
-    private boolean flag = false;
+    // Twitter
+    private static Twitter twitter;
+    private static RequestToken requestToken;
 
     public LoginFragment() {}
 
@@ -39,11 +53,6 @@ public class LoginFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (flag) {
-           OAuthWorker.getInstance(getActivity()).getAccess().execute();
-            flag = false;
-        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -60,11 +69,44 @@ public class LoginFragment extends Fragment {
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                OAuthWorker.getInstance(getActivity()).auth().execute();
-                flag = true;
+                loginToTwitter();
             }
         });
 
+        if (!isTwitterLoggedInAlready()) {
+            OAuthWorker.getInstance(getActivity()).getAccess(getActivity().getIntent().getData());
+        }
+
         return v;
+    }
+
+    private void loginToTwitter() {
+        // Check if already logged in
+        if (!isTwitterLoggedInAlready()) {
+            OAuthWorker.getInstance(getActivity()).auth();
+            super.onDestroy();
+        } else {
+            // user already logged into twitter
+            Toast.makeText(getActivity().getApplicationContext(),
+                    "Already Logged into twitter", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void logoutFromTwitter() {
+        // Clear the shared preferences
+        TwitterPreferences.getInstance(getActivity()).setLoginOn(false);
+        TwitterPreferences.getInstance(getActivity()).setOAuthAccessTokenAndSecret("", "");
+
+    }
+
+    private boolean isTwitterLoggedInAlready() {
+        // return twitter login status from TwitterPreferences
+        return TwitterPreferences.getInstance(getActivity()).getLoginOn();
+    }
+
+    @Override
+    public void onDestroy() {
+        logoutFromTwitter();
+        super.onDestroy();
     }
 }
