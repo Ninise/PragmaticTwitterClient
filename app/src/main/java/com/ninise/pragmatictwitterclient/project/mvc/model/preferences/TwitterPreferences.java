@@ -10,6 +10,7 @@ public class TwitterPreferences {
     private static TwitterPreferences mInstance = null;
     private SharedPreferences mPreferences;
     private Context mContex;
+    private String uri;
 
     private TwitterPreferences(Context context) {
         this.mContex = context;
@@ -83,6 +84,4 @@ public class TwitterPreferences {
     public boolean getLoginOn() {
         return mPreferences.contains(Constants.IS_LOGIN_ON) && mPreferences.getBoolean(Constants.IS_LOGIN_ON, false);
     }
-
-
 }
