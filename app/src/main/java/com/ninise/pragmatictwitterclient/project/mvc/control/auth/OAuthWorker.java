@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.ninise.pragmatictwitterclient.project.mvc.model.preferences.TwitterPreferences;
 import com.ninise.pragmatictwitterclient.project.utils.Constants;
@@ -16,6 +17,8 @@ import twitter4j.TwitterFactory;
 import twitter4j.User;
 import twitter4j.auth.AccessToken;
 import twitter4j.auth.RequestToken;
+import twitter4j.conf.Configuration;
+import twitter4j.conf.ConfigurationBuilder;
 
 public class OAuthWorker {
 
@@ -42,75 +45,66 @@ public class OAuthWorker {
         return mInstance;
     }
 
-    public AsyncTask<String, String, String> auth() {
-        return new TokenGet();
+    public void auth() {
+        ConfigurationBuilder builder = new ConfigurationBuilder();
+        builder.setOAuthConsumerKey(Constants.TWITTER_KEY);
+        builder.setOAuthConsumerSecret(Constants.TWITTER_SECRET);
+        Configuration configuration = builder.build();
+
+        TwitterFactory factory = new TwitterFactory(configuration);
+        twitter = factory.getInstance();
+
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    requestToken = twitter
+                            .getOAuthRequestToken(Constants.CALLBACK_URL);
+                    mContext.startActivity(new Intent(Intent.ACTION_VIEW, Uri
+                            .parse(requestToken.getAuthenticationURL())));
+
+                } catch (TwitterException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
     }
 
-    public AsyncTask<String, String, Boolean> getAccess() {
-        return new AccessTokenGet();
-    }
+    public void getAccess(final Uri uri) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
 
-    private class TokenGet extends AsyncTask<String, String, String> {
+                    if (uri != null && uri.toString().startsWith(Constants.CALLBACK_URL)) {
 
-        @Override
-        protected String doInBackground(String... args) {
+                        // OAuth verifier
+                        String verifier = uri
+                                .getQueryParameter(Constants.AUTH_VERIFIER);
+                        // Get the access token
+                        AccessToken accessToken = twitter.getOAuthAccessToken(
+                                requestToken, verifier);
 
-            try {
-                requestToken = twitter.getOAuthRequestToken(Constants.CALLBACK_URL);
-                oauth_url = requestToken.getAuthorizationURL();
+                        TwitterPreferences.getInstance(mContext).setOAuthAccessTokenAndSecret(accessToken.getToken(),
+                                accessToken.getTokenSecret());
 
-                mContext.startActivity(new Intent(Intent.ACTION_VIEW, Uri
-                        .parse(requestToken.getAuthenticationURL())));
-            } catch (TwitterException e) {
-                e.printStackTrace();
+                        TwitterPreferences.getInstance(mContext).setLoginOn(true);
+
+                        long userID = accessToken.getUserId();
+                        User user = twitter.showUser(userID);
+                        String username = user.getName();
+
+                        TwitterPreferences.getInstance(mContext).setUserNickname(user.getScreenName());
+                        Log.d(TAG, username);
+                    }
+
+                } catch (Exception e) {
+                    Log.e(TAG, e.getMessage());
+                }
             }
-
-            return oauth_url;
-        }
-
-        @Override
-        protected void onPostExecute(final String oauth_url) {
-            if (oauth_url != null) {
-
-//                Intent broadcast = new Intent(Constants.AUTH_RECEIVER);
-//                broadcast.putExtra(Constants.AUTH_URL, oauth_url);
-//                mContext.sendBroadcast(broadcast);
-                TwitterPreferences.getInstance(mContext).setLoginOn(true);
-            }
-        }
-    }
-
-    private class AccessTokenGet extends AsyncTask<String, String, Boolean> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-        }
-
-        @Override
-        protected Boolean doInBackground(String... args) {
-
-            try {
-
-                accessToken = twitter.getOAuthAccessToken(requestToken, TwitterPreferences.getInstance(mContext).getOAuthVerifier());
-                TwitterPreferences.getInstance(mContext).setOAuthAccessTokenAndSecret(accessToken.getToken(), accessToken.getTokenSecret());
-                User user = twitter.showUser(accessToken.getUserId());
-                TwitterPreferences.getInstance(mContext).setUserNickname(user.getName());
-                TwitterPreferences.getInstance(mContext).setUserImageUrl(user.getOriginalProfileImageURL());
-
-                Log.d(TAG, user.getName());
-            } catch (TwitterException e) {
-                e.printStackTrace();
-            }
-
-            return true;
-        }
-        @Override
-        protected void onPostExecute(Boolean response) {
-
-        }
-
+        }).start();
     }
 }
 
