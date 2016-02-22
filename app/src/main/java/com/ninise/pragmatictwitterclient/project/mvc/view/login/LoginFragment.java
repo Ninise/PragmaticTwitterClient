@@ -40,10 +40,6 @@ public class LoginFragment extends Fragment {
     private AppCompatButton signInButton;
     private AppCompatTextView welcomeTextView;
 
-    // Twitter
-    private static Twitter twitter;
-    private static RequestToken requestToken;
-
     public LoginFragment() {}
 
     public static LoginFragment getInstance() {
