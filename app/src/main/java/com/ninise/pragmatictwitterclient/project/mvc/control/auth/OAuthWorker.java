@@ -55,54 +55,48 @@ public class OAuthWorker {
         twitter = factory.getInstance();
 
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    requestToken = twitter
-                            .getOAuthRequestToken(Constants.CALLBACK_URL);
-                    mContext.startActivity(new Intent(Intent.ACTION_VIEW, Uri
-                            .parse(requestToken.getAuthenticationURL())));
+        new Thread(() -> {
+            try {
+                requestToken = twitter
+                        .getOAuthRequestToken(Constants.CALLBACK_URL);
+                mContext.startActivity(new Intent(Intent.ACTION_VIEW, Uri
+                        .parse(requestToken.getAuthenticationURL())));
 
-                } catch (TwitterException e) {
-                    e.printStackTrace();
-                }
+            } catch (TwitterException e) {
+                e.printStackTrace();
             }
         }).start();
 
     }
 
     public void getAccess(final Uri uri) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
+        new Thread(() -> {
+            try {
 
-                    if (uri != null && uri.toString().startsWith(Constants.CALLBACK_URL)) {
+                if (uri != null && uri.toString().startsWith(Constants.CALLBACK_URL)) {
 
-                        // OAuth verifier
-                        String verifier = uri
-                                .getQueryParameter(Constants.AUTH_VERIFIER);
-                        // Get the access token
-                        AccessToken accessToken = twitter.getOAuthAccessToken(
-                                requestToken, verifier);
+                    // OAuth verifier
+                    String verifier = uri
+                            .getQueryParameter(Constants.AUTH_VERIFIER);
+                    // Get the access token
+                    AccessToken accessToken1 = twitter.getOAuthAccessToken(
+                            requestToken, verifier);
 
-                        TwitterPreferences.getInstance(mContext).setOAuthAccessTokenAndSecret(accessToken.getToken(),
-                                accessToken.getTokenSecret());
+                    TwitterPreferences.getInstance(mContext).setOAuthAccessTokenAndSecret(accessToken1.getToken(),
+                            accessToken1.getTokenSecret());
 
-                        TwitterPreferences.getInstance(mContext).setLoginOn(true);
+                    TwitterPreferences.getInstance(mContext).setLoginOn(true);
 
-                        long userID = accessToken.getUserId();
-                        User user = twitter.showUser(userID);
-                        String username = user.getName();
+                    long userID = accessToken1.getUserId();
+                    User user = twitter.showUser(userID);
+                    String username = user.getName();
 
-                        TwitterPreferences.getInstance(mContext).setUserNickname(user.getScreenName());
-                        Log.d(TAG, username);
-                    }
-
-                } catch (Exception e) {
-                    Log.e(TAG, e.getMessage());
+                    TwitterPreferences.getInstance(mContext).setUserNickname(user.getScreenName());
+                    Log.d(TAG, username);
                 }
+
+            } catch (Exception e) {
+                Log.e(TAG, e.getMessage());
             }
         }).start();
     }

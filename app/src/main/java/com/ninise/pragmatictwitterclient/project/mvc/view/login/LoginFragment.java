@@ -21,17 +21,6 @@ import android.widget.Toast;
 import com.ninise.pragmatictwitterclient.R;
 import com.ninise.pragmatictwitterclient.project.mvc.control.auth.OAuthWorker;
 import com.ninise.pragmatictwitterclient.project.mvc.model.preferences.TwitterPreferences;
-import com.ninise.pragmatictwitterclient.project.utils.Constants;
-
-import twitter4j.Twitter;
-import twitter4j.TwitterException;
-import twitter4j.TwitterFactory;
-import twitter4j.User;
-import twitter4j.auth.AccessToken;
-import twitter4j.auth.RequestToken;
-import twitter4j.conf.Configuration;
-import twitter4j.conf.ConfigurationBuilder;
-
 
 public class LoginFragment extends Fragment {
 
@@ -62,12 +51,7 @@ public class LoginFragment extends Fragment {
                 TwitterPreferences.getInstance(getActivity()).getUserNickname());
 
         signInButton = (AppCompatButton) v.findViewById(R.id.loginSignInButton);
-        signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loginToTwitter();
-            }
-        });
+        signInButton.setOnClickListener(v1 -> loginToTwitter());
 
         if (!isTwitterLoggedInAlready()) {
             OAuthWorker.getInstance(getActivity()).getAccess(getActivity().getIntent().getData());
