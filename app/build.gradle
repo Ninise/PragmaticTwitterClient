@@ -38,6 +38,7 @@ dependencies {
 
     // rxjava
     compile 'io.reactivex:rxjava:1.1.1'
+    compile 'io.reactivex:rxandroid:1.1.0'
 
     // test libs
     testCompile 'junit:junit:4.12'
