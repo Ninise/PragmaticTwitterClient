@@ -60,8 +60,9 @@ public class OAuthWorker {
                 requestToken = twitter
                         .getOAuthRequestToken(Constants.CALLBACK_URL);
                 mContext.startActivity(new Intent(Intent.ACTION_VIEW, Uri
-                        .parse(requestToken.getAuthenticationURL())));
-
+                        .parse(requestToken.getAuthenticationURL())).
+                        addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY).
+                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             } catch (TwitterException e) {
                 e.printStackTrace();
             }

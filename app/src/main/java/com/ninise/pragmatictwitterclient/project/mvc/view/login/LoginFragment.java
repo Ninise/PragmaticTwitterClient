@@ -51,7 +51,11 @@ public class LoginFragment extends Fragment {
                 TwitterPreferences.getInstance(getActivity()).getUserNickname());
 
         signInButton = (AppCompatButton) v.findViewById(R.id.loginSignInButton);
-        signInButton.setOnClickListener(v1 -> loginToTwitter());
+        signInButton.setOnClickListener(v1 -> {
+            loginToTwitter();
+            getActivity().onBackPressed();
+            getActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+        });
 
         if (!isTwitterLoggedInAlready()) {
             OAuthWorker.getInstance(getActivity()).getAccess(getActivity().getIntent().getData());
@@ -64,7 +68,6 @@ public class LoginFragment extends Fragment {
         // Check if already logged in
         if (!isTwitterLoggedInAlready()) {
             OAuthWorker.getInstance(getActivity()).auth();
-            super.onDestroy();
         } else {
             // user already logged into twitter
             Toast.makeText(getActivity().getApplicationContext(),
@@ -85,8 +88,8 @@ public class LoginFragment extends Fragment {
     }
 
     @Override
-    public void onDestroy() {
+    public void onStop() {
         logoutFromTwitter();
-        super.onDestroy();
+        super.onStop();
     }
 }
