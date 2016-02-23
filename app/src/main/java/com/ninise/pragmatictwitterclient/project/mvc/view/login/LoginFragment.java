@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatButton;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.ninise.pragmatictwitterclient.R;
 import com.ninise.pragmatictwitterclient.project.mvc.control.auth.OAuthWorker;
 import com.ninise.pragmatictwitterclient.project.mvc.model.preferences.TwitterPreferences;
+import com.ninise.pragmatictwitterclient.project.mvc.view.home.HomeActivity;
 
 public class LoginFragment extends Fragment {
 
@@ -28,8 +30,6 @@ public class LoginFragment extends Fragment {
 
     private AppCompatButton signInButton;
     private AppCompatTextView welcomeTextView;
-
-    public LoginFragment() {}
 
     public static LoginFragment getInstance() {
         return new LoginFragment();
@@ -71,6 +71,7 @@ public class LoginFragment extends Fragment {
         if (!isTwitterLoggedInAlready()) {
             OAuthWorker.getInstance(getActivity()).getAccess(getActivity().getIntent().getData());
         }
+
         return v;
     }
 

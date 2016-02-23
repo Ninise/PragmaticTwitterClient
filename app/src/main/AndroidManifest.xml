@@ -36,6 +36,8 @@
 
         </activity>
 
+        <activity android:name=".project.mvc.view.home.HomeActivity"/>
+
     </application>
 
 </manifest>

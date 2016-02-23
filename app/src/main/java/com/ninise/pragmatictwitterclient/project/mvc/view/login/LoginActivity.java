@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void switchToFragment() {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.loginContrainer, LoginFragment.getInstance());
+        fragmentTransaction.replace(R.id.loginContainer, LoginFragment.getInstance());
         fragmentTransaction.commit();
     }
 }

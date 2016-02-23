@@ -7,14 +7,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * Created by ninise on 2/23/16.
- */
+import com.ninise.pragmatictwitterclient.R;
+
+
 public class TweetsListFragment extends Fragment {
+
+    private static TweetsListFragment mInstance;
+
+    public static TweetsListFragment getInstance() {
+        if (mInstance == null) {
+            mInstance = new TweetsListFragment();
+        }
+
+        return mInstance;
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View v = inflater.inflate(R.layout.fragment_home_tweet_list, container, false);
+
+        return v;
     }
 }
