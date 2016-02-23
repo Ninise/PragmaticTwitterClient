@@ -60,7 +60,6 @@ public class LoginFragment extends Fragment {
         if (!isTwitterLoggedInAlready()) {
             OAuthWorker.getInstance(getActivity()).getAccess(getActivity().getIntent().getData());
         }
-
         return v;
     }
 

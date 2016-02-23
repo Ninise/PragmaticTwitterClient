@@ -11,7 +11,7 @@
         android:layout_marginTop="5dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/loginMainToolbar"
-        android:src="@drawable/ic_ptc"/>
+        android:src="@drawable/ic_twitter_logo_blue"/>
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/loginWelcomeTextView"
