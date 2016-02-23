@@ -27,6 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_below="@id/loginAppImageView"
         android:text="@string/login_hi_textview"/>
 
@@ -38,6 +39,7 @@
         android:layout_marginRight="5dp"
         android:layout_marginBottom="5dp"
         android:layout_alignParentBottom="true"
-        android:text="@string/login_button"/>
+        android:text="@string/login_button"
+        style="@style/RobotoButtonStyle"/>
 
 </RelativeLayout>

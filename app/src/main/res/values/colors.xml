@@ -4,5 +4,6 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="justWhite">#ffffff</color>
-
+    <color name="colorMainTwitter">#33b5e5</color>
+    <color name="colorButton">#FF29B6F6</color>
 </resources>

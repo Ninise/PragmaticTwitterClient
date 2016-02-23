@@ -6,11 +6,25 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
     </style>
 
     <style name="ToolBar" parent="Base.Widget.AppCompat.Toolbar">
         <item name="android:background">@color/colorPrimaryDark</item>
         <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+    </style>
+
+    <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textColor">@color/colorMainTwitter</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="RobotoButtonStyle" parent="Base.Widget.AppCompat.Button">
+        <item name="android:fontFamily">sans-serif-bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/justWhite</item>
+        <item name="android:background">@color/colorPrimaryDark</item>
     </style>
 
 </resources>

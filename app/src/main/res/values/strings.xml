@@ -2,4 +2,6 @@
     <string name="app_name">Pratic</string>
     <string name="login_hi_textview">Hi,</string>
     <string name="login_button">Sign in</string>
+    <string name="login_hi_textview_next">Welcome in Pragmatic twitter client. I hope you get enjoy with my client for Twitter. This is honor for me when you are using my app.</string>
+    <string name="login_welcome_back">Welcome back!</string>
 </resources>

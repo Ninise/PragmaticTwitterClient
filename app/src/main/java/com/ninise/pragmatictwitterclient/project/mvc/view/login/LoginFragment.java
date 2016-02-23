@@ -47,8 +47,19 @@ public class LoginFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_login, container, false);
 
         welcomeTextView = (AppCompatTextView) v.findViewById(R.id.loginWelcomeTextView);
-        welcomeTextView.setText(getActivity().getResources().getString(R.string.login_hi_textview) + " " +
-                TwitterPreferences.getInstance(getActivity()).getUserNickname());
+
+        if (TwitterPreferences.getInstance(getActivity()).getUserNickname().equals("User")) {
+            welcomeTextView.setText(getActivity().getResources().getString(R.string.login_hi_textview) + " " +
+                    TwitterPreferences.getInstance(getActivity()).getUserNickname() +
+                    ". " +
+                    getActivity().getResources().getString(R.string.login_hi_textview_next));
+        } else {
+            welcomeTextView.setText(getActivity().getResources().getString(R.string.login_hi_textview) + " " +
+                    TwitterPreferences.getInstance(getActivity()).getUserNickname() +
+                    ". " +
+                    getActivity().getResources().getString(R.string.login_welcome_back));
+        }
+
 
         signInButton = (AppCompatButton) v.findViewById(R.id.loginSignInButton);
         signInButton.setOnClickListener(v1 -> {
