@@ -1,7 +1,6 @@
 package com.ninise.pragmatictwitterclient.project.mvp.presenter.adapters;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetViewHolder> {
     @Override
     public TweetViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_item, parent, false);
-        Log.d(TAG, "Adapter works");
 
         return new TweetViewHolder(v);
     }
