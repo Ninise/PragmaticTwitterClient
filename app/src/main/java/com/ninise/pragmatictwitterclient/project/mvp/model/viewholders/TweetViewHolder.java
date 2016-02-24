@@ -12,7 +12,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
 
     final CardView cv;
     final TextView groupTitleTextView;
-    final ImageView tweetImageView;
+    final ImageView tweetImageView; 
     final TextView tweetInfoTextView;
 
     public TweetViewHolder(View itemView) {
