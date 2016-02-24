@@ -13,7 +13,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        setListFragment();
+        //setListFragment();
     }
 
     private void setListFragment() {
