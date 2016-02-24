@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".project.mvc.view.login.LoginActivity"
+        <activity android:name=".project.mvp.view.login.LoginActivity"
                   android:clearTaskOnLaunch="true">
 
             <intent-filter>
@@ -36,7 +36,7 @@
 
         </activity>
 
-        <activity android:name=".project.mvc.view.home.HomeActivity"/>
+        <activity android:name=".project.mvp.view.home.HomeActivity"/>
 
     </application>
 

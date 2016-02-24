@@ -6,8 +6,8 @@ import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
 
-import com.ninise.pragmatictwitterclient.project.mvc.view.login.LoginActivity;
-import com.ninise.pragmatictwitterclient.project.mvc.view.login.LoginFragment;
+import com.ninise.pragmatictwitterclient.project.mvp.view.login.LoginActivity;
+import com.ninise.pragmatictwitterclient.project.mvp.view.login.LoginFragment;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
