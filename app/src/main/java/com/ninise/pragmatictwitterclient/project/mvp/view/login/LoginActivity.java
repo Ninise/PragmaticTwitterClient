@@ -1,4 +1,4 @@
-package com.ninise.pragmatictwitterclient.project.mvc.view.login;
+package com.ninise.pragmatictwitterclient.project.mvp.view.login;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;

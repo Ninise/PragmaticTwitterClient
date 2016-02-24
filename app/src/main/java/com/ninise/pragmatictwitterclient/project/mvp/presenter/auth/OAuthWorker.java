@@ -1,4 +1,4 @@
-package com.ninise.pragmatictwitterclient.project.mvc.presenter;
+package com.ninise.pragmatictwitterclient.project.mvp.presenter.auth;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -7,15 +7,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
 import android.view.Window;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import com.ninise.pragmatictwitterclient.R;
-import com.ninise.pragmatictwitterclient.project.mvc.model.preferences.TwitterPreferences;
-import com.ninise.pragmatictwitterclient.project.mvc.view.home.HomeActivity;
+import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferences;
+import com.ninise.pragmatictwitterclient.project.mvp.view.home.HomeActivity;
 import com.ninise.pragmatictwitterclient.project.utils.Constants;
 
 import twitter4j.Twitter;

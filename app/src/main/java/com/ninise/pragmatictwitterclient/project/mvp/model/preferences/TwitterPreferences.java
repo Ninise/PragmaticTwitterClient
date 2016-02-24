@@ -1,4 +1,4 @@
-package com.ninise.pragmatictwitterclient.project.mvc.model.preferences;
+package com.ninise.pragmatictwitterclient.project.mvp.model.preferences;
 
 import android.content.Context;
 import android.content.SharedPreferences;

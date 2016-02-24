@@ -1,4 +1,4 @@
-package com.ninise.pragmatictwitterclient.project.mvc.view.login;
+package com.ninise.pragmatictwitterclient.project.mvp.view.login;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -11,8 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ninise.pragmatictwitterclient.R;
-import com.ninise.pragmatictwitterclient.project.mvc.model.preferences.TwitterPreferences;
-import com.ninise.pragmatictwitterclient.project.mvc.presenter.OAuthWorker;
+import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferences;
+import com.ninise.pragmatictwitterclient.project.mvp.presenter.auth.OAuthWorker;
 
 
 public class LoginFragment extends Fragment {
