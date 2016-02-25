@@ -1,6 +1,7 @@
 package com.ninise.pragmatictwitterclient.project.mvp.presenter.auth;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.ninise.pragmatictwitterclient.R;
 import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferences;
 import com.ninise.pragmatictwitterclient.project.mvp.view.home.HomeActivity;
+import com.ninise.pragmatictwitterclient.project.mvp.view.login.LoginActivity;
 import com.ninise.pragmatictwitterclient.project.utils.Constants;
 
 import twitter4j.Twitter;
@@ -118,6 +120,7 @@ public class OAuthWorker {
                                     mContex.getResources().getString(R.string.permission_denied),
                                     Toast.LENGTH_SHORT).show();
                         }
+
                     }
                 });
 
@@ -160,6 +163,7 @@ public class OAuthWorker {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             mContex.startActivity(new Intent(mContex, HomeActivity.class));
+            ((Activity) mContex).finish();
         }
     }
 }
