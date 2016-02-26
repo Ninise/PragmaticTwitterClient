@@ -10,6 +10,7 @@ public class Constants {
     public static final String TWITTER_PREFERENCES = "twitter_pref";
     public static final String TWITTER_NICKNAME = "nickname";
     public static final String TWITTER_OAUTH_VERIFIER = "verifier";
+    public static final String TWITTER_NAME = "name";
     public static final String ACCESS_TOKEN = "access_token";
     public static final String ACCESS_TOKEN_SECRET = "access_toke_secret";
     public static final String IMAGE_URL = "image_url";

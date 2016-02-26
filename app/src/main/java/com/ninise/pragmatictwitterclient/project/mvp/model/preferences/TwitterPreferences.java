@@ -84,4 +84,15 @@ public class TwitterPreferences {
     public boolean getLoginOn() {
         return mPreferences.contains(Constants.IS_LOGIN_ON) && mPreferences.getBoolean(Constants.IS_LOGIN_ON, false);
     }
+
+    public void setUserName(String name) {
+        SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putString(Constants.TWITTER_NAME, name);
+        editor.apply();
+    }
+
+    public String getUserName() {
+        return mPreferences.contains(Constants.TWITTER_NAME) ?
+                mPreferences.getString(Constants.TWITTER_NAME, "") : "";
+    }
 }

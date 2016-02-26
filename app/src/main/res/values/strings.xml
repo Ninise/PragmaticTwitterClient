@@ -5,7 +5,7 @@
     <string name="login_hi_textview_next">Welcome in Pragmatic twitter client. I hope you get enjoy with my client for Twitter. This is honor for me when you are using my app.</string>
     <string name="login_welcome_back">Welcome back!</string>
     <string name="permission_denied">Sorry ! Permission Denied</string>
-    <string name="home_logout">Logout</string>
+    <string name="home_logout">Sign out</string>
     <string name="about">About</string>
     <string name="settings">Settings</string>
     <string name="home_developed">Ninise 2016</string>
