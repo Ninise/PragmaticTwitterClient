@@ -9,10 +9,12 @@ import android.support.v7.widget.AppCompatTextView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.ninise.pragmatictwitterclient.R;
 import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferences;
 import com.ninise.pragmatictwitterclient.project.mvp.presenter.auth.OAuthWorker;
+import com.ninise.pragmatictwitterclient.project.utils.Constants;
 
 
 public class LoginFragment extends Fragment {
@@ -59,7 +61,13 @@ public class LoginFragment extends Fragment {
 
 
         signInButton = (AppCompatButton) v.findViewById(R.id.loginSignInButton);
-        signInButton.setOnClickListener(v1 ->  OAuthWorker.getInstance(getActivity()).getAuth());
+        signInButton.setOnClickListener(v1 ->  {
+            if (OAuthWorker.getInstance(getActivity()).isNetworkConnectionOn()) {
+                OAuthWorker.getInstance(getActivity()).getAuth();
+            } else {
+                Toast.makeText(getActivity(), Constants.NETWORK_STATE_IS_FALSE, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return v;
     }

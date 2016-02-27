@@ -25,4 +25,5 @@ public class Constants {
     public static final String CALLBACK_URL = "oauth://t4jsample";
 
     public static final String DENIED = "denied";
+    public static final String NETWORK_STATE_IS_FALSE = "You haven't an Internet Connection :( ";
 }
