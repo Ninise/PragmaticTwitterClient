@@ -50,6 +50,7 @@ public class HomeActivity extends AppCompatActivity {
                 R.string.closeDrawer);
 
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
 
         setListFragment();
     }
