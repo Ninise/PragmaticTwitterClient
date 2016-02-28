@@ -11,4 +11,5 @@
     <string name="home_developed">Ninise 2016</string>
     <string name="openDrawer">openDrawer</string>
     <string name="closeDrawer">closeDrawer</string>
+    <string name="back_pressed">Please click BACK again to exit</string>
 </resources>
