@@ -11,10 +11,12 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ninise.pragmatictwitterclient.R;
+import com.ninise.pragmatictwitterclient.project.mvp.model.photo.PhotoWorker;
 import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferences;
 
 public class HomeActivity extends AppCompatActivity {
@@ -50,6 +52,8 @@ public class HomeActivity extends AppCompatActivity {
 
         ((TextView) headView.findViewById(R.id.userName)).setText(TwitterPreferences.getInstance(this).getUserName());
         ((TextView) headView.findViewById(R.id.userNickName)).setText(TwitterPreferences.getInstance(this).getUserNickname());
+        ((ImageView) headView.findViewById(R.id.userProfileIcon))
+                .setImageBitmap(PhotoWorker.setInstance(this).loadImageFromStorage(TwitterPreferences.getInstance(this).getUserIconPath()));
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,
