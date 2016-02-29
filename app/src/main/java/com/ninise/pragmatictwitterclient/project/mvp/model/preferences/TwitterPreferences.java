@@ -95,4 +95,15 @@ public class TwitterPreferences {
         return mPreferences.contains(Constants.TWITTER_NAME) ?
                 mPreferences.getString(Constants.TWITTER_NAME, "") : "";
     }
+
+    public void setUserIconPath(String path) {
+        SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putString(Constants.TWITTER_ICON_PATH, path);
+        editor.apply();
+    }
+
+    public String getUserIconPath() {
+        return mPreferences.contains(Constants.TWITTER_ICON_PATH) ?
+                mPreferences.getString(Constants.TWITTER_ICON_PATH, "") : "";
+    }
 }
