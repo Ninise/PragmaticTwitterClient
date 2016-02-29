@@ -176,6 +176,7 @@ public class OAuthWorker {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            TwitterProfileWorker.getInstance(mContex).getPhoto();
             mContex.startActivity(new Intent(mContex, HomeActivity.class));
             ((Activity) mContex).finish();
         }

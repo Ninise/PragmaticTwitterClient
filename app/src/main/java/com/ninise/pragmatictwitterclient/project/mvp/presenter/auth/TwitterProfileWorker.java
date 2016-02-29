@@ -21,7 +21,6 @@ public class TwitterProfileWorker {
 
     private static TwitterProfileWorker mInstance = null;
 
-    private ProgressDialog mProgress;
     private Context mContex;
     Bitmap mProfileIconBitmap;
 
@@ -38,16 +37,14 @@ public class TwitterProfileWorker {
         return mInstance;
     }
 
+    public void getPhoto() {
+        new LoadProfile().execute();
+    }
 
     private class LoadProfile extends AsyncTask<String, String, Bitmap> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            mProgress = new ProgressDialog(mContex);
-            mProgress.setMessage("Loading Profile ...");
-            mProgress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            mProgress.setIndeterminate(true);
-            mProgress.show();
 
         }
         protected Bitmap doInBackground(String... args) {
@@ -63,19 +60,11 @@ public class TwitterProfileWorker {
         protected void onPostExecute(Bitmap image) {
             Bitmap image_circle = Bitmap.createBitmap(mProfileIconBitmap.getWidth(), mProfileIconBitmap.getHeight(), Bitmap.Config.ARGB_8888);
 
-            BitmapShader shader = new BitmapShader (mProfileIconBitmap,  Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
-            Paint paint = new Paint();
-            paint.setShader(shader);
-            Canvas c = new Canvas(image_circle);
-            c.drawCircle(image.getWidth() / 2, image.getHeight() / 2, image.getWidth() / 2, paint);
-
             try {
                TwitterPreferences.getInstance(mContex).setUserIconPath( PhotoWorker.setInstance(mContex).saveToInternalStorage(image_circle));
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-            mProgress.hide();
 
         }
     }
