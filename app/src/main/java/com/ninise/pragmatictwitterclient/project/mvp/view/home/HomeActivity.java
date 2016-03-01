@@ -1,5 +1,8 @@
 package com.ninise.pragmatictwitterclient.project.mvp.view.home;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -20,12 +23,17 @@ import com.ninise.pragmatictwitterclient.R;
 import com.ninise.pragmatictwitterclient.project.mvp.model.photo.PhotoWorker;
 import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferences;
 
+import java.io.IOException;
+import java.net.URL;
+
 public class HomeActivity extends AppCompatActivity {
 
     private static final String TAG = HomeActivity.class.getSimpleName();
     private DrawerLayout drawerLayout;
 
     private boolean doubleBackToExitPressedOnce = false;
+    Bitmap mProfileIconBitmap;
+    NavigationView navigationView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,10 +43,10 @@ public class HomeActivity extends AppCompatActivity {
         final Toolbar toolbar = (Toolbar) findViewById(R.id.homeToolBar);
         setSupportActionBar(toolbar);
 
-        final NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(menuItem -> {
 
-            if(menuItem.isChecked()) {
+            if (menuItem.isChecked()) {
                 menuItem.setChecked(false);
             } else {
                 menuItem.setChecked(true);
@@ -68,7 +76,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private boolean menuSelected(MenuItem menuItem) {
-        switch (menuItem.getItemId()){
+        switch (menuItem.getItemId()) {
             case R.id.settings:
                 return true;
             case R.id.about:

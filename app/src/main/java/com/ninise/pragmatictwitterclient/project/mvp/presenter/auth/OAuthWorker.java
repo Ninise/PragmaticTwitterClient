@@ -162,9 +162,10 @@ public class OAuthWorker {
 
                 TwitterPreferences.getInstance(mContex).setUserNickname(user.getScreenName());
                 TwitterPreferences.getInstance(mContex).setUserName(user.getName());
-                if (!user.getOriginalProfileImageURL().equals(TwitterPreferences.getInstance(mContex).getUserImageUrl())) {
+                //if (!user.getOriginalProfileImageURL().equals(TwitterPreferences.getInstance(mContex).getUserImageUrl())) {
                     TwitterPreferences.getInstance(mContex).setUserImageUrl(user.getOriginalProfileImageURL());
-                }
+                Log.d(TAG, user.getMiniProfileImageURL());
+              //  }
             } catch (TwitterException e) {
                 e.printStackTrace();
             }

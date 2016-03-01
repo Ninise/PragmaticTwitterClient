@@ -9,6 +9,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Shader;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.ninise.pragmatictwitterclient.project.mvp.model.photo.PhotoWorker;
 import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferences;
@@ -50,7 +51,7 @@ public class TwitterProfileWorker {
         protected Bitmap doInBackground(String... args) {
             try {
                 mProfileIconBitmap = BitmapFactory.decodeStream(
-                        (InputStream) new URL(TwitterPreferences.getInstance(mContex).getUserImageUrl()).getContent()
+                        new URL(TwitterPreferences.getInstance(mContex).getUserImageUrl()).openStream()
                 );
             } catch (Exception e) {
                 e.printStackTrace();
@@ -61,11 +62,10 @@ public class TwitterProfileWorker {
             Bitmap image_circle = Bitmap.createBitmap(mProfileIconBitmap.getWidth(), mProfileIconBitmap.getHeight(), Bitmap.Config.ARGB_8888);
 
             try {
-               TwitterPreferences.getInstance(mContex).setUserIconPath( PhotoWorker.setInstance(mContex).saveToInternalStorage(image_circle));
+               TwitterPreferences.getInstance(mContex).setUserIconPath(PhotoWorker.setInstance(mContex).saveToInternalStorage(image_circle));
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
     }
 }
