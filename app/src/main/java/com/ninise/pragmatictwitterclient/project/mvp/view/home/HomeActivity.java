@@ -20,7 +20,6 @@ import android.widget.Toast;
 
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.ninise.pragmatictwitterclient.R;
-import com.ninise.pragmatictwitterclient.project.mvp.model.photo.PhotoWorker;
 import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferences;
 
 import java.io.IOException;
