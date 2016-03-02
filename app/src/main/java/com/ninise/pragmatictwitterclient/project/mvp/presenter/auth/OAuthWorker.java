@@ -55,8 +55,8 @@ public class OAuthWorker {
         return mInstance;
     }
 
-    public void getAuth() {
-        new GetAuth().execute();
+    public AsyncTask getAuth() {
+        return new GetAuth().execute();
     }
 
     public boolean isNetworkConnectionOn() {
@@ -162,10 +162,7 @@ public class OAuthWorker {
 
                 TwitterPreferences.getInstance(mContex).setUserNickname(user.getScreenName());
                 TwitterPreferences.getInstance(mContex).setUserName(user.getName());
-                //if (!user.getOriginalProfileImageURL().equals(TwitterPreferences.getInstance(mContex).getUserImageUrl())) {
-                    TwitterPreferences.getInstance(mContex).setUserImageUrl(user.getOriginalProfileImageURL());
-                Log.d(TAG, user.getMiniProfileImageURL());
-              //  }
+
             } catch (TwitterException e) {
                 e.printStackTrace();
             }
@@ -177,7 +174,6 @@ public class OAuthWorker {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            TwitterProfileWorker.getInstance(mContex).getPhoto();
             mContex.startActivity(new Intent(mContex, HomeActivity.class));
             ((Activity) mContex).finish();
         }

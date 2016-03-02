@@ -34,6 +34,7 @@ public class HomeActivity extends AppCompatActivity {
     private boolean doubleBackToExitPressedOnce = false;
     Bitmap mProfileIconBitmap;
     NavigationView navigationView;
+    View headView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,12 +58,10 @@ public class HomeActivity extends AppCompatActivity {
             return menuSelected(menuItem);
         });
 
-        View headView = navigationView.getHeaderView(0);
+        headView = navigationView.getHeaderView(0);
 
         ((TextView) headView.findViewById(R.id.userName)).setText(TwitterPreferences.getInstance(this).getUserName());
         ((TextView) headView.findViewById(R.id.userNickName)).setText(TwitterPreferences.getInstance(this).getUserNickname());
-        ((CircularImageView) headView.findViewById(R.id.userProfileIcon))
-                .setImageBitmap(PhotoWorker.setInstance(this).loadImageFromStorage(TwitterPreferences.getInstance(this).getUserIconPath()));
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,
@@ -73,6 +72,7 @@ public class HomeActivity extends AppCompatActivity {
         actionBarDrawerToggle.syncState();
 
         setListFragment();
+        new LoadProfile().execute();
     }
 
     private boolean menuSelected(MenuItem menuItem) {
@@ -112,5 +112,26 @@ public class HomeActivity extends AppCompatActivity {
         Toast.makeText(this, getString(R.string.back_pressed), Toast.LENGTH_SHORT).show();
 
         new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
+    }
+
+    private class LoadProfile extends AsyncTask<String, String, Bitmap> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+        protected Bitmap doInBackground(String... args) {
+            try {
+                mProfileIconBitmap = BitmapFactory.decodeStream(
+                        new URL(TwitterPreferences.getInstance(getApplicationContext()).getUserImageUrl()).openStream()
+                );
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return mProfileIconBitmap;
+        }
+        protected void onPostExecute(Bitmap image) {
+            ((CircularImageView) headView.findViewById(R.id.userProfileIcon)).setImageBitmap(mProfileIconBitmap);
+        }
     }
 }

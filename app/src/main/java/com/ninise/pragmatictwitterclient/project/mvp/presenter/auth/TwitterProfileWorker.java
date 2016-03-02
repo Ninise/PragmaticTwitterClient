@@ -38,34 +38,9 @@ public class TwitterProfileWorker {
         return mInstance;
     }
 
-    public void getPhoto() {
-        new LoadProfile().execute();
-    }
+//    public void getPhoto() {
+//        new LoadProfile().execute();
+//    }
 
-    private class LoadProfile extends AsyncTask<String, String, Bitmap> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
 
-        }
-        protected Bitmap doInBackground(String... args) {
-            try {
-                mProfileIconBitmap = BitmapFactory.decodeStream(
-                        new URL(TwitterPreferences.getInstance(mContex).getUserImageUrl()).openStream()
-                );
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return mProfileIconBitmap;
-        }
-        protected void onPostExecute(Bitmap image) {
-            Bitmap image_circle = Bitmap.createBitmap(mProfileIconBitmap.getWidth(), mProfileIconBitmap.getHeight(), Bitmap.Config.ARGB_8888);
-
-            try {
-               TwitterPreferences.getInstance(mContex).setUserIconPath(PhotoWorker.setInstance(mContex).saveToInternalStorage(image_circle));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }
