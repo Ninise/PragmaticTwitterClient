@@ -40,6 +40,7 @@
         android:layout_marginBottom="5dp"
         android:layout_alignParentBottom="true"
         android:text="@string/login_button"
-        style="@style/RobotoButtonStyle"/>
+        style="@style/RobotoButtonStyle"
+        />
 
 </RelativeLayout>

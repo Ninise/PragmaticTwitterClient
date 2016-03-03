@@ -6,4 +6,5 @@
     <color name="justWhite">#ffffff</color>
     <color name="colorMainTwitter">#33b5e5</color>
     <color name="colorButton">#FF29B6F6</color>
+    <color name="colorPrimaryLight">#96a3fa</color>
 </resources>
