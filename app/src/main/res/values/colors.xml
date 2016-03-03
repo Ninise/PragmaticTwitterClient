@@ -7,4 +7,8 @@
     <color name="colorMainTwitter">#33b5e5</color>
     <color name="colorButton">#FF29B6F6</color>
     <color name="colorPrimaryLight">#96a3fa</color>
+
+    <!-- CircleImageView -->
+    <color name="colorBorderOfCircleImageView">#ffffff</color>
+    <color name="colorShadowOfCircleImageView">#212628</color>
 </resources>
