@@ -95,4 +95,9 @@ public class HomeActivityTest {
     public void usernameTextViewHasUsername() {
         Assertions.assertThat(mUsernameTextView.getText()).isEmpty();
     }
+
+    @Test
+    public void userIconImageViewHasIcon() {
+        Assertions.assertThat(mUserIconImageView.getDrawable()).isNotNull();
+    }
 }
