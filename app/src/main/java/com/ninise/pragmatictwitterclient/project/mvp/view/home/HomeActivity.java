@@ -11,10 +11,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -113,7 +111,7 @@ public class HomeActivity extends AppCompatActivity {
         new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
     }
 
-    private class LoadProfile extends AsyncTask<String, String, Bitmap> {
+    public class LoadProfile extends AsyncTask<String, String, Bitmap> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -122,9 +120,9 @@ public class HomeActivity extends AppCompatActivity {
         protected Bitmap doInBackground(String... args) {
             try {
                 mProfileIconBitmap = BitmapFactory.decodeStream(
-                        new URL(TwitterPreferences.getInstance(getApplicationContext()).getUserImageUrl()).openStream()
+                        new URL(TwitterPreferences.getInstance(getApplicationContext()).getUserImageUrl().trim()).openStream()
                 );
-            } catch (Exception e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
             return mProfileIconBitmap;

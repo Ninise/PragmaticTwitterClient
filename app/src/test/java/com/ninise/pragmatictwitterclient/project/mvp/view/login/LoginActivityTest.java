@@ -1,4 +1,4 @@
-package com.ninise.pragmatictwitterclient;
+package com.ninise.pragmatictwitterclient.project.mvp.view.login;
 
 import android.app.Activity;
 import android.os.AsyncTask;
@@ -8,6 +8,8 @@ import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 
+import com.ninise.pragmatictwitterclient.BuildConfig;
+import com.ninise.pragmatictwitterclient.R;
 import com.ninise.pragmatictwitterclient.project.mvp.presenter.auth.OAuthWorker;
 import com.ninise.pragmatictwitterclient.project.mvp.view.login.LoginActivity;
 import com.ninise.pragmatictwitterclient.project.mvp.view.login.LoginFragment;
@@ -44,7 +46,7 @@ public class LoginActivityTest {
     private Fragment fragment;
 
     @Before
-    public void setup() {
+    public void setUp() {
         activity = Robolectric.setupActivity(LoginActivity.class);
         fragment = LoginFragment.getInstance();
         toolbar = (Toolbar) activity.findViewById(R.id.loginMainToolbar);
