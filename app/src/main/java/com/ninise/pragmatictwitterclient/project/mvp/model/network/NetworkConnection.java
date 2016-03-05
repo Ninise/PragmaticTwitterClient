@@ -27,8 +27,7 @@ public class NetworkConnection {
         ConnectivityManager cm = (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
 
-        return activeNetwork != null &&
-                activeNetwork.isConnectedOrConnecting();
+        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
     }
 
 }
