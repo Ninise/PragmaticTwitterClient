@@ -5,8 +5,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -18,7 +16,6 @@ import android.widget.Toast;
 import com.ninise.pragmatictwitterclient.R;
 import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferences;
 import com.ninise.pragmatictwitterclient.project.mvp.view.home.HomeActivity;
-import com.ninise.pragmatictwitterclient.project.mvp.view.login.LoginActivity;
 import com.ninise.pragmatictwitterclient.project.utils.Constants;
 
 import twitter4j.Twitter;
@@ -41,10 +38,10 @@ public class OAuthWorker {
     private String oauth_url;
     private String oauth_verifier;
 
-    private Context mContex;
+    private Context mContext;
 
     public OAuthWorker(Context contex) {
-        this.mContex = contex;
+        this.mContext = contex;
     }
 
     public static OAuthWorker getInstance(Context context) {
@@ -59,12 +56,8 @@ public class OAuthWorker {
         return new GetAuth().execute();
     }
 
-    public boolean isNetworkConnectionOn() {
-        ConnectivityManager cm = (ConnectivityManager) mContex.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-
-        return activeNetwork != null &&
-                activeNetwork.isConnectedOrConnecting();
+    protected AsyncTask getAccessToken() {
+        return new GetAccessToken().execute();
     }
 
     private class GetAuth extends AsyncTask<String, String, String> {
@@ -100,7 +93,7 @@ public class OAuthWorker {
             super.onPostExecute(oauth_url);
             if (oauth_url != null) {
 
-                Dialog auth_dialog = new Dialog(mContex);
+                Dialog auth_dialog = new Dialog(mContext);
                 auth_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
                 auth_dialog.setContentView(R.layout.dialog_auth);
@@ -122,12 +115,12 @@ public class OAuthWorker {
 
                             auth_dialog.dismiss();
 
-                            new GetAccessToken().execute();
+                            getAccessToken();
                         } if (url.contains(Constants.DENIED)) {
                             auth_dialog.dismiss();
                             Toast.makeText(
-                                    mContex,
-                                    mContex.getResources().getString(R.string.permission_denied),
+                                    mContext,
+                                    mContext.getResources().getString(R.string.permission_denied),
                                     Toast.LENGTH_SHORT).show();
                         }
 
@@ -148,10 +141,10 @@ public class OAuthWorker {
                 AccessToken accessToken = twitter.getOAuthAccessToken(
                         requestToken, oauth_verifier);
 
-                TwitterPreferences.getInstance(mContex).setOAuthAccessTokenAndSecret(accessToken.getToken(),
+                TwitterPreferences.getInstance(mContext).setOAuthAccessTokenAndSecret(accessToken.getToken(),
                         accessToken.getTokenSecret());
 
-                TwitterPreferences.getInstance(mContex).setLoginOn(true);
+                TwitterPreferences.getInstance(mContext).setLoginOn(true);
 
                 long userID = accessToken.getUserId();
                 User user = twitter.showUser(userID);
@@ -160,8 +153,8 @@ public class OAuthWorker {
                 Log.d(TAG, username);
 
 
-                TwitterPreferences.getInstance(mContex).setUserNickname(user.getScreenName());
-                TwitterPreferences.getInstance(mContex).setUserName(user.getName());
+                TwitterPreferences.getInstance(mContext).setUserNickname(user.getScreenName());
+                TwitterPreferences.getInstance(mContext).setUserName(user.getName());
 
             } catch (TwitterException e) {
                 e.printStackTrace();
@@ -174,8 +167,8 @@ public class OAuthWorker {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            mContex.startActivity(new Intent(mContex, HomeActivity.class));
-            ((Activity) mContex).finish();
+            mContext.startActivity(new Intent(mContext, HomeActivity.class));
+            ((Activity) mContext).finish();
         }
     }
 }

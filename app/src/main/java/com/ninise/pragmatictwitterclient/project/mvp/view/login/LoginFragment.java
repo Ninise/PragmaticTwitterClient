@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.ninise.pragmatictwitterclient.R;
+import com.ninise.pragmatictwitterclient.project.mvp.model.network.NetworkConnection;
 import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferences;
 import com.ninise.pragmatictwitterclient.project.mvp.presenter.auth.OAuthWorker;
 import com.ninise.pragmatictwitterclient.project.utils.Constants;
@@ -62,7 +63,7 @@ public class LoginFragment extends Fragment {
 
         signInButton = (AppCompatButton) v.findViewById(R.id.loginSignInButton);
         signInButton.setOnClickListener(v1 ->  {
-            if (OAuthWorker.getInstance(getActivity()).isNetworkConnectionOn()) {
+            if (NetworkConnection.getInstance(getActivity()).isNetworkConnectionOn()) {
                 OAuthWorker.getInstance(getActivity()).getAuth();
             } else {
                 Toast.makeText(getActivity(), Constants.NETWORK_STATE_IS_FALSE, Toast.LENGTH_SHORT).show();
