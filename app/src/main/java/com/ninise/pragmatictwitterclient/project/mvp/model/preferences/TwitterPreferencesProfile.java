@@ -24,10 +24,10 @@ public class TwitterPreferencesProfile {
         return mInstance;
     }
 
-    public void setUserNickname(String nickname) {
+    public boolean setUserNickname(String nickname) {
         SharedPreferences.Editor editor = mPreferences.edit();
         editor.putString(Constants.TWITTER_NICKNAME, nickname);
-        editor.apply();
+        return editor.commit();
     }
 
     public String getUserNickname() {
@@ -35,10 +35,10 @@ public class TwitterPreferencesProfile {
                 mPreferences.getString(Constants.TWITTER_NICKNAME, "User") : "User";
     }
 
-    public void setUserImageUrl(String url) {
+    public boolean setUserImageUrl(String url) {
         SharedPreferences.Editor editor = mPreferences.edit();
         editor.putString(Constants.IMAGE_URL, url);
-        editor.apply();
+        return editor.commit();
     }
 
     public String getUserImageUrl() {
@@ -46,20 +46,20 @@ public class TwitterPreferencesProfile {
                 mPreferences.getString(Constants.IMAGE_URL, "") : "";
     }
 
-    public void setLoginOn(boolean status) {
+    public boolean setLoginOn(boolean status) {
         SharedPreferences.Editor editor = mPreferences.edit();
         editor.putBoolean(Constants.IS_LOGIN_ON, status);
-        editor.apply();
+        return editor.commit();
     }
 
     public boolean getLoginOn() {
         return mPreferences.contains(Constants.IS_LOGIN_ON) && mPreferences.getBoolean(Constants.IS_LOGIN_ON, false);
     }
 
-    public void setUserName(String name) {
+    public boolean setUserName(String name) {
         SharedPreferences.Editor editor = mPreferences.edit();
         editor.putString(Constants.TWITTER_NAME, name);
-        editor.apply();
+        return editor.commit();
     }
 
     public String getUserName() {
