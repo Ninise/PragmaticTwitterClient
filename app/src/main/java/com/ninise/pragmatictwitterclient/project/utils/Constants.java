@@ -6,21 +6,19 @@ public class Constants {
     public static final String TWITTER_KEY = "JKatOaybOJ1Xwa6SQrp8HlmGc";
     public static final String TWITTER_SECRET = "ymSI2OZToSD1BYGNWtbHncMdY5O12uxK9kDHlsQpK1kCcJSjYI";
 
-    /** SharedPreferences */
-    public static final String TWITTER_PREFERENCES = "twitter_pref";
-    public static final String TWITTER_NICKNAME = "nickname";
-    public static final String TWITTER_OAUTH_VERIFIER = "verifier";
-    public static final String TWITTER_NAME = "name";
+    /** SharedPreferences - # AUTH # */
+    public static final String TWITTER_PREFERENCES_AUTH = "twitter_pref_auth";
     public static final String ACCESS_TOKEN = "access_token";
     public static final String ACCESS_TOKEN_SECRET = "access_toke_secret";
-    public static final String IMAGE_URL = "image_url";
     public static final String IS_LOGIN_ON = "is_login_on";
 
-    /** Broadcast */
-    public static final String AUTH_RECEIVER = "com.ninise.pratic.auth_finished";
+    /** SharedPreferences - # PROFILE # */
+    public static final String TWITTER_PREFERENCES_PROFILE = "twitter_pref_profile";
+    public static final String TWITTER_NICKNAME = "nickname";
+    public static final String TWITTER_NAME = "name";
+    public static final String IMAGE_URL = "image_url";
 
     /** AUTH DATA */
-    public static final String AUTH_URL = "auth_url";
     public static final String AUTH_VERIFIER = "oauth_verifier";
     public static final String CALLBACK_URL = "oauth://t4jsample";
 

@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.ninise.pragmatictwitterclient.R;
-import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferences;
+import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferencesProfile;
 
 import java.io.IOException;
 import java.net.URL;
@@ -57,8 +57,8 @@ public class HomeActivity extends AppCompatActivity {
 
         headView = navigationView.getHeaderView(0);
 
-        ((TextView) headView.findViewById(R.id.userName)).setText(TwitterPreferences.getInstance(this).getUserName());
-        ((TextView) headView.findViewById(R.id.userNickName)).setText(TwitterPreferences.getInstance(this).getUserNickname());
+        ((TextView) headView.findViewById(R.id.userName)).setText(TwitterPreferencesProfile.getInstance(this).getUserName());
+        ((TextView) headView.findViewById(R.id.userNickName)).setText(TwitterPreferencesProfile.getInstance(this).getUserNickname());
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,
@@ -120,7 +120,7 @@ public class HomeActivity extends AppCompatActivity {
         protected Bitmap doInBackground(String... args) {
             try {
                 mProfileIconBitmap = BitmapFactory.decodeStream(
-                        new URL(TwitterPreferences.getInstance(getApplicationContext()).getUserImageUrl().trim()).openStream()
+                        new URL(TwitterPreferencesProfile.getInstance(getApplicationContext()).getUserImageUrl().trim()).openStream()
                 );
             } catch (IOException e) {
                 e.printStackTrace();

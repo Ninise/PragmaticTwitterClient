@@ -13,7 +13,8 @@ import android.widget.Toast;
 
 import com.ninise.pragmatictwitterclient.R;
 import com.ninise.pragmatictwitterclient.project.mvp.model.network.NetworkConnection;
-import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferences;
+import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferencesAuth;
+import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferencesProfile;
 import com.ninise.pragmatictwitterclient.project.mvp.presenter.auth.OAuthWorker;
 import com.ninise.pragmatictwitterclient.project.utils.Constants;
 
@@ -48,14 +49,14 @@ public class LoginFragment extends Fragment {
 
         welcomeTextView = (AppCompatTextView) v.findViewById(R.id.loginWelcomeTextView);
 
-        if (TwitterPreferences.getInstance(getActivity()).getUserNickname().equals("User")) {
+        if (TwitterPreferencesProfile.getInstance(getActivity()).getUserNickname().equals("User")) {
             welcomeTextView.setText(getActivity().getResources().getString(R.string.login_hi_textview) + " " +
-                    TwitterPreferences.getInstance(getActivity()).getUserNickname() +
+                    TwitterPreferencesProfile.getInstance(getActivity()).getUserNickname() +
                     ". " +
                     getActivity().getResources().getString(R.string.login_hi_textview_next));
         } else {
             welcomeTextView.setText(getActivity().getResources().getString(R.string.login_hi_textview) + " " +
-                    TwitterPreferences.getInstance(getActivity()).getUserNickname() +
+                    TwitterPreferencesProfile.getInstance(getActivity()).getUserNickname() +
                     ". " +
                     getActivity().getResources().getString(R.string.login_welcome_back));
         }
@@ -75,8 +76,8 @@ public class LoginFragment extends Fragment {
 
     private void logoutFromTwitter() {
         // Clear the shared preferences
-        TwitterPreferences.getInstance(getActivity()).setLoginOn(false);
-        TwitterPreferences.getInstance(getActivity()).setOAuthAccessTokenAndSecret("", "");
+        TwitterPreferencesProfile.getInstance(getActivity()).setLoginOn(false);
+        TwitterPreferencesAuth.getInstance(getActivity()).setOAuthAccessTokenAndSecret("", "");
     }
 
     @Override

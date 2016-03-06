@@ -14,7 +14,8 @@ import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import com.ninise.pragmatictwitterclient.R;
-import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferences;
+import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferencesAuth;
+import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferencesProfile;
 import com.ninise.pragmatictwitterclient.project.mvp.view.home.HomeActivity;
 import com.ninise.pragmatictwitterclient.project.utils.Constants;
 
@@ -141,10 +142,10 @@ public class OAuthWorker {
                 AccessToken accessToken = twitter.getOAuthAccessToken(
                         requestToken, oauth_verifier);
 
-                TwitterPreferences.getInstance(mContext).setOAuthAccessTokenAndSecret(accessToken.getToken(),
+                TwitterPreferencesAuth.getInstance(mContext).setOAuthAccessTokenAndSecret(accessToken.getToken(),
                         accessToken.getTokenSecret());
 
-                TwitterPreferences.getInstance(mContext).setLoginOn(true);
+                TwitterPreferencesProfile.getInstance(mContext).setLoginOn(true);
 
                 long userID = accessToken.getUserId();
                 User user = twitter.showUser(userID);
@@ -153,8 +154,8 @@ public class OAuthWorker {
                 Log.d(TAG, username);
 
 
-                TwitterPreferences.getInstance(mContext).setUserNickname(user.getScreenName());
-                TwitterPreferences.getInstance(mContext).setUserName(user.getName());
+                TwitterPreferencesProfile.getInstance(mContext).setUserNickname(user.getScreenName());
+                TwitterPreferencesProfile.getInstance(mContext).setUserName(user.getName());
 
             } catch (TwitterException e) {
                 e.printStackTrace();
