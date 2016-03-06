@@ -5,21 +5,20 @@ import android.content.SharedPreferences;
 
 import com.ninise.pragmatictwitterclient.project.utils.Constants;
 
-public class TwitterPreferences {
+public class TwitterPreferencesProfile {
 
-    private static TwitterPreferences mInstance = null;
+    private static TwitterPreferencesProfile mInstance = null;
     private SharedPreferences mPreferences;
     private Context mContex;
-    private String uri;
 
-    private TwitterPreferences(Context context) {
+    private TwitterPreferencesProfile(Context context) {
         this.mContex = context;
-        mPreferences = mContex.getSharedPreferences(Constants.TWITTER_PREFERENCES, Context.MODE_PRIVATE);
+        mPreferences = mContex.getSharedPreferences(Constants.TWITTER_PREFERENCES_AUTH, Context.MODE_PRIVATE);
     }
 
-    public static TwitterPreferences getInstance(Context context) {
+    public static TwitterPreferencesProfile getInstance(Context context) {
         if (mInstance == null) {
-            mInstance = new TwitterPreferences(context);
+            mInstance = new TwitterPreferencesProfile(context);
         }
 
         return mInstance;
@@ -47,22 +46,7 @@ public class TwitterPreferences {
                 mPreferences.getString(Constants.TWITTER_OAUTH_VERIFIER, "") : "";
     }
 
-    public void setOAuthAccessTokenAndSecret(String token, String secret) {
-        SharedPreferences.Editor editor = mPreferences.edit();
-        editor.putString(Constants.ACCESS_TOKEN, token);
-        editor.putString(Constants.ACCESS_TOKEN_SECRET, secret);
-        editor.apply();
-    }
 
-    public String getOAuthAccessToken() {
-        return mPreferences.contains(Constants.ACCESS_TOKEN) ?
-                mPreferences.getString(Constants.ACCESS_TOKEN, "") : "";
-    }
-
-    public String getOAuthAccessTokenSecret() {
-        return mPreferences.contains(Constants.ACCESS_TOKEN_SECRET) ?
-                mPreferences.getString(Constants.ACCESS_TOKEN_SECRET, "") : "";
-    }
 
     public void setUserImageUrl(String url) {
         SharedPreferences.Editor editor = mPreferences.edit();
