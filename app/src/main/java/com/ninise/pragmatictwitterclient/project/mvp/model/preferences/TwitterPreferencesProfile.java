@@ -13,7 +13,7 @@ public class TwitterPreferencesProfile {
 
     private TwitterPreferencesProfile(Context context) {
         this.mContex = context;
-        mPreferences = mContex.getSharedPreferences(Constants.TWITTER_PREFERENCES_AUTH, Context.MODE_PRIVATE);
+        mPreferences = mContex.getSharedPreferences(Constants.TWITTER_PREFERENCES_PROFILE, Context.MODE_PRIVATE);
     }
 
     public static TwitterPreferencesProfile getInstance(Context context) {
@@ -34,19 +34,6 @@ public class TwitterPreferencesProfile {
         return mPreferences.contains(Constants.TWITTER_NICKNAME) ?
                 mPreferences.getString(Constants.TWITTER_NICKNAME, "User") : "User";
     }
-
-    public void setOAuthVerifier(String verifier) {
-        SharedPreferences.Editor editor = mPreferences.edit();
-        editor.putString(Constants.TWITTER_OAUTH_VERIFIER, verifier);
-        editor.apply();
-    }
-
-    public String getOAuthVerifier() {
-        return mPreferences.contains(Constants.TWITTER_OAUTH_VERIFIER) ?
-                mPreferences.getString(Constants.TWITTER_OAUTH_VERIFIER, "") : "";
-    }
-
-
 
     public void setUserImageUrl(String url) {
         SharedPreferences.Editor editor = mPreferences.edit();
@@ -78,16 +65,5 @@ public class TwitterPreferencesProfile {
     public String getUserName() {
         return mPreferences.contains(Constants.TWITTER_NAME) ?
                 mPreferences.getString(Constants.TWITTER_NAME, "") : "";
-    }
-
-    public void setUserIconPath(String path) {
-        SharedPreferences.Editor editor = mPreferences.edit();
-        editor.putString(Constants.TWITTER_ICON_PATH, path);
-        editor.apply();
-    }
-
-    public String getUserIconPath() {
-        return mPreferences.contains(Constants.TWITTER_ICON_PATH) ?
-                mPreferences.getString(Constants.TWITTER_ICON_PATH, "") : "";
     }
 }
