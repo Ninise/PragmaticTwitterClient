@@ -13,22 +13,18 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowActivity;
 
 
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class)
 public class OAuthWorkerTest {
 
-    private Activity activity;
-
-    @Before
-    public void setUp() throws Exception {
-        activity = Robolectric.setupActivity(LoginActivity.class);
-    }
+    private ShadowActivity mShadowActivity = new ShadowActivity();
 
     @Test
     public void authAsyncTaskShouldBeNotNull() {
-        AsyncTask auth = OAuthWorker.getInstance(activity).getAuth();
+        AsyncTask auth = OAuthWorker.getInstance(mShadowActivity.getApplicationContext()).getAuth();
 
         Robolectric.flushBackgroundThreadScheduler();
 
