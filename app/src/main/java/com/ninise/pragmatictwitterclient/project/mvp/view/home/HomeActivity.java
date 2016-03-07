@@ -120,7 +120,7 @@ public class HomeActivity extends AppCompatActivity {
         protected Bitmap doInBackground(String... args) {
             try {
                 mProfileIconBitmap = BitmapFactory.decodeStream(
-                        new URL(TwitterPreferencesProfile.getInstance(getApplicationContext()).getUserImageUrl().trim()).openStream()
+                        new URL(TwitterPreferencesProfile.getInstance(getApplicationContext()).getUserImageUrl()).openStream()
                 );
             } catch (IOException e) {
                 e.printStackTrace();

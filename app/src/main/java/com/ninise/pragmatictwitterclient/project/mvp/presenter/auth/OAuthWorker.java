@@ -156,6 +156,7 @@ public class OAuthWorker {
 
                 TwitterPreferencesProfile.getInstance(mContext).setUserNickname(user.getScreenName());
                 TwitterPreferencesProfile.getInstance(mContext).setUserName(user.getName());
+                TwitterPreferencesProfile.getInstance(mContext).setUserImageUrl(user.getOriginalProfileImageURL());
 
             } catch (TwitterException e) {
                 e.printStackTrace();
