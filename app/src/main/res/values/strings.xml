@@ -12,4 +12,5 @@
     <string name="openDrawer">openDrawer</string>
     <string name="closeDrawer">closeDrawer</string>
     <string name="back_pressed">Please click BACK again to exit</string>
+    <string name="home_post_tweet_hint">Post tweet</string>
 </resources>

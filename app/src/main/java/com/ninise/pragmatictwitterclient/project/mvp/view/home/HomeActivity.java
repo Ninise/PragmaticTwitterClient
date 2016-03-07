@@ -38,7 +38,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.homeToolBar);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.homeToolbar);
         setSupportActionBar(toolbar);
 
         navigationView = (NavigationView) findViewById(R.id.navigation_view);

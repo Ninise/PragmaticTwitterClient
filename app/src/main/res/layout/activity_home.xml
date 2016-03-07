@@ -10,16 +10,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/homeToolBar"
-            layout="@layout/tool_bar"
-            />
+        <include android:id="@+id/CoordLay"
+                 layout="@layout/activity_home_coord_toolbar"
+                 />
 
         <FrameLayout
             android:id="@+id/homeContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/homeToolBar"/>
+            android:layout_below="@id/CoordLay"/>
 
     </RelativeLayout>
 
