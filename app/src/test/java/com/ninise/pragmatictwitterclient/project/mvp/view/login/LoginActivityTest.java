@@ -10,9 +10,7 @@ import android.widget.ImageView;
 
 import com.ninise.pragmatictwitterclient.BuildConfig;
 import com.ninise.pragmatictwitterclient.R;
-import com.ninise.pragmatictwitterclient.project.mvp.presenter.auth.OAuthWorker;
-import com.ninise.pragmatictwitterclient.project.mvp.view.login.LoginActivity;
-import com.ninise.pragmatictwitterclient.project.mvp.view.login.LoginFragment;
+import com.ninise.pragmatictwitterclient.project.mvp.model.network.auth.OAuthWorker;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Before;

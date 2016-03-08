@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.ninise.pragmatictwitterclient.BuildConfig;
 import com.ninise.pragmatictwitterclient.R;
+import com.ninise.pragmatictwitterclient.project.mvp.model.network.auth.OAuthWorker;
+import com.ninise.pragmatictwitterclient.project.mvp.model.network.data.ProfileImage;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
@@ -21,6 +23,8 @@ import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowAsyncTask;
 import org.robolectric.shadows.ShadowToast;
+
+import java.net.MalformedURLException;
 
 import static com.ninise.pragmatictwitterclient.project.mvp.view.home.HomeActivity.*;
 import static org.junit.Assert.*;
@@ -44,7 +48,7 @@ public class HomeActivityTest {
 
         mDrawer = (DrawerLayout) activity.findViewById(R.id.drawer);
 
-        mToolbar = (Toolbar) activity.findViewById(R.id.homeToolBar);
+        mToolbar = (Toolbar) activity.findViewById(R.id.homeToolbar);
         mNavigationView = (NavigationView) activity.findViewById(R.id.navigation_view);
 
         final View headView = mNavigationView.getHeaderView(0);
@@ -98,6 +102,6 @@ public class HomeActivityTest {
 
     @Test
     public void userIconImageViewHasIcon() {
-        Assertions.assertThat(mUserIconImageView.getDrawable()).isNotNull();
+        Assertions.assertThat(mUserIconImageView).isNotNull();
     }
 }

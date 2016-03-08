@@ -15,7 +15,7 @@ import com.ninise.pragmatictwitterclient.R;
 import com.ninise.pragmatictwitterclient.project.mvp.model.network.NetworkConnection;
 import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferencesAuth;
 import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferencesProfile;
-import com.ninise.pragmatictwitterclient.project.mvp.presenter.auth.OAuthWorker;
+import com.ninise.pragmatictwitterclient.project.mvp.model.network.auth.OAuthWorker;
 import com.ninise.pragmatictwitterclient.project.utils.Constants;
 
 

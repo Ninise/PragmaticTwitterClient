@@ -1,8 +1,5 @@
 package com.ninise.pragmatictwitterclient.project.mvp.view.home;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
@@ -18,18 +15,18 @@ import android.widget.Toast;
 
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.ninise.pragmatictwitterclient.R;
+import com.ninise.pragmatictwitterclient.project.mvp.model.network.data.ProfileImage;
 import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferencesProfile;
 
-import java.io.IOException;
-import java.net.URL;
+import java.net.MalformedURLException;
 
 public class HomeActivity extends AppCompatActivity {
 
     private static final String TAG = HomeActivity.class.getSimpleName();
+
     private DrawerLayout drawerLayout;
 
     private boolean doubleBackToExitPressedOnce = false;
-    Bitmap mProfileIconBitmap;
     NavigationView navigationView;
     View headView;
 
@@ -69,7 +66,18 @@ public class HomeActivity extends AppCompatActivity {
         actionBarDrawerToggle.syncState();
 
         setListFragment();
-        new LoadProfile().execute();
+
+        try {
+
+            ProfileImage.getProfileImage(getApplicationContext())
+                    .subscribe(bitmap -> (
+                            (CircularImageView) headView.findViewById(R.id.userProfileIcon)).setImageBitmap(bitmap)
+                    );
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private boolean menuSelected(MenuItem menuItem) {
@@ -109,26 +117,5 @@ public class HomeActivity extends AppCompatActivity {
         Toast.makeText(this, getString(R.string.back_pressed), Toast.LENGTH_SHORT).show();
 
         new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
-    }
-
-    public class LoadProfile extends AsyncTask<String, String, Bitmap> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-        }
-        protected Bitmap doInBackground(String... args) {
-            try {
-                mProfileIconBitmap = BitmapFactory.decodeStream(
-                        new URL(TwitterPreferencesProfile.getInstance(getApplicationContext()).getUserImageUrl()).openStream()
-                );
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return mProfileIconBitmap;
-        }
-        protected void onPostExecute(Bitmap image) {
-            ((CircularImageView) headView.findViewById(R.id.userProfileIcon)).setImageBitmap(mProfileIconBitmap);
-        }
     }
 }
