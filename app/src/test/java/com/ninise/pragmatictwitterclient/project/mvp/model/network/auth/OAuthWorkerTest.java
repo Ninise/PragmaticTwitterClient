@@ -1,13 +1,10 @@
-package com.ninise.pragmatictwitterclient.project.mvp.presenter.auth;
+package com.ninise.pragmatictwitterclient.project.mvp.model.network.auth;
 
-import android.app.Activity;
 import android.os.AsyncTask;
 
 import com.ninise.pragmatictwitterclient.BuildConfig;
-import com.ninise.pragmatictwitterclient.project.mvp.view.login.LoginActivity;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;

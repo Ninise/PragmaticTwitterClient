@@ -1,4 +1,4 @@
-package com.ninise.pragmatictwitterclient.project.mvp.presenter.auth;
+package com.ninise.pragmatictwitterclient.project.mvp.model.network.auth;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
