@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 
 import com.ninise.pragmatictwitterclient.project.utils.Constants;
 
+import twitter4j.auth.RequestToken;
+
 public class TwitterPreferencesAuth {
 
     private static TwitterPreferencesAuth mInstance = null;
@@ -42,5 +44,4 @@ public class TwitterPreferencesAuth {
         return mPreferences.contains(Constants.ACCESS_TOKEN_SECRET) ?
                 mPreferences.getString(Constants.ACCESS_TOKEN_SECRET, "") : "";
     }
-
 }

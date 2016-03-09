@@ -19,6 +19,11 @@ import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPr
 import com.ninise.pragmatictwitterclient.project.mvp.view.home.HomeActivity;
 import com.ninise.pragmatictwitterclient.project.utils.Constants;
 
+import rx.Observable;
+import rx.Scheduler;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
@@ -37,12 +42,12 @@ public class OAuthWorker {
     private Twitter twitter;
     private RequestToken requestToken = null;
     private String oauth_url;
-    private String oauth_verifier;
 
     private Context mContext;
 
     public OAuthWorker(Context contex) {
         this.mContext = contex;
+
     }
 
     public static OAuthWorker getInstance(Context context) {
@@ -53,92 +58,51 @@ public class OAuthWorker {
         return mInstance;
     }
 
-    public AsyncTask getAuth() {
-        return new GetAuth().execute();
-    }
+//    public AsyncTask getAuth() {
+//        return new GetAuth().execute();
+//    }
 
-    protected AsyncTask getAccessToken() {
-        return new GetAccessToken().execute();
-    }
+//    protected AsyncTask getAccessToken() {
+//        return new GetAccessToken().execute();
+//    }
 
-    private class GetAuth extends AsyncTask<String, String, String> {
+    public Observable<String> getOAuth() {
+        ConfigurationBuilder builder = new ConfigurationBuilder();
+        builder.setOAuthConsumerKey(Constants.TWITTER_KEY);
+        builder.setOAuthConsumerSecret(Constants.TWITTER_SECRET);
+        Configuration configuration = builder.build();
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            ConfigurationBuilder builder = new ConfigurationBuilder();
-            builder.setOAuthConsumerKey(Constants.TWITTER_KEY);
-            builder.setOAuthConsumerSecret(Constants.TWITTER_SECRET);
-            Configuration configuration = builder.build();
+        TwitterFactory factory = new TwitterFactory(configuration);
+        twitter = factory.getInstance();
 
-            TwitterFactory factory = new TwitterFactory(configuration);
-            twitter = factory.getInstance();
-        }
 
-        @Override
-        protected String doInBackground(String ... args) {
-            try {
-                requestToken = twitter
-                        .getOAuthRequestToken(Constants.CALLBACK_URL);
-                oauth_url = requestToken.getAuthenticationURL();
-                Log.e(TAG, oauth_url);
-            } catch (TwitterException e) {
-                e.printStackTrace();
+        return Observable.defer(() -> Observable.create(new Observable.OnSubscribe<String>() {
+            @Override
+            public void call(Subscriber<? super String> subscriber) {
+                try {
+                    requestToken = twitter
+                            .getOAuthRequestToken(Constants.CALLBACK_URL);
+                    oauth_url = requestToken.getAuthenticationURL();
+                } catch (TwitterException e) {
+                    e.printStackTrace();
+                }
+
+                subscriber.onNext(oauth_url);
+                subscriber.onCompleted();
             }
-            return oauth_url;
-        }
+        }))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
 
-        @SuppressLint("SetJavaScriptEnabled")
-        @Override
-        protected void onPostExecute(String oauth_url) {
-            super.onPostExecute(oauth_url);
-            if (oauth_url != null) {
-
-                Dialog auth_dialog = new Dialog(mContext);
-                auth_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-                auth_dialog.setContentView(R.layout.dialog_auth);
-                WebView web = (WebView) auth_dialog.findViewById(R.id.loginWebView);
-                web.getSettings().setJavaScriptEnabled(true);
-                web.loadUrl(oauth_url);
-                web.setWebViewClient(new WebViewClient() {
-
-                    boolean authComplete = false;
-
-                    @Override
-                    public void onPageFinished(WebView view, String url) {
-                        super.onPageFinished(view, url);
-
-                        if (url.contains(Constants.AUTH_VERIFIER) && !authComplete) {
-                            authComplete = true;
-                            Uri uri = Uri.parse(url);
-                            oauth_verifier = uri.getQueryParameter(Constants.AUTH_VERIFIER);
-
-                            auth_dialog.dismiss();
-
-                            getAccessToken();
-                        } if (url.contains(Constants.DENIED)) {
-                            auth_dialog.dismiss();
-                            Toast.makeText(
-                                    mContext,
-                                    mContext.getResources().getString(R.string.permission_denied),
-                                    Toast.LENGTH_SHORT).show();
-                        }
-
-                    }
-                });
-
-                auth_dialog.show();
-                auth_dialog.setCancelable(true);
-            }
-        }
     }
 
-    private class GetAccessToken extends AsyncTask<String, Void, Void> {
-
-        @Override
-        protected Void doInBackground(String... params) {
+    public Observable<Boolean> getAccessToken(String oauth_verifier) {
+        return Observable.defer(() -> Observable.create((Observable.OnSubscribe<Boolean>) subscriber -> {
             try {
+
+                Log.d(TAG, requestToken.toString() + " VERIFIER " + oauth_verifier);
+
+
                 AccessToken accessToken = twitter.getOAuthAccessToken(
                         requestToken, oauth_verifier);
 
@@ -158,19 +122,54 @@ public class OAuthWorker {
                 TwitterPreferencesProfile.getInstance(mContext).setUserName(user.getName());
                 TwitterPreferencesProfile.getInstance(mContext).setUserImageUrl(user.getOriginalProfileImageURL());
 
+                subscriber.onNext(true);
+                subscriber.onCompleted();
+
             } catch (TwitterException e) {
                 e.printStackTrace();
             }
+        }))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
 
-
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            mContext.startActivity(new Intent(mContext, HomeActivity.class));
-            ((Activity) mContext).finish();
-        }
     }
+//    private class GetAccessToken extends AsyncTask<String, Void, Void> {
+//
+//        @Override
+//        protected Void doInBackground(String... params) {
+//            try {
+//                AccessToken accessToken = twitter.getOAuthAccessToken(
+//                        requestToken, oauth_verifier);
+//
+//                TwitterPreferencesAuth.getInstance(mContext).setOAuthAccessTokenAndSecret(accessToken.getToken(),
+//                        accessToken.getTokenSecret());
+//
+//                TwitterPreferencesProfile.getInstance(mContext).setLoginOn(true);
+//
+//                long userID = accessToken.getUserId();
+//                User user = twitter.showUser(userID);
+//                String username = user.getName();
+//
+//                Log.d(TAG, username);
+//
+//
+//                TwitterPreferencesProfile.getInstance(mContext).setUserNickname(user.getScreenName());
+//                TwitterPreferencesProfile.getInstance(mContext).setUserName(user.getName());
+//                TwitterPreferencesProfile.getInstance(mContext).setUserImageUrl(user.getOriginalProfileImageURL());
+//
+//            } catch (TwitterException e) {
+//                e.printStackTrace();
+//            }
+//
+//
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Void aVoid) {
+//            super.onPostExecute(aVoid);
+//            mContext.startActivity(new Intent(mContext, HomeActivity.class));
+//            ((Activity) mContext).finish();
+//        }
+//    }
 }

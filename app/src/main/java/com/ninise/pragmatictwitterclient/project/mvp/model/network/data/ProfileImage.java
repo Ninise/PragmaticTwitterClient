@@ -22,6 +22,7 @@ public class ProfileImage {
             @Override
             public void call(Subscriber<? super Bitmap> subscriber) {
                 try {
+                    TwitterPreferencesProfile.getInstance(context).getUserImageUrl();
                     subscriber.onNext(BitmapFactory.decodeStream(
                             new URL(TwitterPreferencesProfile.getInstance(context).getUserImageUrl()).openStream()
                     ));
