@@ -20,7 +20,6 @@ public class TwitterPreferencesProfileTest {
     private final String USER_NICKNAME = "Ninise";
     private final String USER_NAME = "Nikita";
     private final String USER_IMAGE_URL = "https://somesite.ua/some_image.png";
-    private final boolean USER_LOGIN_ON = false;
 
     @Before
     public void setUp() throws Exception {
@@ -52,17 +51,6 @@ public class TwitterPreferencesProfileTest {
     public void testGetUserImageUrl() throws Exception {
         mTwitterPreferencesProfile.setUserImageUrl(USER_IMAGE_URL);
         Assertions.assertThat(mTwitterPreferencesProfile.getUserImageUrl()).isEqualTo(USER_IMAGE_URL);
-    }
-
-    @Test
-    public void testSetLoginOn() throws Exception {
-        Assertions.assertThat(mTwitterPreferencesProfile.setLoginOn(USER_LOGIN_ON)).isTrue();
-    }
-
-    @Test
-    public void testGetLoginOn() throws Exception {
-        mTwitterPreferencesProfile.setLoginOn(USER_LOGIN_ON);
-        Assertions.assertThat(mTwitterPreferencesProfile.getLoginOn()).isEqualTo(USER_LOGIN_ON);
     }
 
     @Test
