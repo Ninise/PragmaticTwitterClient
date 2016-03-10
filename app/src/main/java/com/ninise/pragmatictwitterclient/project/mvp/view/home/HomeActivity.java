@@ -8,7 +8,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -22,8 +21,6 @@ import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPr
 import java.net.MalformedURLException;
 
 public class HomeActivity extends AppCompatActivity {
-
-    private static final String TAG = HomeActivity.class.getSimpleName();
 
     private DrawerLayout drawerLayout;
 
@@ -74,7 +71,7 @@ public class HomeActivity extends AppCompatActivity {
                     .subscribe(bitmap -> (
                             (CircularImageView) headView.findViewById(R.id.userProfileIcon)).setImageBitmap(bitmap)
                     );
-            Log.d(TAG, "Picture loaded" + headView.findViewById(R.id.userProfileIcon).getBackground());
+
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

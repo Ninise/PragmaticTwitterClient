@@ -9,7 +9,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,25 +19,18 @@ import android.widget.Toast;
 
 import com.ninise.pragmatictwitterclient.R;
 import com.ninise.pragmatictwitterclient.project.mvp.model.network.NetworkConnection;
-import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferencesAuth;
 import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferencesProfile;
 import com.ninise.pragmatictwitterclient.project.mvp.model.network.auth.OAuthWorker;
 import com.ninise.pragmatictwitterclient.project.mvp.view.home.HomeActivity;
 import com.ninise.pragmatictwitterclient.project.utils.Constants;
 
-import rx.Subscriber;
 import rx.functions.Action1;
 
 
 public class LoginFragment extends Fragment {
 
-    private static final String TAG = LoginFragment.class.getSimpleName();
-
-    private AppCompatButton signInButton;
-    private AppCompatTextView welcomeTextView;
 
     private static LoginFragment mInstance = null;
-    private static String oauth_verifier[] = new String[1];
 
     public static LoginFragment getInstance() {
         if (mInstance == null) {
@@ -59,7 +51,7 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_login, container, false);
 
-        welcomeTextView = (AppCompatTextView) v.findViewById(R.id.loginWelcomeTextView);
+        final AppCompatTextView welcomeTextView = (AppCompatTextView) v.findViewById(R.id.loginWelcomeTextView);
 
         if (TwitterPreferencesProfile.getInstance(getActivity()).getUserNickname().equals("User")) {
             welcomeTextView.setText(getActivity().getResources().getString(R.string.login_hi_textview) + " " +
@@ -74,26 +66,13 @@ public class LoginFragment extends Fragment {
         }
 
 
-        signInButton = (AppCompatButton) v.findViewById(R.id.loginSignInButton);
-        signInButton.setOnClickListener(v1 ->  {
+        final AppCompatButton signInButton = (AppCompatButton) v.findViewById(R.id.loginSignInButton);
+        signInButton.setOnClickListener(v1 -> {
             if (NetworkConnection.getInstance(getActivity()).isNetworkConnectionOn()) {
 
-                OAuthWorker.getInstance(getActivity()).getOAuth().subscribe(new Subscriber<String>() {
+                OAuthWorker.getInstance(getActivity()).getOAuth().subscribe(new Action1<String>() {
                     @Override
-                    public void onCompleted() {
-                        Log.d(TAG, "Over");
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.d(TAG, "OnNextWork3");
-                    }
-
-                    @Override
-                    public void onNext(String oauth_url) {
-                        Log.d(TAG, oauth_url);
-                        Log.d(TAG, "OnNextWork1");
+                    public void call(String oauth_url) {
                         if (oauth_url != null) {
                             Dialog auth_dialog = new Dialog(getActivity());
                             auth_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -113,17 +92,24 @@ public class LoginFragment extends Fragment {
                                     if (url.contains(Constants.AUTH_VERIFIER) && !authComplete) {
                                         authComplete = true;
                                         Uri uri = Uri.parse(url);
-                                        oauth_verifier[0] = uri.getQueryParameter(Constants.AUTH_VERIFIER);
-//                                        TwitterPreferencesAuth.getInstance(
-//                                                getActivity()).setOAuthVerifier(str);
+
                                         auth_dialog.dismiss();
 
-                                        OAuthWorker.getInstance(getActivity()).getAccessToken(uri.getQueryParameter(Constants.AUTH_VERIFIER)).subscribe(aBoolean -> {
+                                        OAuthWorker.getInstance(getActivity())
+                                                .getAccessToken(uri.getQueryParameter(Constants.AUTH_VERIFIER))
+                                                .subscribe(user -> {
+
+                                            TwitterPreferencesProfile.getInstance(getActivity()).setUserNickname(user.getScreenName());
+                                            TwitterPreferencesProfile.getInstance(getActivity()).setUserName(user.getName());
+                                            TwitterPreferencesProfile.getInstance(getActivity()).setUserImageUrl(user.getOriginalProfileImageURL());
+
                                             getActivity().startActivity(new Intent(getActivity(), HomeActivity.class));
                                             getActivity().finish();
+
                                         });
-                                        Log.d(TAG, "OnNextWork_Contanis");
-                                    } if (url.contains(Constants.DENIED)) {
+                                    }
+
+                                    if (url.contains(Constants.DENIED)) {
                                         auth_dialog.dismiss();
                                         Toast.makeText(
                                                 getActivity(),
@@ -146,18 +132,4 @@ public class LoginFragment extends Fragment {
 
         return v;
     }
-
-    private void logoutFromTwitter() {
-        // Clear the shared preferences
-        TwitterPreferencesProfile.getInstance(getActivity()).setLoginOn(false);
-        TwitterPreferencesAuth.getInstance(getActivity()).setOAuthAccessTokenAndSecret("", "");
-    }
-
-    @Override
-    public void onStop() {
-        logoutFromTwitter();
-        super.onStop();
-    }
-
-
 }

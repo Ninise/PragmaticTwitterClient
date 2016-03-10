@@ -4,6 +4,7 @@ package com.ninise.pragmatictwitterclient.project.mvp.model.network.data;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 
 import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferencesProfile;
 
@@ -22,7 +23,6 @@ public class ProfileImage {
             @Override
             public void call(Subscriber<? super Bitmap> subscriber) {
                 try {
-                    TwitterPreferencesProfile.getInstance(context).getUserImageUrl();
                     subscriber.onNext(BitmapFactory.decodeStream(
                             new URL(TwitterPreferencesProfile.getInstance(context).getUserImageUrl()).openStream()
                     ));

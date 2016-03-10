@@ -24,7 +24,4 @@ public class Constants {
 
     public static final String DENIED = "denied";
     public static final String NETWORK_STATE_IS_FALSE = "You haven't an Internet Connection :( ";
-    public static final String TWITTER_ICON_PATH = "path";
-    public static final String TWITTER_REQUEST_A = "request_token";
-    public static final String TWITTER_SECRET_A = "request_secret";
 }

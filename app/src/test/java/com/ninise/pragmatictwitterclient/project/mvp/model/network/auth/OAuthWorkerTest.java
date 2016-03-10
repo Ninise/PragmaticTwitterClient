@@ -20,8 +20,7 @@ public class OAuthWorkerTest {
     private ShadowActivity mShadowActivity = new ShadowActivity();
 
     @Test
-    public void authAsyncTaskShouldBeNotNull() {
-//        AsyncTask auth = OAuthWorker.getInstance(mShadowActivity.getApplicationContext()).getAuth();
+    public void testGetOAuth() {
 
         Robolectric.flushBackgroundThreadScheduler();
 

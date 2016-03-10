@@ -11,13 +11,10 @@ public class TwitterPreferencesAuth {
 
     private static TwitterPreferencesAuth mInstance = null;
 
-    private Context mContext;
-
     private SharedPreferences mPreferences;
 
     private TwitterPreferencesAuth(Context context) {
-        this.mContext = context;
-        this.mPreferences = mContext.getSharedPreferences(Constants.TWITTER_PREFERENCES_AUTH, Context.MODE_PRIVATE);
+        this.mPreferences = context.getSharedPreferences(Constants.TWITTER_PREFERENCES_AUTH, Context.MODE_PRIVATE);
     }
 
     public static TwitterPreferencesAuth getInstance(Context context) {

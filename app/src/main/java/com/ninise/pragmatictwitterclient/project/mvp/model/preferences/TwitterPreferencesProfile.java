@@ -9,11 +9,9 @@ public class TwitterPreferencesProfile {
 
     private static TwitterPreferencesProfile mInstance = null;
     private SharedPreferences mPreferences;
-    private Context mContex;
 
     private TwitterPreferencesProfile(Context context) {
-        this.mContex = context;
-        mPreferences = mContex.getSharedPreferences(Constants.TWITTER_PREFERENCES_PROFILE, Context.MODE_PRIVATE);
+        mPreferences = context.getSharedPreferences(Constants.TWITTER_PREFERENCES_PROFILE, Context.MODE_PRIVATE);
     }
 
     public static TwitterPreferencesProfile getInstance(Context context) {
@@ -44,16 +42,6 @@ public class TwitterPreferencesProfile {
     public String getUserImageUrl() {
         return mPreferences.contains(Constants.IMAGE_URL) ?
                 mPreferences.getString(Constants.IMAGE_URL, "") : "";
-    }
-
-    public boolean setLoginOn(boolean status) {
-        SharedPreferences.Editor editor = mPreferences.edit();
-        editor.putBoolean(Constants.IS_LOGIN_ON, status);
-        return editor.commit();
-    }
-
-    public boolean getLoginOn() {
-        return mPreferences.contains(Constants.IS_LOGIN_ON) && mPreferences.getBoolean(Constants.IS_LOGIN_ON, false);
     }
 
     public boolean setUserName(String name) {
