@@ -1,13 +1,10 @@
 package com.ninise.pragmatictwitterclient.project.mvp.model.network.auth;
 
-import android.os.AsyncTask;
-
 import com.ninise.pragmatictwitterclient.BuildConfig;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowActivity;
@@ -21,9 +18,12 @@ public class OAuthWorkerTest {
 
     @Test
     public void testGetOAuth() {
-
-        Robolectric.flushBackgroundThreadScheduler();
-
-//        Assertions.assertThat(auth).isNotNull();
+        Assertions.assertThat(OAuthWorker.getInstance(mShadowActivity.getApplicationContext()).getOAuth()).isNotNull();
     }
+
+    @Test
+    public void testGetAccess() {
+        Assertions.assertThat(OAuthWorker.getInstance(mShadowActivity.getApplicationContext()).getAccessToken("Some verifier")).isNotNull();
+    }
+
 }
