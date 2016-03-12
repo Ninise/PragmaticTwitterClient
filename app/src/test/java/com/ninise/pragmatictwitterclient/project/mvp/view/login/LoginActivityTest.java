@@ -1,7 +1,6 @@
 package com.ninise.pragmatictwitterclient.project.mvp.view.login;
 
 import android.app.Activity;
-import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
@@ -26,7 +25,6 @@ import org.robolectric.shadows.support.v4.SupportFragmentTestUtil;
 import java.util.concurrent.ExecutionException;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 
 @RunWith(RobolectricGradleTestRunner.class)
@@ -93,12 +91,7 @@ public class LoginActivityTest {
     @Test
     public void signInButtonClick() throws ExecutionException, InterruptedException {
         signInButton.performClick();
-
-//        AsyncTask auth = OAuthWorker.getInstance(activity).getAuth();
-
-        Robolectric.flushBackgroundThreadScheduler();
-
-//        Assertions.assertThat(auth.get()).isNotNull();
+        Assertions.assertThat(OAuthWorker.getInstance(activity).getOAuth()).isNotNull();
     }
 
     @Test
