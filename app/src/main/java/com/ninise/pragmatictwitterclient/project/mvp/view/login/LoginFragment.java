@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringDef;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.ninise.pragmatictwitterclient.R;
@@ -24,10 +26,19 @@ import com.ninise.pragmatictwitterclient.project.mvp.model.network.auth.OAuthWor
 import com.ninise.pragmatictwitterclient.project.mvp.view.home.HomeActivity;
 import com.ninise.pragmatictwitterclient.project.utils.Constants;
 
+import butterknife.Bind;
+import butterknife.BindString;
+import butterknife.ButterKnife;
 import rx.functions.Action1;
 
 
 public class LoginFragment extends Fragment {
+
+    @Bind(R.id.loginSignInButton) AppCompatButton signInButton;
+    @Bind(R.id.loginWelcomeTextView) AppCompatTextView welcomeTextView;
+    @BindString(R.string.login_hi_textview_next) String loginTextView;
+    @BindString(R.string.login_hi_textview) String loginHi;
+    @BindString(R.string.login_welcome_back) String loginWelcomeBack;
 
 
     private static LoginFragment mInstance = null;
@@ -51,22 +62,18 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_login, container, false);
 
-        final AppCompatTextView welcomeTextView = (AppCompatTextView) v.findViewById(R.id.loginWelcomeTextView);
+        ButterKnife.bind(this, v);
 
         if (TwitterPreferencesProfile.getInstance(getActivity()).getUserNickname().equals("User")) {
-            welcomeTextView.setText(getActivity().getResources().getString(R.string.login_hi_textview) + " " +
+            welcomeTextView.setText(loginHi + " " +
                     TwitterPreferencesProfile.getInstance(getActivity()).getUserNickname() +
-                    ". " +
-                    getActivity().getResources().getString(R.string.login_hi_textview_next));
+                    ". " + loginTextView);
         } else {
-            welcomeTextView.setText(getActivity().getResources().getString(R.string.login_hi_textview) + " " +
+            welcomeTextView.setText(loginHi + " " +
                     TwitterPreferencesProfile.getInstance(getActivity()).getUserNickname() +
-                    ". " +
-                    getActivity().getResources().getString(R.string.login_welcome_back));
+                    ". " + loginWelcomeBack);
         }
 
-
-        final AppCompatButton signInButton = (AppCompatButton) v.findViewById(R.id.loginSignInButton);
         signInButton.setOnClickListener(v1 -> {
             if (NetworkConnection.getInstance(getActivity()).isNetworkConnectionOn()) {
 
@@ -131,5 +138,11 @@ public class LoginFragment extends Fragment {
         });
 
         return v;
+    }
+
+    @Override
+    public void onDestroy() {
+        ButterKnife.unbind(this);
+        super.onDestroy();
     }
 }
