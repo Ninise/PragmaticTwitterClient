@@ -20,24 +20,30 @@ import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPr
 
 import java.net.MalformedURLException;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 public class HomeActivity extends AppCompatActivity {
 
-    private DrawerLayout drawerLayout;
+    @Bind(R.id.navigation_view) NavigationView mNavigationView;
+    @Bind(R.id.homeToolbar) Toolbar mToolbar;
+    @Bind(R.id.drawer) DrawerLayout drawerLayout;
+
+    View headView;
 
     private boolean doubleBackToExitPressedOnce = false;
-    NavigationView navigationView;
-    View headView;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        final Toolbar toolbar = (Toolbar) findViewById(R.id.homeToolbar);
-        setSupportActionBar(toolbar);
+        ButterKnife.bind(this);
 
-        navigationView = (NavigationView) findViewById(R.id.navigation_view);
-        navigationView.setNavigationItemSelectedListener(menuItem -> {
+        setSupportActionBar(mToolbar);
+
+        mNavigationView.setNavigationItemSelectedListener(menuItem -> {
 
             if (menuItem.isChecked()) {
                 menuItem.setChecked(false);
@@ -50,14 +56,13 @@ public class HomeActivity extends AppCompatActivity {
             return menuSelected(menuItem);
         });
 
-        headView = navigationView.getHeaderView(0);
+        headView = mNavigationView.getHeaderView(0);
 
         ((TextView) headView.findViewById(R.id.userName)).setText(TwitterPreferencesProfile.getInstance(this).getUserName());
         ((TextView) headView.findViewById(R.id.userNickName)).setText(TwitterPreferencesProfile.getInstance(this).getUserNickname());
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,
-                drawerLayout, toolbar, R.string.openDrawer,
+                drawerLayout, mToolbar, R.string.openDrawer,
                 R.string.closeDrawer);
 
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
@@ -115,5 +120,11 @@ public class HomeActivity extends AppCompatActivity {
         Toast.makeText(this, getString(R.string.back_pressed), Toast.LENGTH_SHORT).show();
 
         new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
+    }
+
+    @Override
+    protected void onDestroy() {
+        ButterKnife.unbind(this);
+        super.onDestroy();
     }
 }
