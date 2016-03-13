@@ -1,16 +1,25 @@
 package com.ninise.pragmatictwitterclient.project.mvp.model.network.data;
 
+import com.ninise.pragmatictwitterclient.BuildConfig;
+
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowActivity;
 
-import static org.junit.Assert.*;
+import rx.Observable;
 
-/**
- * Created by ninise on 3/13/16.
- */
+@RunWith(RobolectricGradleTestRunner.class)
+@Config(constants = BuildConfig.class)
 public class PostTweetTest {
+
+    private ShadowActivity mShadowActivity = new ShadowActivity();
 
     @Test
     public void testSetStatus() throws Exception {
-
+        Observable<Boolean> postTweet = PostTweet.setStatus(mShadowActivity.getApplicationContext(), "Test post @pratic");
+        Assertions.assertThat(postTweet.subscribe()).isNotNull();
     }
 }
