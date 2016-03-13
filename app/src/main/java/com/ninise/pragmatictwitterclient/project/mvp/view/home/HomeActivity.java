@@ -8,13 +8,17 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.ninise.pragmatictwitterclient.R;
+import com.ninise.pragmatictwitterclient.project.mvp.model.network.data.PostTweet;
 import com.ninise.pragmatictwitterclient.project.mvp.model.network.data.ProfileImage;
 import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferencesProfile;
 
@@ -28,6 +32,8 @@ public class HomeActivity extends AppCompatActivity {
     @Bind(R.id.navigation_view) NavigationView mNavigationView;
     @Bind(R.id.homeToolbar) Toolbar mToolbar;
     @Bind(R.id.drawer) DrawerLayout drawerLayout;
+    @Bind(R.id.homePostTweetEditText) EditText mPostTweetEditText;
+    @Bind(R.id.homePostTweetButton) Button mPostTweetButton;
 
     View headView;
 
@@ -67,11 +73,15 @@ public class HomeActivity extends AppCompatActivity {
 
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
-
-        setListFragment();
+        Log.d(HomeActivity.class.getSimpleName(), "Start");
+        mPostTweetButton.setOnClickListener((isOver) -> {
+            Log.d(HomeActivity.class.getSimpleName(), "Its works");
+            PostTweet.setStatus(this, mPostTweetEditText.getText().toString()).subscribe((flag) -> {
+                Toast.makeText(this, "Status updated", Toast.LENGTH_SHORT).show();
+            });
+        });
 
         try {
-
             ProfileImage.getProfileImage(getApplicationContext())
                     .subscribe(bitmap -> (
                             (CircularImageView) headView.findViewById(R.id.userProfileIcon)).setImageBitmap(bitmap)
@@ -81,6 +91,7 @@ public class HomeActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        setListFragment();
     }
 
     private boolean menuSelected(MenuItem menuItem) {

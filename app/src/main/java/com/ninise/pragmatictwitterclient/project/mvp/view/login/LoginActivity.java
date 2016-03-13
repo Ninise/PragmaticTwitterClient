@@ -7,10 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
-
 import com.ninise.pragmatictwitterclient.R;
-
-
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -25,7 +22,6 @@ public class LoginActivity extends AppCompatActivity {
         final Toolbar toolbar = (Toolbar) findViewById(R.id.loginMainToolbar);
         toolbar.setTitle(getResources().getString(R.string.app_name));
         setSupportActionBar(toolbar);
-
 
         switchToFragment();
     }
