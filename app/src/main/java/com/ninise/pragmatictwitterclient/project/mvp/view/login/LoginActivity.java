@@ -9,10 +9,13 @@ import android.widget.Toast;
 
 import com.ninise.pragmatictwitterclient.R;
 
+import butterknife.BindString;
+
 public class LoginActivity extends AppCompatActivity {
 
     private boolean doubleBackToExitPressedOnce = false;
 
+    @BindString(R.string.app_name) String appName;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -20,7 +23,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         final Toolbar toolbar = (Toolbar) findViewById(R.id.loginMainToolbar);
-        toolbar.setTitle(getResources().getString(R.string.app_name));
+        toolbar.setTitle(appName);
         setSupportActionBar(toolbar);
 
         switchToFragment();
