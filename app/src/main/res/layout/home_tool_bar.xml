@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/ToolBar"
+    app:layout_scrollFlags="scroll|enterAlways"
+    app:layout_collapseMode="pin"
+    >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+
+    <com.mikhaellopez.circularimageview.CircularImageView
+        android:id="@+id/userProfileIcon"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        app:civ_border_color="@color/colorBorderOfCircleImageView"
+        app:civ_border_width="3dp"
+        app:civ_shadow="true"
+        app:civ_shadow_radius="12"
+        app:civ_shadow_color="@color/colorShadowOfCircleImageView"
+        />
+
+    <TextView
+        android:id="@+id/userNickName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/userProfileIcon"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        style="@style/RobotoTextViewStyle.HomeToolBar"
+        />
+    </RelativeLayout>
+
+</android.support.v7.widget.Toolbar>
