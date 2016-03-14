@@ -3,7 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main_content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    >
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appbar"
@@ -12,7 +14,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <include android:id="@+id/homeToolbar"
-                 layout="@layout/tool_bar"
+                 layout="@layout/home_tool_bar"
             />
 
         <LinearLayout
@@ -26,7 +28,7 @@
             <EditText
                 android:id="@+id/homePostTweetEditText"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingLeft="8dp"
                 android:isScrollContainer="true"
