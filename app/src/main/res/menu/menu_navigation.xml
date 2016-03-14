@@ -1,23 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/search_tweets"
+        android:title="@string/search"
+        android:icon="@drawable/ic_action_action_search"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/update_tweets"
+        android:title="@string/update"
+        android:icon="@drawable/ic_action_action_autorenew"
+        app:showAsAction="ifRoom"
+        />
 
     <item
         android:id="@+id/settings"
         android:checked="false"
         android:title="@string/settings"
-        android:icon="@drawable/ic_action_settings"/>
+        />
 
     <item
         android:id="@+id/about"
         android:checked="false"
         android:title="@string/about"
-        android:icon="@drawable/ic_action_info_outline"
         />
 
     <item
         android:id="@+id/logout"
         android:checked="false"
         android:title="@string/home_logout"
-        android:icon="@drawable/ic_action_exit_to_app"/>
+        />
 
 </menu>
