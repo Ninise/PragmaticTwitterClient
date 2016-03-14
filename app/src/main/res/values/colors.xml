@@ -6,7 +6,11 @@
     <color name="justWhite">#ffffff</color>
     <color name="colorMainTwitter">#33b5e5</color>
     <color name="colorButton">#FF29B6F6</color>
+
+    <!-- Post Tweet -->
     <color name="colorPrimaryLight">#96a3fa</color>
+    <color name="colorPostTweet">#d9f3ff</color>
+    <color name="colorPostDark">#404243</color>
 
     <!-- CircleImageView -->
     <color name="colorBorderOfCircleImageView">#ffffff</color>
