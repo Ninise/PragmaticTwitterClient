@@ -14,4 +14,7 @@
     <string name="back_pressed">Please click BACK again to exit</string>
     <string name="home_post_tweet_hint">What\'s happening?</string>
     <string name="homePostBtn">Tweet</string>
+    <string name="search">Search</string>
+    <string name="update">Update</string>
+    <string name="update_status">Status updated</string>
 </resources>

@@ -3,15 +3,15 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/justWhite</item>
+        <item name="colorPrimaryDark">@color/justWhite</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
     </style>
 
     <style name="ToolBar" parent="Base.Widget.AppCompat.Toolbar">
-        <item name="android:background">@color/colorPrimaryDark</item>
-        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+        <item name="android:background">@color/justWhite</item>
+        <item name="android:theme">@style/ThemeOverlay.AppCompat.Light</item>
     </style>
 
     <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
@@ -21,12 +21,13 @@
     </style>
 
     <style name="RobotoTextViewStyle.PostTweet" parent="RobotoTextViewStyle">
-        <item name="android:textColor">@color/justWhite</item>
-        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/colorPostDark</item>
+        <item name="android:textColorHint">@color/colorPostDark</item>
+        <item name="android:background">@color/colorPostTweet</item>
     </style>
 
-    <style name="RobotoTextViewStyle.NavigationHeader" parent="RobotoTextViewStyle">
-        <item name="android:textColor">@color/justWhite</item>
+    <style name="RobotoTextViewStyle.HomeToolBar" parent="RobotoTextViewStyle">
+        <item name="android:textColor">@color/colorPostDark</item>
     </style>
 
     <style name="RobotoButtonStyle" parent="android:style/Widget.Button">
@@ -38,6 +39,8 @@
 
     <style name="RobotoButtonStyle.PostTweet" parent="RobotoButtonStyle">
         <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/colorPostDark</item>
+        <item name="android:background">@color/colorPostTweet</item>
     </style>
 
 </resources>

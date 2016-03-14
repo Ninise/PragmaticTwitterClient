@@ -2,15 +2,11 @@ package com.ninise.pragmatictwitterclient.project.mvp.view.home;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -25,17 +21,17 @@ import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPr
 import java.net.MalformedURLException;
 
 import butterknife.Bind;
+import butterknife.BindString;
 import butterknife.ButterKnife;
 
 public class HomeActivity extends AppCompatActivity {
 
-    @Bind(R.id.navigation_view) NavigationView mNavigationView;
     @Bind(R.id.homeToolbar) Toolbar mToolbar;
-    @Bind(R.id.drawer) DrawerLayout drawerLayout;
     @Bind(R.id.homePostTweetEditText) EditText mPostTweetEditText;
     @Bind(R.id.homePostTweetButton) Button mPostTweetButton;
-
-    View headView;
+    @Bind(R.id.userProfileIcon) CircularImageView mProfileCircularImageView;
+    @Bind(R.id.userNickName) TextView mUserNicknameTextView;
+    @BindString(R.string.update_status) String updateStatus;
 
     private boolean doubleBackToExitPressedOnce = false;
 
@@ -48,45 +44,21 @@ public class HomeActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setSupportActionBar(mToolbar);
+        //noinspection ConstantConditions
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        mNavigationView.setNavigationItemSelectedListener(menuItem -> {
 
-            if (menuItem.isChecked()) {
-                menuItem.setChecked(false);
-            } else {
-                menuItem.setChecked(true);
-            }
+        mUserNicknameTextView.setText(TwitterPreferencesProfile.getInstance(this).getUserNickname());
 
-            drawerLayout.closeDrawers();
-
-            return menuSelected(menuItem);
-        });
-
-        headView = mNavigationView.getHeaderView(0);
-
-        ((TextView) headView.findViewById(R.id.userName)).setText(TwitterPreferencesProfile.getInstance(this).getUserName());
-        ((TextView) headView.findViewById(R.id.userNickName)).setText(TwitterPreferencesProfile.getInstance(this).getUserNickname());
-
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,
-                drawerLayout, mToolbar, R.string.openDrawer,
-                R.string.closeDrawer);
-
-        drawerLayout.setDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.syncState();
-        Log.d(HomeActivity.class.getSimpleName(), "Start");
-        mPostTweetButton.setOnClickListener((isOver) -> {
-            Log.d(HomeActivity.class.getSimpleName(), "Its works");
+        mPostTweetButton.setOnClickListener((isOver) ->
             PostTweet.setStatus(this, mPostTweetEditText.getText().toString()).subscribe((flag) -> {
-                Toast.makeText(this, "Status updated", Toast.LENGTH_SHORT).show();
-            });
-        });
+                Toast.makeText(this, updateStatus, Toast.LENGTH_SHORT).show();
+            })
+        );
 
         try {
             ProfileImage.getProfileImage(getApplicationContext())
-                    .subscribe(bitmap -> (
-                            (CircularImageView) headView.findViewById(R.id.userProfileIcon)).setImageBitmap(bitmap)
-                    );
-
+                    .subscribe(bitmap -> mProfileCircularImageView.setImageBitmap(bitmap));
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -96,6 +68,10 @@ public class HomeActivity extends AppCompatActivity {
 
     private boolean menuSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
+            case R.id.search_tweets:
+                return true;
+            case R.id.update_tweets:
+                return true;
             case R.id.settings:
                 return true;
             case R.id.about:
@@ -118,6 +94,17 @@ public class HomeActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.homeContainer, TweetsListFragment.getInstance());
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_navigation, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return menuSelected(item);
     }
 
     @Override
