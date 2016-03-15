@@ -3,16 +3,51 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
+    <include
+        android:id="@+id/loginMainToolbar"
+        layout="@layout/home_tool_bar"
+        />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/loginLatestUpdates"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_below="@id/loginMainToolbar"
+        android:text="@string/latest_updates"
+        style="@style/RobotoTextViewStyle.HomeToolBar"
+        />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/loginSignInButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_alignParentBottom="true"
+        android:text="@string/login_button"
+        style="@style/RobotoButtonStyle"
+        />
+
+    <FrameLayout
+        android:id="@+id/loginContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/loginSignInButton"
+        android:layout_below="@id/loginLatestUpdates"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        >
+
         <include
-            android:id="@+id/loginMainToolbar"
-            layout="@layout/tool_bar"
+            layout="@layout/fragment_recycler"
             />
 
-       <FrameLayout
-           android:id="@+id/loginContainer"
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           android:layout_below="@id/loginMainToolbar"/>
-
+    </FrameLayout>
 
 </RelativeLayout>
