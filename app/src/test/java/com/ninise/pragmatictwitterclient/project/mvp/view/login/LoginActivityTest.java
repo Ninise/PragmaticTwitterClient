@@ -49,7 +49,7 @@ public class LoginActivityTest {
 
         signInButton = (AppCompatButton) activity.findViewById(R.id.loginSignInButton);
 
-        loginWelcomeTextView = (AppCompatTextView) activity.findViewById(R.id.loginWelcomeTextView);
+        loginWelcomeTextView = (AppCompatTextView) activity.findViewById(R.id.loginLatestUpdates);
         loginAppImageView = (ImageView) activity.findViewById(R.id.loginAppImageView);
         loginAppNameImageView = (ImageView) activity.findViewById(R.id.loginAppNameImageView);
 

@@ -29,8 +29,8 @@ public class HomeActivity extends AppCompatActivity {
     @Bind(R.id.homeToolbar) Toolbar mToolbar;
     @Bind(R.id.homePostTweetEditText) EditText mPostTweetEditText;
     @Bind(R.id.homePostTweetButton) Button mPostTweetButton;
-    @Bind(R.id.userProfileIcon) CircularImageView mProfileCircularImageView;
-    @Bind(R.id.userNickName) TextView mUserNicknameTextView;
+    @Bind(R.id.toolbarIcon) CircularImageView mProfileCircularImageView;
+    @Bind(R.id.toolbarTitle) TextView mUserNicknameTextView;
     @BindString(R.string.update_status) String updateStatus;
 
     private boolean doubleBackToExitPressedOnce = false;

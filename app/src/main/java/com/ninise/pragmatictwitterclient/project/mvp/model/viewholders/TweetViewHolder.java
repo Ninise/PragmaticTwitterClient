@@ -20,6 +20,6 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         cv = (CardView) itemView.findViewById(R.id.cv);
         groupTitleTextView = (TextView) itemView.findViewById(R.id.cardViewTweetGroupTitle);
         tweetImageView = (ImageView) itemView.findViewById(R.id.cardViewTweetImage);
-        tweetInfoTextView = (TextView) itemView.findViewById(R.id.loginWelcomeTextView);
+        tweetInfoTextView = (TextView) itemView.findViewById(R.id.loginLatestUpdates);
     }
 }

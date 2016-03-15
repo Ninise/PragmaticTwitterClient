@@ -11,8 +11,6 @@ import android.widget.TextView;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.ninise.pragmatictwitterclient.BuildConfig;
 import com.ninise.pragmatictwitterclient.R;
-import com.ninise.pragmatictwitterclient.project.mvp.model.network.auth.OAuthWorker;
-import com.ninise.pragmatictwitterclient.project.mvp.model.network.data.ProfileImage;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
@@ -21,13 +19,7 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
-import org.robolectric.shadows.ShadowAsyncTask;
 import org.robolectric.shadows.ShadowToast;
-
-import java.net.MalformedURLException;
-
-import static com.ninise.pragmatictwitterclient.project.mvp.view.home.HomeActivity.*;
-import static org.junit.Assert.*;
 
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class)
@@ -53,9 +45,9 @@ public class HomeActivityTest {
 
         final View headView = mNavigationView.getHeaderView(0);
 
-        mNicknameTextView = (TextView) headView.findViewById(R.id.userNickName);
+        mNicknameTextView = (TextView) headView.findViewById(R.id.toolbarTitle);
         mUsernameTextView = (TextView) headView.findViewById(R.id.userName);
-        mUserIconImageView = (CircularImageView) headView.findViewById(R.id.userProfileIcon);
+        mUserIconImageView = (CircularImageView) headView.findViewById(R.id.toolbarIcon);
     }
 
     @Test

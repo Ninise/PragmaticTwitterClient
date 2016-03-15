@@ -16,7 +16,7 @@
         >
 
     <com.mikhaellopez.circularimageview.CircularImageView
-        android:id="@+id/userProfileIcon"
+        android:id="@+id/toolbarIcon"
         android:layout_width="70dp"
         android:layout_height="70dp"
         app:civ_border_color="@color/colorBorderOfCircleImageView"
@@ -27,10 +27,10 @@
         />
 
     <TextView
-        android:id="@+id/userNickName"
+        android:id="@+id/toolbarTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/userProfileIcon"
+        android:layout_toRightOf="@id/toolbarIcon"
         android:layout_centerVertical="true"
         android:layout_marginLeft="5dp"
         style="@style/RobotoTextViewStyle.HomeToolBar"

@@ -2,11 +2,11 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:state_pressed="true">
-        <color android:color="@color/colorPrimaryLight"/>
+        <color android:color="@color/colorPostDark"/>
     </item>
 
     <item >
-        <color android:color="@color/colorPrimaryDark"/>
+        <color android:color="@color/colorPostDark"/>
     </item>
 
 </selector>
