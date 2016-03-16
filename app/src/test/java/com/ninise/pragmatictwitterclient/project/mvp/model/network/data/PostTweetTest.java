@@ -1,6 +1,7 @@
 package com.ninise.pragmatictwitterclient.project.mvp.model.network.data;
 
 import com.ninise.pragmatictwitterclient.BuildConfig;
+import com.ninise.pragmatictwitterclient.project.mvp.model.network.data.twitter.PostTweet;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Test;

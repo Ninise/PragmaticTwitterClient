@@ -14,8 +14,8 @@ import android.widget.Toast;
 
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.ninise.pragmatictwitterclient.R;
-import com.ninise.pragmatictwitterclient.project.mvp.model.network.data.PostTweet;
-import com.ninise.pragmatictwitterclient.project.mvp.model.network.data.ProfileImage;
+import com.ninise.pragmatictwitterclient.project.mvp.model.network.data.twitter.PostTweet;
+import com.ninise.pragmatictwitterclient.project.mvp.model.network.data.twitter.ProfileImage;
 import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferencesProfile;
 
 import java.net.MalformedURLException;

@@ -33,37 +33,23 @@ public class LoginActivityTest {
 
     private AppCompatTextView loginWelcomeTextView;
     private AppCompatButton signInButton;
-    private ImageView loginAppImageView;
-    private ImageView loginAppNameImageView;
     private Toolbar toolbar;
 
     private Activity activity;
 
-    private Fragment fragment;
-
     @Before
     public void setUp() {
         activity = Robolectric.setupActivity(LoginActivity.class);
-        fragment = LoginFragment.getInstance();
         toolbar = (Toolbar) activity.findViewById(R.id.loginMainToolbar);
 
         signInButton = (AppCompatButton) activity.findViewById(R.id.loginSignInButton);
 
         loginWelcomeTextView = (AppCompatTextView) activity.findViewById(R.id.loginLatestUpdates);
-        loginAppImageView = (ImageView) activity.findViewById(R.id.loginAppImageView);
-        loginAppNameImageView = (ImageView) activity.findViewById(R.id.loginAppNameImageView);
-
-        SupportFragmentTestUtil.startFragment(fragment);
     }
 
     @Test
     public void activityCreated() {
         Assertions.assertThat(activity).isNotNull();
-    }
-
-    @Test
-    public void fragmentCreated() {
-        Assertions.assertThat(fragment.getView()).isNotNull();
     }
 
     @Test
@@ -76,12 +62,6 @@ public class LoginActivityTest {
         Assertions.assertThat(toolbar.getLogo()).isNotNull();
     }
 
-    @Test
-    public void loginWelcomeText() {
-        assertEquals(activity.getResources().getString(R.string.login_hi_textview) +
-                " User. " +
-                activity.getResources().getString(R.string.login_hi_textview_next), loginWelcomeTextView.getText().toString());
-    }
 
     @Test
     public void signInButtonText() {
@@ -92,16 +72,6 @@ public class LoginActivityTest {
     public void signInButtonClick() throws ExecutionException, InterruptedException {
         signInButton.performClick();
         Assertions.assertThat(OAuthWorker.getInstance(activity).getOAuth()).isNotNull();
-    }
-
-    @Test
-    public void loginAppImageView() {
-        Assertions.assertThat(loginAppImageView.getDrawable()).isNotNull();
-    }
-
-    @Test
-    public void loginAppNameImageView() {
-        Assertions.assertThat(loginAppNameImageView).isNotNull();
     }
 
     @Test

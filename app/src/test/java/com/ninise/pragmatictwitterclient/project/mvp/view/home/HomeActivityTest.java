@@ -25,12 +25,8 @@ import org.robolectric.shadows.ShadowToast;
 @Config(constants = BuildConfig.class)
 public class HomeActivityTest {
 
-    private NavigationView mNavigationView;
-    private TextView mNicknameTextView;
-    private TextView mUsernameTextView;
-    private CircularImageView mUserIconImageView;
+
     private Toolbar mToolbar;
-    private DrawerLayout mDrawer;
 
     private Activity activity;
 
@@ -38,16 +34,8 @@ public class HomeActivityTest {
     public void setUp() throws Exception {
         activity = Robolectric.setupActivity(HomeActivity.class);
 
-        mDrawer = (DrawerLayout) activity.findViewById(R.id.drawer);
 
         mToolbar = (Toolbar) activity.findViewById(R.id.homeToolbar);
-        mNavigationView = (NavigationView) activity.findViewById(R.id.navigation_view);
-
-        final View headView = mNavigationView.getHeaderView(0);
-
-        mNicknameTextView = (TextView) headView.findViewById(R.id.toolbarTitle);
-        mUsernameTextView = (TextView) headView.findViewById(R.id.userName);
-        mUserIconImageView = (CircularImageView) headView.findViewById(R.id.toolbarIcon);
     }
 
     @Test
@@ -67,12 +55,6 @@ public class HomeActivityTest {
     }
 
     @Test
-    public void drawerShouldShown() {
-        mDrawer.openDrawer(Gravity.LEFT);
-        Assertions.assertThat(mDrawer.isShown()).isTrue();
-    }
-
-    @Test
     public void toolBarHasIcon() {
         Assertions.assertThat(mToolbar.getLogo()).isNotNull();
     }
@@ -80,20 +62,5 @@ public class HomeActivityTest {
     @Test
     public void toolBarHasRightTitle() {
         Assertions.assertThat(mToolbar.getTitle()).isEqualToIgnoringCase(activity.getResources().getString(R.string.app_name));
-    }
-
-    @Test
-    public void nicknameTextViewHasNickname() {
-        Assertions.assertThat(mNicknameTextView.getText()).isNotEmpty();
-    }
-
-    @Test
-    public void usernameTextViewHasUsername() {
-        Assertions.assertThat(mUsernameTextView.getText()).isEmpty();
-    }
-
-    @Test
-    public void userIconImageViewHasIcon() {
-        Assertions.assertThat(mUserIconImageView).isNotNull();
     }
 }
