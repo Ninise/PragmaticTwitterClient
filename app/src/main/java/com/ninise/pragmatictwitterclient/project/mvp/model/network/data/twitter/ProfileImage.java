@@ -1,4 +1,4 @@
-package com.ninise.pragmatictwitterclient.project.mvp.model.network.data;
+package com.ninise.pragmatictwitterclient.project.mvp.model.network.data.twitter;
 
 
 import android.content.Context;
