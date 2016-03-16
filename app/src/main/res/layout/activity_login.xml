@@ -44,10 +44,6 @@
         android:layout_marginBottom="5dp"
         >
 
-        <include
-            layout="@layout/fragment_recycler"
-            />
-
     </FrameLayout>
 
 </RelativeLayout>

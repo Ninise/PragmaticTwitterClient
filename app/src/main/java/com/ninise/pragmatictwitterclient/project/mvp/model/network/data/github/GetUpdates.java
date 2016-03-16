@@ -1,6 +1,6 @@
 package com.ninise.pragmatictwitterclient.project.mvp.model.network.data.github;
 
-import com.ninise.pragmatictwitterclient.project.mvp.model.pojos.Commit;
+import com.ninise.pragmatictwitterclient.project.mvp.model.pojos.Pojo;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import rx.schedulers.Schedulers;
 
 public class GetUpdates {
 
-    public static Observable<List<Commit>> getCommits() {
+    public static Observable<List<Pojo>> getCommits() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(GitHubResources.ENDPOINT)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())

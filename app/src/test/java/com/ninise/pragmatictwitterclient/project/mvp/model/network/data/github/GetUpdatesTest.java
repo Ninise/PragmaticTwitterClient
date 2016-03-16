@@ -1,11 +1,18 @@
 package com.ninise.pragmatictwitterclient.project.mvp.model.network.data.github;
 
-import com.ninise.pragmatictwitterclient.BuildConfig;
+import android.util.Log;
 
+import com.ninise.pragmatictwitterclient.BuildConfig;
+import com.ninise.pragmatictwitterclient.project.mvp.model.pojos.Commit;
+
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import rx.observers.TestSubscriber;
 
@@ -20,5 +27,12 @@ public class GetUpdatesTest {
 
         GetUpdates.getCommits().subscribe(subscriber);
         subscriber.assertNoErrors();
+        subscriber.assertReceivedOnNext(new ArrayList<>());
+    }
+
+    @Test
+    public void testGet() {
+        GetUpdates.getCommits().subscribe(commits -> Log.d("Lst", commits.toString() + "asd"));
+        Assertions.assertThat(false).isTrue();
     }
 }

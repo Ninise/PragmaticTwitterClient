@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ninise.pragmatictwitterclient.R;
+import com.ninise.pragmatictwitterclient.project.mvp.model.network.data.github.GetUpdates;
 import com.ninise.pragmatictwitterclient.project.mvp.model.viewholders.TweetViewHolder;
 
 public class TweetsAdapter extends RecyclerView.Adapter<TweetViewHolder> {
@@ -14,7 +15,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetViewHolder> {
 
     @Override
     public TweetViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_tweet_item, parent, false);
 
         return new TweetViewHolder(v);
     }

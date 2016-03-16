@@ -1,7 +1,7 @@
 package com.ninise.pragmatictwitterclient.project.mvp.model.network.data.github;
 
 
-import com.ninise.pragmatictwitterclient.project.mvp.model.pojos.Commit;
+import com.ninise.pragmatictwitterclient.project.mvp.model.pojos.Pojo;
 
 import java.util.List;
 
@@ -14,5 +14,5 @@ public interface GitHubResources {
     String ENDPOINT = "https://api.github.com";
 
     @GET("/repos/{user}/PragmaticTwitterClient/commits")
-    Observable<List<Commit>> getCommits(@Path("user") String user);
+    Observable<List<Pojo>> getCommits(@Path("user") String user);
 }

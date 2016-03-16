@@ -1,6 +1,7 @@
 package com.ninise.pragmatictwitterclient.project.mvp.view.login;
 
 import android.app.Dialog;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -9,6 +10,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Window;
 import android.webkit.WebView;
@@ -20,7 +24,9 @@ import com.mikhaellopez.circularimageview.CircularImageView;
 import com.ninise.pragmatictwitterclient.R;
 import com.ninise.pragmatictwitterclient.project.mvp.model.network.NetworkConnection;
 import com.ninise.pragmatictwitterclient.project.mvp.model.network.auth.OAuthWorker;
+import com.ninise.pragmatictwitterclient.project.mvp.model.network.data.github.GetUpdates;
 import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferencesProfile;
+import com.ninise.pragmatictwitterclient.project.mvp.presenter.adapters.CommitAdapter;
 import com.ninise.pragmatictwitterclient.project.mvp.view.home.HomeActivity;
 import com.ninise.pragmatictwitterclient.project.utils.Constants;
 
@@ -41,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
     @BindString(R.string.permission_denied) String mPermissionDenied;
     @BindDrawable(R.drawable.app_logo) Drawable mIconBitmap;
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +65,17 @@ public class LoginActivity extends AppCompatActivity {
         mIconCircularImageView.setBorderColor(Color.BLACK);
         mTitleTextView.setText(mAppName);
 
+        signInButton();
+        showCommitFragment();
+    }
+
+    private void showCommitFragment() {
+        android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.loginContainer, new CommitsFragment());
+        fragmentTransaction.commit();
+    }
+
+    private void signInButton() {
         signInButton.setOnClickListener(v1 -> {
             if (NetworkConnection.getInstance(this).isNetworkConnectionOn()) {
 
@@ -119,7 +137,6 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(this, Constants.NETWORK_STATE_IS_FALSE, Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
     @Override
