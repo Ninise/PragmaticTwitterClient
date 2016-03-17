@@ -1,18 +1,13 @@
 package com.ninise.pragmatictwitterclient.project.mvp.view.login;
 
 import android.app.Dialog;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Window;
 import android.webkit.WebView;
@@ -24,11 +19,10 @@ import com.mikhaellopez.circularimageview.CircularImageView;
 import com.ninise.pragmatictwitterclient.R;
 import com.ninise.pragmatictwitterclient.project.mvp.model.network.NetworkConnection;
 import com.ninise.pragmatictwitterclient.project.mvp.model.network.auth.OAuthWorker;
-import com.ninise.pragmatictwitterclient.project.mvp.model.network.data.github.GetUpdates;
 import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferencesProfile;
-import com.ninise.pragmatictwitterclient.project.mvp.presenter.adapters.CommitAdapter;
 import com.ninise.pragmatictwitterclient.project.mvp.view.home.HomeActivity;
 import com.ninise.pragmatictwitterclient.project.utils.Constants;
+import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import butterknife.Bind;
 import butterknife.BindDrawable;
@@ -36,7 +30,7 @@ import butterknife.BindString;
 import butterknife.ButterKnife;
 import rx.functions.Action1;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends RxAppCompatActivity {
 
     private boolean doubleBackToExitPressedOnce = false;
 
@@ -79,9 +73,9 @@ public class LoginActivity extends AppCompatActivity {
         signInButton.setOnClickListener(v1 -> {
             if (NetworkConnection.getInstance(this).isNetworkConnectionOn()) {
 
-                OAuthWorker.getInstance(this.getApplicationContext()).getOAuth().subscribe(new Action1<String>() {
-                    @Override
-                    public void call(String oauth_url) {
+                OAuthWorker.getInstance(this.getApplicationContext()).getOAuth()
+                        .compose(bindToLifecycle())
+                        .subscribe(oauth_url -> {
                         if (oauth_url != null) {
                             Dialog auth_dialog = new Dialog(LoginActivity.this);
                             auth_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -106,6 +100,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                         OAuthWorker.getInstance(getApplicationContext())
                                                 .getAccessToken(uri.getQueryParameter(Constants.AUTH_VERIFIER))
+                                                .compose(bindToLifecycle())
                                                 .subscribe(user -> {
 
                                                     TwitterPreferencesProfile.getInstance(getApplicationContext()).setUserNickname(user.getScreenName());
@@ -131,8 +126,7 @@ public class LoginActivity extends AppCompatActivity {
                             auth_dialog.show();
                             auth_dialog.setCancelable(true);
                         }
-                    }
-                });
+                    });
             } else {
                 Toast.makeText(this, Constants.NETWORK_STATE_IS_FALSE, Toast.LENGTH_SHORT).show();
             }

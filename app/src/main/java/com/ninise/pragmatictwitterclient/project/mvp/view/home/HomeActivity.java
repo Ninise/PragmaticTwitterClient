@@ -3,7 +3,6 @@ package com.ninise.pragmatictwitterclient.project.mvp.view.home;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,6 +16,9 @@ import com.ninise.pragmatictwitterclient.R;
 import com.ninise.pragmatictwitterclient.project.mvp.model.network.data.twitter.PostTweet;
 import com.ninise.pragmatictwitterclient.project.mvp.model.network.data.twitter.ProfileImage;
 import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferencesProfile;
+import com.trello.rxlifecycle.ActivityEvent;
+import com.trello.rxlifecycle.RxLifecycle;
+import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import java.net.MalformedURLException;
 
@@ -24,7 +26,7 @@ import butterknife.Bind;
 import butterknife.BindString;
 import butterknife.ButterKnife;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends RxAppCompatActivity {
 
     @Bind(R.id.homeToolbar) Toolbar mToolbar;
     @Bind(R.id.homePostTweetEditText) EditText mPostTweetEditText;
@@ -51,13 +53,16 @@ public class HomeActivity extends AppCompatActivity {
         mUserNicknameTextView.setText(TwitterPreferencesProfile.getInstance(this).getUserNickname());
 
         mPostTweetButton.setOnClickListener((isOver) ->
-            PostTweet.setStatus(this, mPostTweetEditText.getText().toString()).subscribe((flag) -> {
+            PostTweet.setStatus(this, mPostTweetEditText.getText().toString())
+                    .compose(bindToLifecycle())
+                    .subscribe((flag) -> {
                 Toast.makeText(this, updateStatus, Toast.LENGTH_SHORT).show();
             })
         );
 
         try {
             ProfileImage.getProfileImage(getApplicationContext())
+                    .compose(bindToLifecycle())
                     .subscribe(bitmap -> mProfileCircularImageView.setImageBitmap(bitmap));
         } catch (MalformedURLException e) {
             e.printStackTrace();

@@ -2,7 +2,6 @@ package com.ninise.pragmatictwitterclient.project.mvp.view.login;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,11 +12,12 @@ import android.view.ViewGroup;
 import com.ninise.pragmatictwitterclient.R;
 import com.ninise.pragmatictwitterclient.project.mvp.model.network.data.github.GetUpdates;
 import com.ninise.pragmatictwitterclient.project.mvp.presenter.adapters.CommitAdapter;
+import com.trello.rxlifecycle.components.support.RxFragment;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class CommitsFragment extends Fragment {
+public class CommitsFragment extends RxFragment {
 
     @Bind(R.id.rv) RecyclerView mRecyclerView;
 
@@ -36,7 +36,9 @@ public class CommitsFragment extends Fragment {
         itemAnimator.setRemoveDuration(1000);
         mRecyclerView.setItemAnimator(itemAnimator);
 
-        GetUpdates.getCommits().subscribe(pojos -> {
+        GetUpdates.getCommits()
+                .compose(bindToLifecycle())
+                .subscribe(pojos -> {
             CommitAdapter adapter = new CommitAdapter(pojos);
             mRecyclerView.setAdapter(adapter);
         });
