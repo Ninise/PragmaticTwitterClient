@@ -11,13 +11,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jakewharton.rxbinding.support.v7.widget.RxToolbar;
+import com.jakewharton.rxbinding.view.RxView;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.ninise.pragmatictwitterclient.R;
 import com.ninise.pragmatictwitterclient.project.mvp.model.network.data.twitter.PostTweet;
 import com.ninise.pragmatictwitterclient.project.mvp.model.network.data.twitter.ProfileImage;
 import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferencesProfile;
-import com.trello.rxlifecycle.ActivityEvent;
-import com.trello.rxlifecycle.RxLifecycle;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import java.net.MalformedURLException;
@@ -25,7 +25,6 @@ import java.net.MalformedURLException;
 import butterknife.Bind;
 import butterknife.BindString;
 import butterknife.ButterKnife;
-
 public class HomeActivity extends RxAppCompatActivity {
 
     @Bind(R.id.homeToolbar) Toolbar mToolbar;
@@ -33,7 +32,8 @@ public class HomeActivity extends RxAppCompatActivity {
     @Bind(R.id.homePostTweetButton) Button mPostTweetButton;
     @Bind(R.id.toolbarIcon) CircularImageView mProfileCircularImageView;
     @Bind(R.id.toolbarTitle) TextView mUserNicknameTextView;
-    @BindString(R.string.update_status) String updateStatus;
+    @BindString(R.string.tweet_posted) String tweetPosted;
+    @BindString(R.string.tweet_not_posted) String tweetNotPosted;
 
     private boolean doubleBackToExitPressedOnce = false;
 
@@ -48,17 +48,18 @@ public class HomeActivity extends RxAppCompatActivity {
         setSupportActionBar(mToolbar);
         //noinspection ConstantConditions
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-
+        RxToolbar.itemClicks(mToolbar).subscribe(this::menuSelected);
 
         mUserNicknameTextView.setText(TwitterPreferencesProfile.getInstance(this).getUserNickname());
 
-        mPostTweetButton.setOnClickListener((isOver) ->
+        RxView.clicks(mPostTweetButton).subscribe((view) -> {
             PostTweet.setStatus(this, mPostTweetEditText.getText().toString())
                     .compose(bindToLifecycle())
-                    .subscribe((flag) -> {
-                Toast.makeText(this, updateStatus, Toast.LENGTH_SHORT).show();
-            })
-        );
+                    .subscribe((aVoid) -> {
+                        Toast.makeText(this, tweetPosted, Toast.LENGTH_SHORT).show();
+                        mPostTweetEditText.setText("");
+                    }, (aVoid) -> Toast.makeText(this, tweetNotPosted, Toast.LENGTH_SHORT).show());
+        });
 
         try {
             ProfileImage.getProfileImage(getApplicationContext())
@@ -105,11 +106,6 @@ public class HomeActivity extends RxAppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_navigation, menu);
         return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return menuSelected(item);
     }
 
     @Override

@@ -15,6 +15,7 @@ import android.webkit.WebViewClient;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jakewharton.rxbinding.view.RxView;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.ninise.pragmatictwitterclient.R;
 import com.ninise.pragmatictwitterclient.project.mvp.model.network.NetworkConnection;
@@ -28,7 +29,6 @@ import butterknife.Bind;
 import butterknife.BindDrawable;
 import butterknife.BindString;
 import butterknife.ButterKnife;
-import rx.functions.Action1;
 
 public class LoginActivity extends RxAppCompatActivity {
 
@@ -70,7 +70,7 @@ public class LoginActivity extends RxAppCompatActivity {
     }
 
     private void signInButton() {
-        signInButton.setOnClickListener(v1 -> {
+        RxView.clicks(signInButton).subscribe(aVoid -> {
             if (NetworkConnection.getInstance(this).isNetworkConnectionOn()) {
 
                 OAuthWorker.getInstance(this.getApplicationContext()).getOAuth()

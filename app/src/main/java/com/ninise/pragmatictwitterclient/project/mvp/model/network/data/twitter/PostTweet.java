@@ -19,24 +19,28 @@ public class PostTweet {
 
     public static Observable<Boolean> setStatus(Context context, String post) {
         return Observable.create((Observable.OnSubscribe<Boolean>) subscriber -> {
-            ConfigurationBuilder builder = new ConfigurationBuilder();
-            builder.setOAuthConsumerKey(Constants.TWITTER_KEY);
-            builder.setOAuthConsumerSecret(Constants.TWITTER_SECRET);
+            if (!post.isEmpty()) {
+                ConfigurationBuilder builder = new ConfigurationBuilder();
+                builder.setOAuthConsumerKey(Constants.TWITTER_KEY);
+                builder.setOAuthConsumerSecret(Constants.TWITTER_SECRET);
 
-            AccessToken accessToken = new AccessToken(
-                    TwitterPreferencesAuth.getInstance(context).getOAuthAccessToken(),
-                    TwitterPreferencesAuth.getInstance(context).getOAuthAccessTokenSecret()
-            );
+                AccessToken accessToken = new AccessToken(
+                        TwitterPreferencesAuth.getInstance(context).getOAuthAccessToken(),
+                        TwitterPreferencesAuth.getInstance(context).getOAuthAccessTokenSecret()
+                );
 
-            Twitter twitter = new TwitterFactory(builder.build()).getInstance(accessToken);
+                Twitter twitter = new TwitterFactory(builder.build()).getInstance(accessToken);
 
-            try {
-                twitter.updateStatus(post);
-            } catch (TwitterException e) {
-                e.printStackTrace();
+                try {
+                    twitter.updateStatus(post);
+                } catch (TwitterException e) {
+                    e.printStackTrace();
+                }
+
+                subscriber.onNext(true);
+            } else {
+                subscriber.onError(new Throwable());
             }
-
-            subscriber.onNext(true);
         })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());

@@ -15,5 +15,6 @@
     <string name="homePostBtn">Tweet</string>
     <string name="search">Search</string>
     <string name="update">Update</string>
-    <string name="update_status">Status updated</string>
+    <string name="tweet_posted">Tweet posted</string>
+    <string name="tweet_not_posted">Tweet not posted</string>
 </resources>
