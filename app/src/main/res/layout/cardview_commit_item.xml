@@ -20,6 +20,9 @@
             android:layout_alignParentLeft="true"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="5dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            style="@style/RobotoTextViewStyle.HomeToolBar"
             />
 
         <TextView
@@ -28,6 +31,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_below="@id/cardViewCommitMessage"
+            android:ellipsize="end"
+            android:maxLines="1"
+            style="@style/RobotoTextViewStyle.HomeToolBar"
             />
 
     </RelativeLayout>
