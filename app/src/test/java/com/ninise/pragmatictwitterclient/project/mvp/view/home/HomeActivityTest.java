@@ -6,11 +6,14 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.ninise.pragmatictwitterclient.BuildConfig;
 import com.ninise.pragmatictwitterclient.R;
+import com.ninise.pragmatictwitterclient.project.mvp.model.network.data.twitter.PostTweet;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
@@ -25,8 +28,11 @@ import org.robolectric.shadows.ShadowToast;
 @Config(constants = BuildConfig.class)
 public class HomeActivityTest {
 
-
-    private Toolbar mToolbar;
+    EditText mPostTweetEditText;
+    Button mPostTweetButton;
+    CircularImageView mProfileCircularImageView;
+    TextView mUserNicknameTextView;
+    Toolbar mToolbar;
 
     private Activity activity;
 
@@ -34,18 +40,20 @@ public class HomeActivityTest {
     public void setUp() throws Exception {
         activity = Robolectric.setupActivity(HomeActivity.class);
 
-
         mToolbar = (Toolbar) activity.findViewById(R.id.homeToolbar);
+
+        mPostTweetEditText = (EditText) activity.findViewById(R.id.homePostTweetEditText);
+
+        mPostTweetButton = (Button) activity.findViewById(R.id.homePostTweetButton);
+
+        mProfileCircularImageView = (CircularImageView) activity.findViewById(R.id.toolbarIcon);
+
+        mUserNicknameTextView = (TextView) activity.findViewById(R.id.toolbarTitle);
     }
 
     @Test
     public void activityIsNotNull() {
         Assertions.assertThat(activity).isNotNull();
-    }
-
-    @Test
-    public void listFragmentShouldDisplay() {
-        Assertions.assertThat(activity.findViewById(R.id.rv).getVisibility()).isEqualTo(View.VISIBLE);
     }
 
     @Test
@@ -56,11 +64,17 @@ public class HomeActivityTest {
 
     @Test
     public void toolBarHasIcon() {
-        Assertions.assertThat(mToolbar.getLogo()).isNotNull();
+        Assertions.assertThat(mProfileCircularImageView).isNotNull();
     }
 
     @Test
     public void toolBarHasRightTitle() {
-        Assertions.assertThat(mToolbar.getTitle()).isEqualToIgnoringCase(activity.getResources().getString(R.string.app_name));
+        Assertions.assertThat(mUserNicknameTextView).isNotNull();
+    }
+
+    @Test
+    public void postTweetButtonShouldSendTweet() {
+        mPostTweetButton.performClick();
+        Assertions.assertThat(PostTweet.setStatus(activity, "Some test")).isNotNull();
     }
 }
