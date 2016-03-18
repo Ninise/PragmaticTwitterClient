@@ -1,12 +1,12 @@
 package com.ninise.pragmatictwitterclient.project.mvp.view.login;
 
 import android.app.Activity;
-import android.support.v4.app.Fragment;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.AppCompatButton;
-import android.support.v7.widget.AppCompatTextView;
-import android.support.v7.widget.Toolbar;
-import android.widget.ImageView;
+import android.widget.Button;
+import android.widget.TextView;
 
+import com.mikhaellopez.circularimageview.CircularImageView;
 import com.ninise.pragmatictwitterclient.BuildConfig;
 import com.ninise.pragmatictwitterclient.R;
 import com.ninise.pragmatictwitterclient.project.mvp.model.network.auth.OAuthWorker;
@@ -20,31 +20,37 @@ import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
 import org.robolectric.shadows.ShadowToast;
-import org.robolectric.shadows.support.v4.SupportFragmentTestUtil;
 
 import java.util.concurrent.ExecutionException;
 
-import static org.junit.Assert.assertEquals;
+import butterknife.BindDrawable;
+import butterknife.BindString;
+import butterknife.ButterKnife;
 
 
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class)
 public class LoginActivityTest {
 
-    private AppCompatTextView loginWelcomeTextView;
-    private AppCompatButton signInButton;
-    private Toolbar toolbar;
+    CircularImageView mIconCircularImageView;
+    TextView mTitleTextView;
+    AppCompatButton mSignInButton;
+    @BindDrawable(R.drawable.app_logo) Drawable mIconBitmap;
 
     private Activity activity;
 
     @Before
     public void setUp() {
         activity = Robolectric.setupActivity(LoginActivity.class);
-        toolbar = (Toolbar) activity.findViewById(R.id.loginMainToolbar);
 
-        signInButton = (AppCompatButton) activity.findViewById(R.id.loginSignInButton);
+        mIconCircularImageView = (CircularImageView) activity.findViewById(R.id.toolbarIcon);
+        mIconCircularImageView.setImageDrawable(mIconBitmap);
 
-        loginWelcomeTextView = (AppCompatTextView) activity.findViewById(R.id.loginLatestUpdates);
+        mTitleTextView = (TextView) activity.findViewById(R.id.toolbarTitle);
+        mTitleTextView.setText(activity.getResources().getString(R.string.app_name));
+
+        mSignInButton = (AppCompatButton) activity.findViewById(R.id.loginSignInButton);
+        mSignInButton.setText(activity.getResources().getString(R.string.login_button));
     }
 
     @Test
@@ -54,23 +60,31 @@ public class LoginActivityTest {
 
     @Test
     public void toolBarTitle() {
-        Assertions.assertThat(toolbar.getTitle().toString()).isEqualToIgnoringCase(activity.getResources().getString(R.string.app_name));
+        Assertions.assertThat(mTitleTextView).isNotNull();
+        Assertions.assertThat(mTitleTextView.getText().toString())
+                .isEqualToIgnoringCase(activity.getResources().getString(R.string.app_name));
+        Assertions.assertThat(mTitleTextView.getText().toString())
+                .isNotEqualTo("Some test text");
     }
 
     @Test
     public void toolBarLogo() {
-        Assertions.assertThat(toolbar.getLogo()).isNotNull();
+        Assertions.assertThat(mIconCircularImageView.getBackground())
+                .isEqualTo(mIconBitmap);
+        Assertions.assertThat(mIconCircularImageView).isNotNull();
     }
-
 
     @Test
     public void signInButtonText() {
-        assertEquals(activity.getResources().getString(R.string.login_button), signInButton.getText().toString());
+        Assertions.assertThat(mSignInButton.getText().toString())
+                .isEqualToIgnoringCase(activity.getResources().getString(R.string.login_button));
+        Assertions.assertThat(mSignInButton.getText().toString())
+                .isNotEqualTo("Some test text");
     }
 
     @Test
     public void signInButtonClick() throws ExecutionException, InterruptedException {
-        signInButton.performClick();
+        mSignInButton.performClick();
         Assertions.assertThat(OAuthWorker.getInstance(activity).getOAuth()).isNotNull();
     }
 

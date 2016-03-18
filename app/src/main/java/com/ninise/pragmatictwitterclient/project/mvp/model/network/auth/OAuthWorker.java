@@ -8,6 +8,7 @@ import com.ninise.pragmatictwitterclient.project.utils.Constants;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -51,24 +52,16 @@ public class OAuthWorker {
         twitter = factory.getInstance();
 
 
-        return Observable.defer(() -> Observable.create(new Observable.OnSubscribe<String>() {
-            @Override
-            public void call(Subscriber<? super String> subscriber) {
-                try {
-                    requestToken = twitter
-                            .getOAuthRequestToken(Constants.CALLBACK_URL);
-                    oauth_url = requestToken.getAuthenticationURL();
-                } catch (TwitterException e) {
-                    e.printStackTrace();
-                }
-
-                subscriber.onNext(oauth_url);
-                subscriber.onCompleted();
+        return Observable.just(twitter).map(v -> {
+            try {
+                requestToken = v.getOAuthRequestToken(Constants.CALLBACK_URL);
+            } catch (TwitterException e) {
+                e.printStackTrace();
             }
-        }))
+            return requestToken.getAuthenticationURL();
+        })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
-
     }
 
     public Observable<User> getAccessToken(String oauth_verifier) {
