@@ -17,6 +17,6 @@ public class CommitViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         cvCommit = (CardView) itemView.findViewById(R.id.cvCommit);
         CommitMessageTextView = (TextView) itemView.findViewById(R.id.cardViewCommitMessage);
-        CommitTimeTextView = (TextView) itemView.findViewById(R.id.loginLatestUpdates);
+        CommitTimeTextView = (TextView) itemView.findViewById(R.id.cardViewCommitTime);
     }
 }

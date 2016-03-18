@@ -1,6 +1,7 @@
 package com.ninise.pragmatictwitterclient.project.mvp.presenter.adapters;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -27,10 +28,11 @@ public class CommitAdapter extends RecyclerView.Adapter<CommitViewHolder> {
     @Override
     public void onBindViewHolder(CommitViewHolder holder, int position) {
         holder.CommitMessageTextView.setText(mDataSet.get(holder.getAdapterPosition()).getCommit());
+        holder.CommitTimeTextView.setText(mDataSet.get(holder.getAdapterPosition()).getDateOfCommit());
     }
 
     @Override
     public int getItemCount() {
-        return mDataSet.size();
+        return 4;
     }
 }
