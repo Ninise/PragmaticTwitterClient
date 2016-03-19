@@ -65,27 +65,25 @@ public class OAuthWorker {
     }
 
     public Observable<User> getAccessToken(String oauth_verifier) {
-        return Observable.defer(() -> Observable.create((Observable.OnSubscribe<User>) subscriber -> {
-            try {
+        return Observable.just(oauth_verifier).map(v -> {
+                    AccessToken accessToken = null;
+                    User user = null;
+                    try {
+                             accessToken = twitter.getOAuthAccessToken(requestToken, v);
+                             TwitterPreferencesAuth.getInstance(mContext)
+                                    .setOAuthAccessTokenAndSecret(
+                                         accessToken.getToken(),
+                                          accessToken.getTokenSecret()
+                                    );
 
-                AccessToken accessToken = twitter.getOAuthAccessToken(
-                        requestToken, oauth_verifier);
-
-                TwitterPreferencesAuth.getInstance(mContext).setOAuthAccessTokenAndSecret(accessToken.getToken(),
-                        accessToken.getTokenSecret());
-
-                long userID = accessToken.getUserId();
-                User user = twitter.showUser(userID);
-
-                subscriber.onNext(user);
-                subscriber.onCompleted();
-
-            } catch (TwitterException e) {
-                e.printStackTrace();
-            }
-        }))
+                             long userID = accessToken.getUserId();
+                             user = twitter.showUser(userID);
+                         } catch (TwitterException e) {
+                              e.printStackTrace();
+                         }
+                    return user;
+                })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
-
     }
 }
