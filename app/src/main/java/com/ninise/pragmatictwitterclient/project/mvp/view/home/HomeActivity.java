@@ -64,7 +64,7 @@ public class HomeActivity extends RxAppCompatActivity {
         try {
             ProfileImage.getProfileImage(getApplicationContext())
                     .compose(bindToLifecycle())
-                    .subscribe(bitmap -> mProfileCircularImageView.setImageBitmap(bitmap));
+                    .subscribe(mProfileCircularImageView::setImageBitmap);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

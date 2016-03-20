@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ninise.pragmatictwitterclient.R;
-import com.ninise.pragmatictwitterclient.project.mvp.presenter.adapters.TweetsAdapter;
+import com.ninise.pragmatictwitterclient.project.mvp.model.adapters.TweetsAdapter;
 
 
 public class TweetsListFragment extends Fragment {

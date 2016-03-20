@@ -4,6 +4,7 @@
     <string name="login_button">Sign in</string>
     <string name="permission_denied">Sorry ! Permission Denied</string>
     <string name="latest_updates">Latest Updates</string>
+    <string name="not_found_wifi">You haven\'t an Wifi Connection :( </string>
 
     <!-- Home Activity -->
     <string name="home_logout">Sign out</string>
