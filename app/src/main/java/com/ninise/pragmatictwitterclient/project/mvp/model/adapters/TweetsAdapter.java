@@ -1,4 +1,4 @@
-package com.ninise.pragmatictwitterclient.project.mvp.presenter.adapters;
+package com.ninise.pragmatictwitterclient.project.mvp.model.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ninise.pragmatictwitterclient.R;
-import com.ninise.pragmatictwitterclient.project.mvp.model.network.data.github.GetUpdates;
 import com.ninise.pragmatictwitterclient.project.mvp.model.viewholders.TweetViewHolder;
 
 public class TweetsAdapter extends RecyclerView.Adapter<TweetViewHolder> {

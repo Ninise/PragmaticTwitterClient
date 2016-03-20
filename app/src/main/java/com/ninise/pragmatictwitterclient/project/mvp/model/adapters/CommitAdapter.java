@@ -1,7 +1,6 @@
-package com.ninise.pragmatictwitterclient.project.mvp.presenter.adapters;
+package com.ninise.pragmatictwitterclient.project.mvp.model.adapters;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
