@@ -1,5 +1,6 @@
 package com.ninise.pragmatictwitterclient.project.mvp.view.home;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentTransaction;
@@ -15,17 +16,17 @@ import com.jakewharton.rxbinding.support.v7.widget.RxToolbar;
 import com.jakewharton.rxbinding.view.RxView;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.ninise.pragmatictwitterclient.R;
-import com.ninise.pragmatictwitterclient.project.mvp.model.network.data.twitter.PostTweet;
-import com.ninise.pragmatictwitterclient.project.mvp.model.network.data.twitter.ProfileImage;
 import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferencesProfile;
+import com.ninise.pragmatictwitterclient.project.mvp.presenter.home.HomePresenter;
+import com.ninise.pragmatictwitterclient.project.mvp.presenter.home.IHomeView;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
-
-import java.net.MalformedURLException;
 
 import butterknife.Bind;
 import butterknife.BindString;
 import butterknife.ButterKnife;
-public class HomeActivity extends RxAppCompatActivity {
+
+
+public class HomeActivity extends RxAppCompatActivity implements IHomeView {
 
     @Bind(R.id.homeToolbar) Toolbar mToolbar;
     @Bind(R.id.homePostTweetEditText) EditText mPostTweetEditText;
@@ -36,6 +37,8 @@ public class HomeActivity extends RxAppCompatActivity {
     @BindString(R.string.tweet_not_posted) String tweetNotPosted;
 
     private boolean doubleBackToExitPressedOnce = false;
+
+    private HomePresenter mPresenter;
 
 
     @Override
@@ -53,23 +56,15 @@ public class HomeActivity extends RxAppCompatActivity {
         mUserNicknameTextView.setText(TwitterPreferencesProfile.getInstance(this).getUserNickname());
 
         RxView.clicks(mPostTweetButton).subscribe((view) -> {
-            PostTweet.setStatus(this, mPostTweetEditText.getText().toString())
-                    .compose(bindToLifecycle())
-                    .subscribe((aVoid) -> {
-                        Toast.makeText(this, tweetPosted, Toast.LENGTH_SHORT).show();
-                        mPostTweetEditText.setText("");
-                    }, (aVoid) -> Toast.makeText(this, tweetNotPosted, Toast.LENGTH_SHORT).show());
+            mPresenter.postTweet(this, mPostTweetEditText.getText().toString());
+            mPostTweetEditText.setText("");
         });
 
-        try {
-            ProfileImage.getProfileImage(getApplicationContext())
-                    .compose(bindToLifecycle())
-                    .subscribe(mProfileCircularImageView::setImageBitmap);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-
         setListFragment();
+
+        mPresenter = new HomePresenter(this);
+
+        mPresenter.getProfilePhoto(this);
     }
 
     private boolean menuSelected(MenuItem menuItem) {
@@ -125,5 +120,20 @@ public class HomeActivity extends RxAppCompatActivity {
     protected void onDestroy() {
         ButterKnife.unbind(this);
         super.onDestroy();
+    }
+
+    @Override
+    public void postTweeted() {
+        Toast.makeText(this, tweetPosted, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void postTweetError() {
+        Toast.makeText(this, tweetNotPosted, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setProfileIcon(Bitmap icon) {
+        mProfileCircularImageView.setImageBitmap(icon);
     }
 }
