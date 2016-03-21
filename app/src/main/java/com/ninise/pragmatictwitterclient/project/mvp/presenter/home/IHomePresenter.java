@@ -1,7 +1,10 @@
 package com.ninise.pragmatictwitterclient.project.mvp.presenter.home;
 
-/**
- * Created by ninise on 21.03.16.
- */
+import android.content.Context;
+
 public interface IHomePresenter {
+
+    void postTweet(Context context, String tweet);
+    void getProfilePhoto(Context context);
+
 }
