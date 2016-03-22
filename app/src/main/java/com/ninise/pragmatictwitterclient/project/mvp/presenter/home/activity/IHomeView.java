@@ -1,4 +1,4 @@
-package com.ninise.pragmatictwitterclient.project.mvp.presenter.home;
+package com.ninise.pragmatictwitterclient.project.mvp.presenter.home.activity;
 
 import android.graphics.Bitmap;
 

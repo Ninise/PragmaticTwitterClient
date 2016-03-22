@@ -1,5 +1,5 @@
 
-package com.ninise.pragmatictwitterclient.project.mvp.model.pojos;
+package com.ninise.pragmatictwitterclient.project.mvp.model.pojos.github;
 
 public class Commit {
 
