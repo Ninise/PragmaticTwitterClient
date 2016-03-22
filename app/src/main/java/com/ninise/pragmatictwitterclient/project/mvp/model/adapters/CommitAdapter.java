@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.ninise.pragmatictwitterclient.R;
-import com.ninise.pragmatictwitterclient.project.mvp.model.pojos.Pojo;
+import com.ninise.pragmatictwitterclient.project.mvp.model.pojos.github.Pojo;
 import com.ninise.pragmatictwitterclient.project.mvp.model.viewholders.CommitViewHolder;
 
 import java.util.List;

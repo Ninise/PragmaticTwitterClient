@@ -13,7 +13,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/cardViewCommitMessage"
+            android:id="@+id/cardViewTweetMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -26,11 +26,11 @@
             />
 
         <TextView
-            android:id="@+id/cardViewCommitTime"
+            android:id="@+id/cardViewTweetTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:layout_below="@id/cardViewCommitMessage"
+            android:layout_below="@id/cardViewTweetMessage"
             android:ellipsize="end"
             android:maxLines="1"
             style="@style/RobotoTextViewStyle.HomeToolBar"

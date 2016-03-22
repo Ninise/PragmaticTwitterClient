@@ -10,16 +10,18 @@ import com.ninise.pragmatictwitterclient.R;
 
 public class TweetViewHolder extends RecyclerView.ViewHolder {
 
-    final CardView cv;
-    final TextView groupTitleTextView;
-    final ImageView tweetImageView;
-    final TextView tweetInfoTextView;
+    public final CardView cv;
+    public final TextView tweetMessageTextView;
+    public final ImageView tweetImageView;
+    public final TextView tweetTimeTextView;
+    public final TextView tweetContriBTextView;
 
     public TweetViewHolder(View itemView) {
         super(itemView);
         cv = (CardView) itemView.findViewById(R.id.cv);
-        groupTitleTextView = (TextView) itemView.findViewById(R.id.cardViewCommitMessage);
+        tweetMessageTextView = (TextView) itemView.findViewById(R.id.cardViewTweetMessage);
         tweetImageView = (ImageView) itemView.findViewById(R.id.cardViewTweetImage);
-        tweetInfoTextView = (TextView) itemView.findViewById(R.id.loginLatestUpdates);
+        tweetTimeTextView = (TextView) itemView.findViewById(R.id.cardViewTweetTime);
+        tweetContriBTextView = (TextView) itemView.findViewById(R.id.cardViewContrib);
     }
 }

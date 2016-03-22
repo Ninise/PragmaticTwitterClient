@@ -1,6 +1,7 @@
 package com.ninise.pragmatictwitterclient.project.mvp.model.pojos;
 
 import com.ninise.pragmatictwitterclient.BuildConfig;
+import com.ninise.pragmatictwitterclient.project.mvp.model.pojos.github.Commit;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Test;

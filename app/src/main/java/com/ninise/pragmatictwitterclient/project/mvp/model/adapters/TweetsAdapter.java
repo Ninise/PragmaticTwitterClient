@@ -6,11 +6,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ninise.pragmatictwitterclient.R;
+import com.ninise.pragmatictwitterclient.project.mvp.model.pojos.twitter.Tweet;
 import com.ninise.pragmatictwitterclient.project.mvp.model.viewholders.TweetViewHolder;
+
+import java.util.List;
 
 public class TweetsAdapter extends RecyclerView.Adapter<TweetViewHolder> {
 
-    public static final String TAG = TweetsAdapter.class.getSimpleName();
+    private List<Tweet> mDataSet;
+
+    public TweetsAdapter(List<Tweet> dataSet) {
+        this.mDataSet = dataSet;
+    }
 
     @Override
     public TweetViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -21,11 +28,13 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetViewHolder> {
 
     @Override
     public void onBindViewHolder(TweetViewHolder holder, int position) {
-
+        holder.tweetMessageTextView.setText(mDataSet.get(holder.getAdapterPosition()).getTweetMessage());
+        holder.tweetTimeTextView.setText(mDataSet.get(holder.getAdapterPosition()).getTweetTime());
+        holder.tweetContriBTextView.setText(mDataSet.get(holder.getAdapterPosition()).getTweetContrib());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mDataSet.size();
     }
 }

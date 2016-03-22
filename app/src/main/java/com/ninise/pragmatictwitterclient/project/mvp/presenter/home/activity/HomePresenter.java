@@ -5,8 +5,6 @@ import android.content.Context;
 
 import com.ninise.pragmatictwitterclient.project.mvp.model.network.data.twitter.PostTweet;
 import com.ninise.pragmatictwitterclient.project.mvp.model.network.data.twitter.ProfileImage;
-import com.ninise.pragmatictwitterclient.project.mvp.presenter.home.IHomePresenter;
-import com.ninise.pragmatictwitterclient.project.mvp.presenter.home.IHomeView;
 
 import java.net.MalformedURLException;
 

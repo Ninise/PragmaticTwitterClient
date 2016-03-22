@@ -3,7 +3,6 @@ package com.ninise.pragmatictwitterclient.project.mvp.model.network.data.github;
 import android.util.Log;
 
 import com.ninise.pragmatictwitterclient.BuildConfig;
-import com.ninise.pragmatictwitterclient.project.mvp.model.pojos.Commit;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
@@ -12,7 +11,6 @@ import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.annotation.Config;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import rx.observers.TestSubscriber;
 

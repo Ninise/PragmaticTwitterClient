@@ -1,7 +1,7 @@
 package com.ninise.pragmatictwitterclient.project.mvp.model.network.data.github;
 
 
-import com.ninise.pragmatictwitterclient.project.mvp.model.pojos.Pojo;
+import com.ninise.pragmatictwitterclient.project.mvp.model.pojos.github.Pojo;
 
 import java.util.List;
 
