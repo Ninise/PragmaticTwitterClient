@@ -10,35 +10,58 @@
     
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp">
 
-        <TextView
-            android:id="@+id/cardViewCommitMessage"
+        <LinearLayout
+            android:id="@+id/userAndTime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/cardViewContrib"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                style="@style/RobotoTextViewStyle.HomeToolBar"
+                />
+
+            <TextView
+                android:id="@+id/cardViewTweetTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                style="@style/RobotoTextViewStyle.HomeToolBar"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/cardViewTweetMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:layout_marginLeft="5dp"
+            android:layout_below="@id/userAndTime"
+            android:ellipsize="end"
+            android:maxLines="1"
+            style="@style/RobotoTextViewStyle.HomeToolBar"
             />
 
         <ImageView
             android:id="@+id/cardViewTweetImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/cardViewCommitMessage"
+            android:layout_below="@id/cardViewTweetMessage"
             android:layout_marginTop="2dp"
             android:layout_marginLeft="5dp"
             />
 
-        <TextView
-            android:id="@+id/cardViewCommitTime"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_below="@id/cardViewCommitMessage"
-            android:layout_toRightOf="@id/cardViewTweetImage"
-            />
 
     </RelativeLayout>
     
