@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.ninise.pragmatictwitterclient.project.mvp.model.network.data.twitter.PostTweet;
 import com.ninise.pragmatictwitterclient.project.mvp.model.network.data.twitter.ProfileImage;
+import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferencesProfile;
 
 import java.net.MalformedURLException;
 
@@ -25,7 +26,7 @@ public class HomePresenter implements IHomePresenter {
     @Override
     public void getProfilePhoto(Context context) {
         try {
-            ProfileImage.getProfileImage(context)
+            ProfileImage.getProfileImage(context, TwitterPreferencesProfile.getInstance(context).getUserImageUrl())
                     .subscribe(mView::setProfileIcon);
         } catch (MalformedURLException e) {
             e.printStackTrace();

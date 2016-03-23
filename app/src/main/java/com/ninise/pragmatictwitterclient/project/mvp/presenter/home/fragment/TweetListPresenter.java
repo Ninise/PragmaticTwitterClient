@@ -2,6 +2,7 @@ package com.ninise.pragmatictwitterclient.project.mvp.presenter.home.fragment;
 
 
 import android.content.Context;
+import android.util.Log;
 
 import com.ninise.pragmatictwitterclient.project.mvp.model.adapters.TweetsAdapter;
 import com.ninise.pragmatictwitterclient.project.mvp.model.network.data.twitter.GetRecentTweets;
@@ -30,9 +31,11 @@ public class TweetListPresenter implements ITweetListPresenter {
                                 .tweetContrib(sta.getUser().getName())
                                 .tweetMessage(sta.getText())
                                 .tweetTime(sta.getCreatedAt().toString())
+                                .tweetImgUrl(sta.getUser().getProfileImageURL())
                                 .build());
+                        Log.d("das", sta.toString());
                     }
-                    mView.getAdapter(new TweetsAdapter(arr));
+                    mView.getAdapter(new TweetsAdapter(context, arr));
                 }
         );
     }

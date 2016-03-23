@@ -1,22 +1,27 @@
 package com.ninise.pragmatictwitterclient.project.mvp.model.adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.ninise.pragmatictwitterclient.R;
+import com.ninise.pragmatictwitterclient.project.mvp.model.network.data.twitter.ProfileImage;
 import com.ninise.pragmatictwitterclient.project.mvp.model.pojos.twitter.Tweet;
 import com.ninise.pragmatictwitterclient.project.mvp.model.viewholders.TweetViewHolder;
 
+import java.net.MalformedURLException;
 import java.util.List;
 
 public class TweetsAdapter extends RecyclerView.Adapter<TweetViewHolder> {
 
     private List<Tweet> mDataSet;
+    private Context mContext;
 
-    public TweetsAdapter(List<Tweet> dataSet) {
+    public TweetsAdapter(Context context,List<Tweet> dataSet) {
         this.mDataSet = dataSet;
+        this.mContext = context;
     }
 
     @Override
@@ -31,6 +36,12 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         holder.tweetMessageTextView.setText(mDataSet.get(holder.getAdapterPosition()).getTweetMessage());
         holder.tweetTimeTextView.setText(mDataSet.get(holder.getAdapterPosition()).getTweetTime());
         holder.tweetContriBTextView.setText(mDataSet.get(holder.getAdapterPosition()).getTweetContrib());
+        try {
+            ProfileImage.getProfileImage(mContext, mDataSet.get(holder.getAdapterPosition()).getTwwetImgUrl())
+                    .subscribe(holder.tweetImageView::setImageBitmap);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
