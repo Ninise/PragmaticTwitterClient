@@ -1,5 +1,6 @@
 package com.ninise.pragmatictwitterclient.project.mvp.model.adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -42,6 +43,15 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+        holder.cv.setOnClickListener(e -> {
+            Tweet tweet = mDataSet.get(holder.getAdapterPosition());
+            AlertDialog.Builder builder = new AlertDialog.Builder(mContext)
+                    .setTitle(tweet.getTweetContrib())
+                    .setMessage(tweet.getTweetMessage())
+                    .setPositiveButton("Ok", null);
+            AlertDialog alert = builder.create();
+            alert.show();
+        });
     }
 
     @Override

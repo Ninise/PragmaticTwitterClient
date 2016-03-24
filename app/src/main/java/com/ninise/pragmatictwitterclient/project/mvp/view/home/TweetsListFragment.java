@@ -6,20 +6,14 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.ninise.pragmatictwitterclient.R;
 import com.ninise.pragmatictwitterclient.project.mvp.model.adapters.TweetsAdapter;
-import com.ninise.pragmatictwitterclient.project.mvp.model.network.data.twitter.GetRecentTweets;
-import com.ninise.pragmatictwitterclient.project.mvp.model.pojos.twitter.Tweet;
 import com.ninise.pragmatictwitterclient.project.mvp.presenter.home.fragment.ITweetListView;
 import com.ninise.pragmatictwitterclient.project.mvp.presenter.home.fragment.TweetListPresenter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -61,6 +55,7 @@ public class TweetsListFragment extends Fragment implements ITweetListView {
         itemAnimator.setAddDuration(1000);
         itemAnimator.setRemoveDuration(1000);
         mRecyclerView.setItemAnimator(itemAnimator);
+
 
         mPresenter = new TweetListPresenter(this);
 

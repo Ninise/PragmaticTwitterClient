@@ -25,7 +25,6 @@ import butterknife.Bind;
 import butterknife.BindString;
 import butterknife.ButterKnife;
 
-
 public class HomeActivity extends RxAppCompatActivity implements IHomeView {
 
     @Bind(R.id.homeToolbar) Toolbar mToolbar;
@@ -35,6 +34,7 @@ public class HomeActivity extends RxAppCompatActivity implements IHomeView {
     @Bind(R.id.toolbarTitle) TextView mUserNicknameTextView;
     @BindString(R.string.tweet_posted) String tweetPosted;
     @BindString(R.string.tweet_not_posted) String tweetNotPosted;
+    @BindString(R.string.back_pressed) String onBackPressed;
 
     private boolean doubleBackToExitPressedOnce = false;
 
@@ -111,7 +111,7 @@ public class HomeActivity extends RxAppCompatActivity implements IHomeView {
             return;
         }
         this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, getString(R.string.back_pressed), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, onBackPressed, Toast.LENGTH_SHORT).show();
 
         new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
     }
