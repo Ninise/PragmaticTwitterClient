@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -70,9 +71,9 @@ public class HomeActivity extends RxAppCompatActivity implements IHomeView {
     private boolean menuSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.search_tweets:
-                return true;
+                return false;
             case R.id.update_tweets:
-                return true;
+                return false;
             case R.id.settings:
                 return true;
             case R.id.about:
@@ -82,8 +83,9 @@ public class HomeActivity extends RxAppCompatActivity implements IHomeView {
                 return true;
             default:
                 Toast.makeText(this, "Somethings Wrong", Toast.LENGTH_SHORT).show();
-                return true;
         }
+
+        return false;
     }
 
     private void closeApp() {

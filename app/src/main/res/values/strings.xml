@@ -18,4 +18,6 @@
     <string name="update">Update</string>
     <string name="tweet_posted">Tweet posted</string>
     <string name="tweet_not_posted">Tweet not posted</string>
+    <string name="progress_dialog_loading">Loading recent tweets...</string>
+    <string name="progress_dialog_loadTitle">Loading...</string>
 </resources>
