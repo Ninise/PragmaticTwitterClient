@@ -2,6 +2,7 @@ package com.ninise.pragmatictwitterclient.project.mvp.view.home;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -20,6 +21,7 @@ import com.ninise.pragmatictwitterclient.R;
 import com.ninise.pragmatictwitterclient.project.mvp.model.adapters.TweetsAdapter;
 import com.ninise.pragmatictwitterclient.project.mvp.presenter.home.fragment.ITweetListView;
 import com.ninise.pragmatictwitterclient.project.mvp.presenter.home.fragment.TweetListPresenter;
+import com.ninise.pragmatictwitterclient.project.mvp.view.settings.SettingsActivity;
 
 import butterknife.Bind;
 import butterknife.BindString;
@@ -88,11 +90,12 @@ public class TweetsListFragment extends Fragment implements ITweetListView {
                 getTweets(getActivity());
                 return true;
             case R.id.settings:
+                startActivity(new Intent(getActivity(), SettingsActivity.class));
                 return true;
             case R.id.about:
-                return true;
+                return false;
             case R.id.logout:
-                return true;
+                return false;
             default:
                 Toast.makeText(getActivity(), "Somethings Wrong", Toast.LENGTH_SHORT).show();
         }

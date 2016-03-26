@@ -39,6 +39,8 @@
 
         <activity android:name=".project.mvp.view.home.HomeActivity"/>
 
+        <activity android:name=".project.mvp.view.settings.SettingsActivity"/>
+
     </application>
 
 </manifest>

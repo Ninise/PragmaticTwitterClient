@@ -20,4 +20,8 @@
     <string name="tweet_not_posted">Tweet not posted</string>
     <string name="progress_dialog_loading">Loading recent tweets...</string>
     <string name="progress_dialog_loadTitle">Loading...</string>
+    <string name="settings_github">Check for news</string>
+    <string name="settings_network">Network</string>
+    <string name="settings_save_btn">Save</string>
+    <string name="settings_title">Settings</string>
 </resources>
