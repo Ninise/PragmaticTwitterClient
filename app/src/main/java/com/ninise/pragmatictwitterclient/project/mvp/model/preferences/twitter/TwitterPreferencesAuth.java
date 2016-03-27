@@ -1,11 +1,9 @@
-package com.ninise.pragmatictwitterclient.project.mvp.model.preferences;
+package com.ninise.pragmatictwitterclient.project.mvp.model.preferences.twitter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.ninise.pragmatictwitterclient.project.utils.Constants;
-
-import twitter4j.auth.RequestToken;
 
 public class TwitterPreferencesAuth {
 
