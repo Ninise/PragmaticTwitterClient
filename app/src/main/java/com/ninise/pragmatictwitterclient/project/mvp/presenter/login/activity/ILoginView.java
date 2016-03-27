@@ -5,5 +5,6 @@ public interface ILoginView {
     void navigateToHomeActivity();
     void loginFailedNetworkNotFound();
     void loginFailedPermissionDenied();
+    void showLastUpdates();
 
 }

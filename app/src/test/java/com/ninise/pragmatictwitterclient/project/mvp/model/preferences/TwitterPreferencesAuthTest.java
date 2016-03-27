@@ -1,10 +1,7 @@
 package com.ninise.pragmatictwitterclient.project.mvp.model.preferences;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
-
 import com.ninise.pragmatictwitterclient.BuildConfig;
+import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.twitter.TwitterPreferencesAuth;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Before;

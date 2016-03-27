@@ -1,6 +1,7 @@
 package com.ninise.pragmatictwitterclient.project.mvp.model.preferences;
 
 import com.ninise.pragmatictwitterclient.BuildConfig;
+import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.twitter.TwitterPreferencesProfile;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Before;

@@ -24,4 +24,6 @@
     <string name="settings_network">Network</string>
     <string name="settings_save_btn">Save</string>
     <string name="settings_title">Settings</string>
+    <string name="settings_changes_saved">Changes saved</string>
+    <string name="settings_changes_not_saved">Changes not saved</string>
 </resources>

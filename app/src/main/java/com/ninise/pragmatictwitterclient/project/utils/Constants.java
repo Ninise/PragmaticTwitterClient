@@ -18,9 +18,13 @@ public class Constants {
     public static final String TWITTER_NAME = "name";
     public static final String IMAGE_URL = "image_url";
 
+    /** SharedPreferences - # SETTINGS # */
+    public static final String SETTINGS_PREFERENCES = "settings_pref";
+
     /** AUTH DATA */
     public static final String AUTH_VERIFIER = "oauth_verifier";
     public static final String CALLBACK_URL = "oauth://t4jsample";
 
     public static final String DENIED = "denied";
+    public static final String SETTINGS_GITUPDATES = "settings_git_updates";
 }

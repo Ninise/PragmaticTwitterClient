@@ -10,7 +10,8 @@ import android.webkit.WebViewClient;
 import com.ninise.pragmatictwitterclient.R;
 import com.ninise.pragmatictwitterclient.project.mvp.model.network.NetworkConnection;
 import com.ninise.pragmatictwitterclient.project.mvp.model.network.auth.OAuthWorker;
-import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferencesProfile;
+import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.settings.SettingsPreferences;
+import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.twitter.TwitterPreferencesProfile;
 import com.ninise.pragmatictwitterclient.project.utils.Constants;
 
 public class LoginPresenter implements ILoginPresenter {
@@ -76,5 +77,11 @@ public class LoginPresenter implements ILoginPresenter {
         } else {
             mView.loginFailedNetworkNotFound();
         }
+    }
+
+    @Override
+    public void showCommitFragment(Context context) {
+        if (SettingsPreferences.getInstance(context).getGithugUpdatesStatus())
+            mView.showLastUpdates();
     }
 }

@@ -3,7 +3,7 @@ package com.ninise.pragmatictwitterclient.project.mvp.model.network.data.twitter
 
 import android.content.Context;
 
-import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferencesAuth;
+import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.twitter.TwitterPreferencesAuth;
 import com.ninise.pragmatictwitterclient.project.utils.Constants;
 
 import rx.Observable;

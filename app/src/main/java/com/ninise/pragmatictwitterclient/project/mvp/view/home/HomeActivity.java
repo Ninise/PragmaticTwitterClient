@@ -16,7 +16,7 @@ import com.jakewharton.rxbinding.support.v7.widget.RxToolbar;
 import com.jakewharton.rxbinding.view.RxView;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.ninise.pragmatictwitterclient.R;
-import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferencesProfile;
+import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.twitter.TwitterPreferencesProfile;
 import com.ninise.pragmatictwitterclient.project.mvp.presenter.home.activity.HomePresenter;
 import com.ninise.pragmatictwitterclient.project.mvp.presenter.home.activity.IHomeView;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;

@@ -60,14 +60,8 @@ public class LoginActivity extends RxAppCompatActivity implements ILoginView {
             mLoginPresenter.attemptLogin(this);
         });
 
-        showCommitFragment();
         mLoginPresenter = new LoginPresenter(this);
-    }
-
-    private void showCommitFragment() {
-        android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.loginContainer, new CommitsFragment());
-        fragmentTransaction.commit();
+        mLoginPresenter.showCommitFragment(this);
     }
 
     @Override
@@ -99,6 +93,13 @@ public class LoginActivity extends RxAppCompatActivity implements ILoginView {
     @Override
     public void loginFailedPermissionDenied() {
         Toast.makeText(this, mPermissionDenied, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showLastUpdates() {
+        android.support.v4.app.FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.loginContainer, new CommitsFragment());
+        fragmentTransaction.commit();
     }
 
     @Override

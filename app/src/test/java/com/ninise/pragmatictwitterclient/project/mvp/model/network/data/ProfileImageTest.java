@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 
 import com.ninise.pragmatictwitterclient.BuildConfig;
 import com.ninise.pragmatictwitterclient.project.mvp.model.network.data.twitter.ProfileImage;
-import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferencesProfile;
+import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.twitter.TwitterPreferencesProfile;
 
 import org.assertj.core.api.Assertions;
 import org.junit.Test;

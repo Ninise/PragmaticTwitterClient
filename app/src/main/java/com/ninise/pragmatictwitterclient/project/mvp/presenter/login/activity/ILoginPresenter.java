@@ -5,5 +5,6 @@ import android.content.Context;
 public interface ILoginPresenter {
 
     void attemptLogin(Context context);
+    void showCommitFragment(Context context);
     
 }

@@ -5,7 +5,7 @@ import android.content.Context;
 
 import com.ninise.pragmatictwitterclient.project.mvp.model.network.data.twitter.PostTweet;
 import com.ninise.pragmatictwitterclient.project.mvp.model.network.data.twitter.ProfileImage;
-import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferencesProfile;
+import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.twitter.TwitterPreferencesProfile;
 
 import java.net.MalformedURLException;
 

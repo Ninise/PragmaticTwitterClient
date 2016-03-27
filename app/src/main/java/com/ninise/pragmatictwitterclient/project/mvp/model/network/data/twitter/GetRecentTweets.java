@@ -2,15 +2,13 @@ package com.ninise.pragmatictwitterclient.project.mvp.model.network.data.twitter
 
 import android.content.Context;
 
-import com.ninise.pragmatictwitterclient.project.mvp.model.pojos.twitter.Tweet;
-import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.TwitterPreferencesAuth;
+import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.twitter.TwitterPreferencesAuth;
 import com.ninise.pragmatictwitterclient.project.utils.Constants;
 
 import java.util.List;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import twitter4j.Status;
 import twitter4j.Twitter;
