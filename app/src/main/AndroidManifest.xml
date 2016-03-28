@@ -41,6 +41,8 @@
 
         <activity android:name=".project.mvp.view.settings.SettingsActivity"/>
 
+        <activity android:name=".project.mvp.view.about.AboutActivity"/>
+
     </application>
 
 </manifest>

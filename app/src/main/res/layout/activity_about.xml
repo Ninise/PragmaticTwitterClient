@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <include android:id="@+id/aboutToolbar"
+             layout="@layout/home_tool_bar"/>
+
+    <TextView
+        android:id="@+id/aboutAppNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@id/aboutToolbar"
+        android:gravity="center"
+        android:text="@string/app_name"
+        android:textSize="30sp"
+        style="?android:listSeparatorTextViewStyle"
+        />
+
+    <ImageView
+        android:id="@+id/aboutAppIconImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/aboutAppNameTextView"
+        android:src="@drawable/ic_launcher"
+        />
+
+    <TextView
+        android:id="@+id/aboutAppCreatorTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@id/aboutAppIconImageView"
+        android:gravity="center"
+        android:text="@string/about_developer"
+        />
+
+    <TextView
+        android:id="@+id/aboutAppVersionTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/aboutAppCreatorTextView"
+        android:gravity="center"
+        android:text="@string/about_version"
+        />
+
+    <Button
+        android:id="@+id/aboutOkButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="3dp"
+        android:layout_alignParentBottom="true"
+        android:text="@string/about_ok"
+        style="@style/RobotoButtonStyle"
+        />
+
+</RelativeLayout>

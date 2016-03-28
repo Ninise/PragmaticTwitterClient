@@ -78,18 +78,12 @@ public class HomeActivity extends RxAppCompatActivity implements IHomeView {
             case R.id.about:
                 return true;
             case R.id.logout:
-                closeApp();
                 return true;
             default:
                 Toast.makeText(this, "Somethings Wrong", Toast.LENGTH_SHORT).show();
         }
 
         return false;
-    }
-
-    private void closeApp() {
-        android.os.Process.killProcess(android.os.Process.myPid());
-        finish();
     }
 
     private void setListFragment() {
@@ -121,6 +115,8 @@ public class HomeActivity extends RxAppCompatActivity implements IHomeView {
     protected void onDestroy() {
         ButterKnife.unbind(this);
         super.onDestroy();
+        android.os.Process.killProcess(android.os.Process.myPid());
+        finish();
     }
 
     @Override

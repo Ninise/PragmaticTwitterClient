@@ -21,6 +21,7 @@ import com.ninise.pragmatictwitterclient.R;
 import com.ninise.pragmatictwitterclient.project.mvp.model.adapters.TweetsAdapter;
 import com.ninise.pragmatictwitterclient.project.mvp.presenter.home.fragment.ITweetListView;
 import com.ninise.pragmatictwitterclient.project.mvp.presenter.home.fragment.TweetListPresenter;
+import com.ninise.pragmatictwitterclient.project.mvp.view.about.AboutActivity;
 import com.ninise.pragmatictwitterclient.project.mvp.view.settings.SettingsActivity;
 
 import butterknife.Bind;
@@ -93,9 +94,12 @@ public class TweetsListFragment extends Fragment implements ITweetListView {
                 startActivity(new Intent(getActivity(), SettingsActivity.class));
                 return true;
             case R.id.about:
-                return false;
+                startActivity(new Intent(getActivity(), AboutActivity.class));
+                return true;
             case R.id.logout:
-                return false;
+                android.os.Process.killProcess(android.os.Process.myPid());
+                getActivity().finish();
+                return true;
             default:
                 Toast.makeText(getActivity(), "Somethings Wrong", Toast.LENGTH_SHORT).show();
         }

@@ -18,12 +18,19 @@
     <string name="update">Update</string>
     <string name="tweet_posted">Tweet posted</string>
     <string name="tweet_not_posted">Tweet not posted</string>
-    <string name="progress_dialog_loading">Loading recent tweets...</string>
-    <string name="progress_dialog_loadTitle">Loading...</string>
+    <string name="progress_dialog_loading">Loading recent tweets…</string>
+    <string name="progress_dialog_loadTitle">Loading…</string>
+
+    <!-- Settings Activity -->
     <string name="settings_github">Check for news</string>
     <string name="settings_network">Network</string>
     <string name="settings_save_btn">Save</string>
     <string name="settings_title">Settings</string>
     <string name="settings_changes_saved">Changes saved</string>
     <string name="settings_changes_not_saved">Changes not saved</string>
+
+    <!-- About Activity -->
+    <string name="about_developer">Created by Ninise</string>
+    <string name="about_version">Version 0.6</string>
+    <string name="about_ok">Ok</string>
 </resources>
