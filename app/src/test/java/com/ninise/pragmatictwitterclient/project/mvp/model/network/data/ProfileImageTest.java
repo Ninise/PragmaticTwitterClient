@@ -24,7 +24,7 @@ public class ProfileImageTest {
         TwitterPreferencesProfile.getInstance(mShadowActivity.getApplicationContext()).setUserImageUrl(TEST_IMAGE_LINK);
 
         final Bitmap[] actual = {null};
-        ProfileImage.getProfileImage(mShadowActivity.getApplicationContext()).subscribe(
+        ProfileImage.getProfileImage(mShadowActivity.getApplicationContext(), TEST_IMAGE_LINK).subscribe(
                 bitmap -> {
                     actual[0] = bitmap;}
         );

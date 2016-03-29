@@ -38,7 +38,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetViewHolder> {
         holder.tweetTimeTextView.setText(mDataSet.get(holder.getAdapterPosition()).getTweetTime());
         holder.tweetContriBTextView.setText(mDataSet.get(holder.getAdapterPosition()).getTweetContrib());
         try {
-            ProfileImage.getProfileImage(mContext, mDataSet.get(holder.getAdapterPosition()).getTwwetImgUrl())
+            ProfileImage.getProfileImage(mContext, mDataSet.get(holder.getAdapterPosition()).getTweetImgUrl())
                     .subscribe(holder.tweetImageView::setImageBitmap);
         } catch (MalformedURLException e) {
             e.printStackTrace();

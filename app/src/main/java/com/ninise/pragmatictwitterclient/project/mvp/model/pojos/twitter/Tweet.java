@@ -20,7 +20,7 @@ public class Tweet {
         return tweetMessage;
     }
 
-    public String getTwwetImgUrl() {
+    public String getTweetImgUrl() {
         return twwetImgUrl;
     }
 
