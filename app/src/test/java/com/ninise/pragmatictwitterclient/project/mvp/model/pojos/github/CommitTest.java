@@ -1,4 +1,4 @@
-package com.ninise.pragmatictwitterclient.project.mvp.model.pojos;
+package com.ninise.pragmatictwitterclient.project.mvp.model.pojos.github;
 
 import com.ninise.pragmatictwitterclient.BuildConfig;
 import com.ninise.pragmatictwitterclient.project.mvp.model.pojos.github.Commit;
