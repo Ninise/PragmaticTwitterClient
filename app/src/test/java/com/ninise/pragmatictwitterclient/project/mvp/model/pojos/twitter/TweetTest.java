@@ -12,7 +12,7 @@ public class TweetTest extends TestCase {
     private static final String CONTRIB  = "DevNinise";
     private static final String IMG_UTL = "https://some.com/hi.jpg";
     private static final String MESSAGE = "Hi, there!";
-    private static final String TIME = "2016-03-29";
+    private static final String TIME = "2016-03-29 18:42:03";
 
     @Before
     public void setUp() {

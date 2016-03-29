@@ -7,8 +7,6 @@ import junit.framework.TestCase;
 import org.assertj.core.api.Assertions;
 
 import java.util.Arrays;
-import java.util.List;
-
 
 public class CommitAdapterTest extends TestCase {
 
@@ -16,8 +14,7 @@ public class CommitAdapterTest extends TestCase {
 
     @Override
     public void setUp() throws Exception {
-        List<Pojo> dataSet = Arrays.asList(new Pojo(), new Pojo());
-        mCommitAdapter = new CommitAdapter(dataSet);
+        mCommitAdapter = new CommitAdapter(Arrays.asList(new Pojo(), new Pojo()));
     }
 
     public void testOnCreateCommitAdapter() throws Exception {
