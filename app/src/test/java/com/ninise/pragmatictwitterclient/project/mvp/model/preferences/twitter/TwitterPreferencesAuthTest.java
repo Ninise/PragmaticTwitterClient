@@ -1,4 +1,4 @@
-package com.ninise.pragmatictwitterclient.project.mvp.model.preferences;
+package com.ninise.pragmatictwitterclient.project.mvp.model.preferences.twitter;
 
 import com.ninise.pragmatictwitterclient.BuildConfig;
 import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.twitter.TwitterPreferencesAuth;

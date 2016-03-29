@@ -30,7 +30,7 @@ public class SettingsPreferences {
         return editor.commit();
     }
 
-    public boolean getGithugUpdatesStatus() {
+    public boolean getGithubUpdatesStatus() {
         return mPreferences.contains(Constants.SETTINGS_GITUPDATES)
                 && mPreferences.getBoolean(Constants.SETTINGS_GITUPDATES, false);
     }

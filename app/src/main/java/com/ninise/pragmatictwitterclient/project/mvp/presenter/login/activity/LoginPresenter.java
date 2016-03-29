@@ -81,7 +81,7 @@ public class LoginPresenter implements ILoginPresenter {
 
     @Override
     public void showCommitFragment(Context context) {
-        if (SettingsPreferences.getInstance(context).getGithugUpdatesStatus())
+        if (SettingsPreferences.getInstance(context).getGithubUpdatesStatus())
             mView.showLastUpdates();
     }
 }

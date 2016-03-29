@@ -1,4 +1,4 @@
-package com.ninise.pragmatictwitterclient.project.mvp.model.network.data;
+package com.ninise.pragmatictwitterclient.project.mvp.model.network.data.twitter;
 
 import com.ninise.pragmatictwitterclient.BuildConfig;
 import com.ninise.pragmatictwitterclient.project.mvp.model.network.data.twitter.PostTweet;

@@ -25,7 +25,7 @@ public class SettingsPresenter implements ISettingsPresenter {
 
     @Override
     public void getUpdatesSwitchState(Context context) {
-        if (SettingsPreferences.getInstance(context).getGithugUpdatesStatus()) {
+        if (SettingsPreferences.getInstance(context).getGithubUpdatesStatus()) {
             mView.setGitHubSwitchState(true);
         } else {
             mView.setGitHubSwitchState(false);
