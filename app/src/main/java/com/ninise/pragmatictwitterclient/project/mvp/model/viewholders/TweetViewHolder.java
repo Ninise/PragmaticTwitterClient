@@ -14,7 +14,7 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
     public final TextView tweetMessageTextView;
     public final ImageView tweetImageView;
     public final TextView tweetTimeTextView;
-    public final TextView tweetContriBTextView;
+    public final TextView tweetContribTextView;
 
     public TweetViewHolder(View itemView) {
         super(itemView);
@@ -22,6 +22,6 @@ public class TweetViewHolder extends RecyclerView.ViewHolder {
         tweetMessageTextView = (TextView) itemView.findViewById(R.id.cardViewTweetMessage);
         tweetImageView = (ImageView) itemView.findViewById(R.id.cardViewTweetImage);
         tweetTimeTextView = (TextView) itemView.findViewById(R.id.cardViewTweetTime);
-        tweetContriBTextView = (TextView) itemView.findViewById(R.id.cardViewContrib);
+        tweetContribTextView = (TextView) itemView.findViewById(R.id.cardViewContrib);
     }
 }

@@ -36,7 +36,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetViewHolder> {
     public void onBindViewHolder(TweetViewHolder holder, int position) {
         holder.tweetMessageTextView.setText(mDataSet.get(holder.getAdapterPosition()).getTweetMessage());
         holder.tweetTimeTextView.setText(mDataSet.get(holder.getAdapterPosition()).getTweetTime());
-        holder.tweetContriBTextView.setText(mDataSet.get(holder.getAdapterPosition()).getTweetContrib());
+        holder.tweetContribTextView.setText(mDataSet.get(holder.getAdapterPosition()).getTweetContrib());
         try {
             ProfileImage.getProfileImage(mContext, mDataSet.get(holder.getAdapterPosition()).getTweetImgUrl())
                     .subscribe(holder.tweetImageView::setImageBitmap);
