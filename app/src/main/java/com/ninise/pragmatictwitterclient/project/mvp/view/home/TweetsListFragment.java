@@ -1,6 +1,7 @@
 package com.ninise.pragmatictwitterclient.project.mvp.view.home;
 
 import android.app.ProgressDialog;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -86,6 +88,19 @@ public class TweetsListFragment extends Fragment implements ITweetListView {
     private boolean menuSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.search_tweets:
+
+                SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+
+                SearchView searchView = null;
+
+
+                if (menuItem != null) {
+                    searchView = (SearchView) menuItem.getActionView();
+                }
+                if (searchView != null) {
+                    searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+                }
+
                 return true;
             case R.id.update_tweets:
                 getTweets(getActivity());

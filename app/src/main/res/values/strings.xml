@@ -33,4 +33,5 @@
     <string name="about_developer">Created by Ninise</string>
     <string name="about_version">Version 0.6</string>
     <string name="about_ok">Ok</string>
+    <string name="search_hint">Search</string>
 </resources>
