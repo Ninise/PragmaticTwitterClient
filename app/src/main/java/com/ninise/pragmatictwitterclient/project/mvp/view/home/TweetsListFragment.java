@@ -12,13 +12,18 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.jakewharton.rxbinding.support.v7.widget.RxSearchView;
 import com.jakewharton.rxbinding.support.v7.widget.RxToolbar;
+import com.jakewharton.rxbinding.widget.RxTextView;
 import com.ninise.pragmatictwitterclient.R;
 import com.ninise.pragmatictwitterclient.project.mvp.model.adapters.TweetsAdapter;
 import com.ninise.pragmatictwitterclient.project.mvp.presenter.home.fragment.ITweetListView;
@@ -26,9 +31,13 @@ import com.ninise.pragmatictwitterclient.project.mvp.presenter.home.fragment.Twe
 import com.ninise.pragmatictwitterclient.project.mvp.view.about.AboutActivity;
 import com.ninise.pragmatictwitterclient.project.mvp.view.settings.SettingsActivity;
 
+import java.util.concurrent.TimeUnit;
+
 import butterknife.Bind;
 import butterknife.BindString;
 import butterknife.ButterKnife;
+import rx.Observable;
+import rx.functions.Action1;
 
 
 public class TweetsListFragment extends Fragment implements ITweetListView {
@@ -42,6 +51,9 @@ public class TweetsListFragment extends Fragment implements ITweetListView {
     private static TweetsListFragment mInstance = null;
 
     private ProgressDialog mProgressDialog;
+    private SearchView searchView = null;
+    private SearchView.OnQueryTextListener queryTextListener;
+
 
     public static TweetsListFragment getInstance() {
         if (mInstance == null) {
@@ -85,22 +97,24 @@ public class TweetsListFragment extends Fragment implements ITweetListView {
         getTweets(getActivity());
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        MenuItem searchItem = menu.findItem(R.id.search_tweets);
+        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+
+        if (searchItem != null) {
+            searchView = (SearchView) searchItem.getActionView();
+        }
+        if (searchView != null) {
+            searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+            search();
+        }
+    }
+
     private boolean menuSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case R.id.search_tweets:
-
-                SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
-
-                SearchView searchView = null;
-
-
-                if (menuItem != null) {
-                    searchView = (SearchView) menuItem.getActionView();
-                }
-                if (searchView != null) {
-                    searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
-                }
-
                 return true;
             case R.id.update_tweets:
                 getTweets(getActivity());
@@ -124,6 +138,7 @@ public class TweetsListFragment extends Fragment implements ITweetListView {
 
     @Override
     public void getAdapter(TweetsAdapter adapter) {
+        adapter.notifyDataSetChanged();
         mRecyclerView.setAdapter(adapter);
         mProgressDialog.dismiss();
     }
@@ -132,6 +147,16 @@ public class TweetsListFragment extends Fragment implements ITweetListView {
     public void getTweets(Context context) {
         mProgressDialog = ProgressDialog.show(getActivity(), mProgressDialogTitle, mProgressDialogMessage);
         mPresenter.getTweetList(getActivity());
+    }
+
+    @Override
+    public void search() {
+        RxSearchView.queryTextChanges(searchView)
+                .debounce(500, TimeUnit.MILLISECONDS)
+                .map(CharSequence::toString)
+                .subscribe(query -> {
+                    mPresenter.searchForTweets(getActivity(), query);
+                });
     }
 
     @Override

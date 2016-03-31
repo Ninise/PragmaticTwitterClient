@@ -8,4 +8,5 @@ public interface ITweetListView {
 
     void getAdapter(TweetsAdapter adapter);
     void getTweets(Context context);
+    void search();
 }
