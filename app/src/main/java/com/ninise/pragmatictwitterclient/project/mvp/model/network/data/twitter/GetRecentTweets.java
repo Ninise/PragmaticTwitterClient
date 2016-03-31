@@ -8,8 +8,6 @@ import com.ninise.pragmatictwitterclient.project.utils.Constants;
 import java.util.List;
 
 import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -20,15 +18,14 @@ import twitter4j.conf.ConfigurationBuilder;
 public class GetRecentTweets {
 
     public static Observable<List<Status>> getTweets(Context context) {
-        return Observable.just(context)
-                .map(s -> {
+        return Observable.create(subscriber -> {
                     ConfigurationBuilder builder = new ConfigurationBuilder();
                     builder.setOAuthConsumerKey(Constants.TWITTER_KEY);
                     builder.setOAuthConsumerSecret(Constants.TWITTER_SECRET);
 
                     AccessToken accessToken = new AccessToken(
-                            TwitterPreferencesAuth.getInstance(s).getOAuthAccessToken(),
-                            TwitterPreferencesAuth.getInstance(s).getOAuthAccessTokenSecret()
+                            TwitterPreferencesAuth.getInstance(context).getOAuthAccessToken(),
+                            TwitterPreferencesAuth.getInstance(context).getOAuthAccessTokenSecret()
                     );
 
                     List<Status> statuses = null;
@@ -39,9 +36,7 @@ public class GetRecentTweets {
                         e.printStackTrace();
                     }
 
-                    return statuses;
-                })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+                    subscriber.onNext(statuses);
+                });
     }
 }

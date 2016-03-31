@@ -12,7 +12,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,7 +22,6 @@ import android.widget.Toast;
 
 import com.jakewharton.rxbinding.support.v7.widget.RxSearchView;
 import com.jakewharton.rxbinding.support.v7.widget.RxToolbar;
-import com.jakewharton.rxbinding.widget.RxTextView;
 import com.ninise.pragmatictwitterclient.R;
 import com.ninise.pragmatictwitterclient.project.mvp.model.adapters.TweetsAdapter;
 import com.ninise.pragmatictwitterclient.project.mvp.presenter.home.fragment.ITweetListView;
@@ -36,8 +34,6 @@ import java.util.concurrent.TimeUnit;
 import butterknife.Bind;
 import butterknife.BindString;
 import butterknife.ButterKnife;
-import rx.Observable;
-import rx.functions.Action1;
 
 
 public class TweetsListFragment extends Fragment implements ITweetListView {
@@ -52,8 +48,6 @@ public class TweetsListFragment extends Fragment implements ITweetListView {
 
     private ProgressDialog mProgressDialog;
     private SearchView searchView = null;
-    private SearchView.OnQueryTextListener queryTextListener;
-
 
     public static TweetsListFragment getInstance() {
         if (mInstance == null) {
