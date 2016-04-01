@@ -22,17 +22,19 @@ public class TweetListPresenter implements ITweetListPresenter {
 
     @Override
     public void getTweetList(Context context) {
+
         GetRecentTweets.getTweets(context)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .flatMap(Observable::from)
                 .limit(15)
                 .map(status -> new Tweet.Builder()
-                        .tweetContrib(status.getUser().getName())
-                        .tweetMessage(status.getText())
-                        .tweetTime(status.getCreatedAt().toString())
-                        .tweetImgUrl(status.getUser().getProfileImageURL())
-                        .build())
+                            .tweetContrib(status.getUser().getName())
+                            .tweetMessage(status.getText())
+                            .tweetTime(status.getCreatedAt().toString())
+                            .tweetImgUrl(status.getUser().getProfileImageURL())
+                            .tweetSource(status.getText())
+                            .build())
                 .toList()
                 .subscribe(tweets -> mView.getAdapter(new TweetsAdapter(context, tweets)));
     }

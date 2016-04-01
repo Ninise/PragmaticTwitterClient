@@ -2,7 +2,11 @@ package com.ninise.pragmatictwitterclient.project.mvp.model.adapters;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +52,16 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetViewHolder> {
             AlertDialog.Builder builder = new AlertDialog.Builder(mContext)
                     .setTitle(tweet.getTweetContrib())
                     .setMessage(tweet.getTweetMessage())
-                    .setPositiveButton("Ok", null);
+                    .setNeutralButton(mContext.getText(R.string.to_source), (dialog, which) ->
+                        mContext.startActivity(
+                                new Intent(Intent.ACTION_VIEW,
+                                        Uri.parse(mDataSet.get(
+                                                holder.getAdapterPosition()).getTweetSource()
+                                        )
+                                )
+                        )
+                    )
+                    .setPositiveButton(mContext.getText(R.string.about_ok), null);
             AlertDialog alert = builder.create();
             alert.show();
         });

@@ -1,12 +1,15 @@
 package com.ninise.pragmatictwitterclient.project.mvp.model.pojos.twitter;
 
 
+import com.ninise.pragmatictwitterclient.project.utils.TweetUrlFinder;
+
 public class Tweet {
 
     private final String tweetContrib;
     private final String tweetTime;
     private final String tweetMessage;
-    private final String twwetImgUrl;
+    private final String tweetImgUrl;
+    private final String tweetSource;
 
     public String getTweetContrib() {
         return tweetContrib;
@@ -21,7 +24,11 @@ public class Tweet {
     }
 
     public String getTweetImgUrl() {
-        return twwetImgUrl;
+        return tweetImgUrl;
+    }
+
+    public String getTweetSource() {
+        return tweetSource;
     }
 
     public static class Builder {
@@ -29,6 +36,7 @@ public class Tweet {
         private String tweetTime;
         private String tweetMessage;
         private String tweetImgUrl;
+        private String tweetSource;
 
         public Builder tweetContrib(String val) {
             tweetContrib = val;
@@ -50,6 +58,11 @@ public class Tweet {
             return this;
         }
 
+        public Builder tweetSource(String val) {
+            tweetSource = TweetUrlFinder.getUrl(val).trim();
+            return this;
+        }
+
         public Tweet build() {
             return new Tweet(this);
         }
@@ -59,7 +72,8 @@ public class Tweet {
         tweetContrib = builder.tweetContrib;
         tweetMessage = builder.tweetMessage;
         tweetTime = builder.tweetTime;
-        twwetImgUrl = builder.tweetImgUrl;
+        tweetImgUrl = builder.tweetImgUrl;
+        tweetSource = builder.tweetSource;
     }
 
     @Override
@@ -68,7 +82,8 @@ public class Tweet {
                 "tweetContrib='" + tweetContrib + '\'' +
                 ", tweetTime='" + tweetTime + '\'' +
                 ", tweetMessage='" + tweetMessage + '\'' +
-                ", twwetImgUrl='" + twwetImgUrl + '\'' +
+                ", tweetImgUrl='" + tweetImgUrl + '\'' +
+                ", tweetSource='" + tweetSource + '\'' +
                 '}';
     }
 }
