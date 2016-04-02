@@ -4,6 +4,7 @@ import android.content.Context;
 
 public interface ISettingsPresenter  {
 
-    void saveChanges(Context context, boolean checked);
+    void saveChanges(Context context, boolean checked, int countOfPosts, int countOfTweets);
     void getUpdatesSwitchState(Context context);
+    void getCountsSpinnersState(Context context);
 }

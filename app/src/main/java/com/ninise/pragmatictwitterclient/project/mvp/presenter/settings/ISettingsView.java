@@ -5,5 +5,5 @@ public interface ISettingsView {
     void onSuccess();
     void onFailed();
     void setGitHubSwitchState(boolean state);
-
+    void setCountsSpinners(int countOfPosts, int countOfTweets);
 }

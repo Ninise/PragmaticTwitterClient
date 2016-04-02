@@ -22,8 +22,8 @@
     <string name="progress_dialog_loadTitle">Loading…</string>
 
     <!-- Settings Activity -->
-    <string name="settings_github">Check for news</string>
-    <string name="settings_network">Network</string>
+    <string name="settings_github">Check for app updates</string>
+    <string name="settings_network">App updates</string>
     <string name="settings_save_btn">Save</string>
     <string name="settings_title">Settings</string>
     <string name="settings_changes_saved">Changes saved</string>
@@ -35,4 +35,7 @@
     <string name="about_ok">OK</string>
     <string name="search_hint">Search</string>
     <string name="to_source">To source</string>
+    <string name="settings_count_github">Count of posts</string>
+    <string name="settings_tweet">Tweets display</string>
+    <string name="settings_tweets_count">Count of tweets</string>
 </resources>

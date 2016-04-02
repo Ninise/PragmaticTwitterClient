@@ -2,12 +2,14 @@ package com.ninise.pragmatictwitterclient.project.mvp.model.network.data.twitter
 
 import android.content.Context;
 
+import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.settings.SettingsPreferences;
 import com.ninise.pragmatictwitterclient.project.mvp.model.preferences.twitter.TwitterPreferencesAuth;
 import com.ninise.pragmatictwitterclient.project.utils.Constants;
 
 import java.util.List;
 
 import rx.Observable;
+import twitter4j.Paging;
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -31,7 +33,9 @@ public class GetRecentTweets {
                     List<Status> statuses = null;
                     Twitter twitter = new TwitterFactory(builder.build()).getInstance(accessToken);
                     try {
-                        statuses = twitter.getHomeTimeline();
+                        statuses = twitter.getHomeTimeline(new Paging().count(
+                                (SettingsPreferences.getInstance(context).getCountOfTweets() + 1) * 10
+                        ));
                     } catch (TwitterException e) {
                         e.printStackTrace();
                     }

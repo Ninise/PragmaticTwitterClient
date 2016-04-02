@@ -14,9 +14,14 @@ public class SettingsPresenter implements ISettingsPresenter {
     }
 
     @Override
-    public void saveChanges(Context context, boolean checked) {
+    public void saveChanges(Context context, boolean checked, int countOfPosts, int countOfTweets) {
         try {
-            SettingsPreferences.getInstance(context).setGithubUpdatesStatus(checked);
+            SettingsPreferences pref = SettingsPreferences.getInstance(context);
+
+            pref.setGithubUpdatesStatus(checked);
+            pref.setCountOfTweets(countOfTweets);
+            pref.setCountOfPosts(countOfPosts);
+
             mView.onSuccess();
         } catch (Exception e) {
             mView.onFailed();
@@ -30,5 +35,13 @@ public class SettingsPresenter implements ISettingsPresenter {
         } else {
             mView.setGitHubSwitchState(false);
         }
+    }
+
+    @Override
+    public void getCountsSpinnersState(Context context) {
+        SettingsPreferences pref = SettingsPreferences.getInstance(context);
+        mView.setCountsSpinners(
+                pref.getCountOfPosts(),
+                pref.getCountOfTweets());
     }
 }

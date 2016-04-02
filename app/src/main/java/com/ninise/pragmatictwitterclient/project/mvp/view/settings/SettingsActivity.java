@@ -3,8 +3,10 @@ package com.ninise.pragmatictwitterclient.project.mvp.view.settings;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.SwitchCompat;
 import android.support.v7.widget.Toolbar;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +29,8 @@ public class SettingsActivity extends AppCompatActivity implements ISettingsView
     @Bind(R.id.toolbarIcon) CircularImageView mToolbarIconCircularImageView;
     @Bind(R.id.toolbarTitle) TextView mToolbarTitleTextView;
     @Bind(R.id.settingsUpdatesSwitch) SwitchCompat mGithubUpdatesSwitchCompat;
+    @Bind(R.id.settingsUpdatesCountSpinner) AppCompatSpinner mCountOfUpdatesCompatSpinner;
+    @Bind(R.id.settingsCountOfTweetsSpinner) AppCompatSpinner mCountOfTweetsCompatSpinner;
     @BindString(R.string.settings_title) String mToolBarTitleString;
     @BindString(R.string.settings_changes_saved) String mChangesSaved;
     @BindString(R.string.settings_changes_not_saved) String mChangesSaveFailed;
@@ -50,13 +54,38 @@ public class SettingsActivity extends AppCompatActivity implements ISettingsView
         mToolbarIconCircularImageView.setImageDrawable(mIconDrawable);
         mToolbarTitleTextView.setText(mToolBarTitleString);
 
+        ArrayAdapter<?> adapterTweets =
+                ArrayAdapter.createFromResource(
+                        this,
+                        R.array.tweets_count,
+                        android.R.layout.simple_spinner_item);
+
+        adapterTweets.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        ArrayAdapter<?> adapterPosts =
+                ArrayAdapter.createFromResource(
+                        this,
+                        R.array.posts_count,
+                        android.R.layout.simple_spinner_item);
+
+        adapterPosts.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        mCountOfTweetsCompatSpinner.setAdapter(adapterTweets);
+        mCountOfUpdatesCompatSpinner.setAdapter(adapterPosts);
+
         RxView.clicks(mSaveButton).subscribe(aVoid -> {
-            mPresenter.saveChanges(this, mGithubUpdatesSwitchCompat.isChecked());
+            mPresenter.saveChanges(
+                    this,
+                    mGithubUpdatesSwitchCompat.isChecked(),
+                    mCountOfUpdatesCompatSpinner.getSelectedItemPosition(),
+                    mCountOfTweetsCompatSpinner.getSelectedItemPosition()
+            );
             leaveFromActivity();
         });
 
         mPresenter = new SettingsPresenter(this);
         mPresenter.getUpdatesSwitchState(this);
+        mPresenter.getCountsSpinnersState(this);
     }
 
     private void leaveFromActivity() {
@@ -83,5 +112,11 @@ public class SettingsActivity extends AppCompatActivity implements ISettingsView
     @Override
     public void setGitHubSwitchState(boolean state) {
         mGithubUpdatesSwitchCompat.setChecked(state);
+    }
+
+    @Override
+    public void setCountsSpinners(int countOfPosts, int countOfTweets) {
+        mCountOfUpdatesCompatSpinner.setSelection(countOfPosts);
+        mCountOfTweetsCompatSpinner.setSelection(countOfTweets);
     }
 }

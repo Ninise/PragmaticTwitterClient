@@ -27,4 +27,6 @@ public class Constants {
 
     public static final String DENIED = "denied";
     public static final String SETTINGS_GITUPDATES = "settings_git_updates";
+    public static final String SETTINGS_COUNT_OF_TWEETS = "settings_count_of_tweets";
+    public static final String SETTINGS_COUNT_OF_POSTS = "settings_count_of_posts";
 }
