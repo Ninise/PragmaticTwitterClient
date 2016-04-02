@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+               >
 
     <include android:id="@+id/settingsToolBar"
              layout="@layout/home_tool_bar"/>
@@ -35,6 +36,57 @@
         android:layout_marginTop="5dp"
         android:layout_marginRight="5dp"
         android:layout_below="@id/settingsNetworkTextView"/>
+
+    <TextView
+        android:id="@+id/settingsCountOfItemsGitTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/settingsUpdatesTextView"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/settings_count_github"
+        style="@style/RobotoTextViewStyle"
+        />
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/settingsUpdatesCountSpinner"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/settingsUpdatesTextView"
+        />
+
+    <TextView
+        android:id="@+id/settingsTweetTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/settingsCountOfItemsGitTextView"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="15dp"
+        android:textSize="30sp"
+        android:text="@string/settings_tweet"
+        style="?android:listSeparatorTextViewStyle"
+        />
+
+    <TextView
+        android:id="@+id/settingsCountOfTweetsTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/settingsTweetTextView"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/settings_tweets_count"
+        style="@style/RobotoTextViewStyle"
+        />
+
+    <android.support.v7.widget.AppCompatSpinner
+        android:id="@+id/settingsCountOfTweetsSpinner"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/settingsTweetTextView"
+        />
+
 
     <Button
         android:id="@+id/settingsSaveButton"
