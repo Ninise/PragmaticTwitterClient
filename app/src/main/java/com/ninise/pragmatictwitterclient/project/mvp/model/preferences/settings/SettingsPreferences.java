@@ -34,4 +34,26 @@ public class SettingsPreferences {
         return mPreferences.contains(Constants.SETTINGS_GITUPDATES)
                 && mPreferences.getBoolean(Constants.SETTINGS_GITUPDATES, false);
     }
+
+    public boolean setCountOfTweets(int count) {
+        SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putInt(Constants.SETTINGS_COUNT_OF_TWEETS, count);
+        return editor.commit();
+    }
+
+    public int getCountOfTweets() {
+        return mPreferences.contains(Constants.SETTINGS_COUNT_OF_TWEETS) ?
+                mPreferences.getInt(Constants.SETTINGS_COUNT_OF_TWEETS, 1) : 1;
+    }
+
+    public boolean setCountOfPosts(int count) {
+        SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putInt(Constants.SETTINGS_COUNT_OF_POSTS, count);
+        return editor.commit();
+    }
+
+    public int getCountOfPosts() {
+        return mPreferences.contains(Constants.SETTINGS_COUNT_OF_POSTS) ?
+                mPreferences.getInt(Constants.SETTINGS_COUNT_OF_POSTS, 1) : 1;
+    }
 }
