@@ -18,10 +18,12 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        >
 
         <activity android:name=".project.mvp.view.login.LoginActivity"
-                  android:clearTaskOnLaunch="true">
+                  android:clearTaskOnLaunch="true"
+                  android:screenOrientation="portrait">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,11 +47,14 @@
 
         </activity>
 
-        <activity android:name=".project.mvp.view.home.HomeActivity"/>
+        <activity android:name=".project.mvp.view.home.HomeActivity"
+                  android:screenOrientation="portrait"/>
 
-        <activity android:name=".project.mvp.view.settings.SettingsActivity"/>
+        <activity android:name=".project.mvp.view.settings.SettingsActivity"
+                  android:screenOrientation="portrait"/>
 
-        <activity android:name=".project.mvp.view.about.AboutActivity"/>
+        <activity android:name=".project.mvp.view.about.AboutActivity"
+                  android:screenOrientation="portrait"/>
 
     </application>
 

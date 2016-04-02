@@ -31,8 +31,8 @@
 
     <!-- About Activity -->
     <string name="about_developer">Created by Ninise</string>
-    <string name="about_version">Version 0.6</string>
-    <string name="about_ok">Ok</string>
+    <string name="about_version">Version 0.9</string>
+    <string name="about_ok">OK</string>
     <string name="search_hint">Search</string>
     <string name="to_source">To source</string>
 </resources>
