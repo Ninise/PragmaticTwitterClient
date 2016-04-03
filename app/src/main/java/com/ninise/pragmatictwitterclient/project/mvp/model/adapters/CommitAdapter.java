@@ -32,6 +32,6 @@ public class CommitAdapter extends RecyclerView.Adapter<CommitViewHolder> {
 
     @Override
     public int getItemCount() {
-        return 4;
+        return mDataSet.size();
     }
 }

@@ -23,7 +23,6 @@ public class TweetListPresenter implements ITweetListPresenter {
 
     @Override
     public void getTweetList(Context context) {
-
         GetRecentTweets.getTweets(context)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -46,7 +45,7 @@ public class TweetListPresenter implements ITweetListPresenter {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .flatMap(Observable::from)
-                .limit((SettingsPreferences.getInstance(context).getCountOfPosts() + 1) * 5)
+                .limit((SettingsPreferences.getInstance(context).getCountOfTweets() + 1) * 5)
                 .map(status -> new Tweet.Builder()
                         .tweetContrib(status.getUser().getName())
                         .tweetMessage(status.getText())

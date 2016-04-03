@@ -23,7 +23,6 @@ public class GetUpdates {
         GitHubResources service = retrofit.create(GitHubResources.class);
 
         return rx.Observable.just("Ninise")
-                .first()
                 .flatMap(service::getCommits)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
